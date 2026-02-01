@@ -27,3 +27,9 @@
 .carousel__button-container--right {
     justify-content: end;
 }
+
+.carousel__button {
+    width: 100%;
+    max-width: 5vw;
+    background-color: #6969695b;
+}
