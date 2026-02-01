@@ -5,8 +5,13 @@ export default function Carousel() {
   return (
     <div className="carousel">
       <div className="carousel__buttons layer">
-        <button className="carousel__button carousel__button--left">Left</button>
-        <button className="carousel__button carousel__button--right">Right</button>
+        <div className="carousel__button-container carousel__button-container--left">
+          <button className="carousel__button carousel__button--left">Left</button>
+        </div>
+
+        <div className="carousel__button-container carousel__button-container--right">
+          <button className="carousel__button carousel__button--right">Right</button>
+        </div>
       </div>
     </div>
   );
