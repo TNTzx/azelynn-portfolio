@@ -1,17 +1,48 @@
+import { useState } from 'react';
+import type { CarouselProps } from './CarouselTypes';
 import './Carousel.css';
 import '@src/styles/layer.css';
 
-export default function Carousel() {
+export default function Carousel({ slides, currentSlide }: CarouselProps) {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  let foundIndex = slides.findIndex((slide) => slide.route === currentSlide);
+  if (foundIndex === -1) {
+    throw new Error(`Slide with route "${currentSlide}" not found.`);
+  }
+  setCurrentIndex(foundIndex);
+
+  function switchScreen(offset: number) {
+    let newIndex = currentIndex + offset;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= slides.length) newIndex = slides.length - 1;
+    setCurrentIndex(newIndex);
+  }
+
   return (
     <div className="carousel">
       <div className="carousel__buttons layer">
         <div className="carousel__button-container carousel__button-container--left">
-          <button className="carousel__button carousel__button--left">Left</button>
+          <button
+            onClick={() => switchScreen(-1)}
+            className="carousel__button carousel__button--left"
+          >
+            Left
+          </button>
         </div>
 
         <div className="carousel__button-container carousel__button-container--right">
-          <button className="carousel__button carousel__button--right">Right</button>
+          <button
+            onClick={() => switchScreen(1)}
+            className="carousel__button carousel__button--right"
+          >
+            Right
+          </button>
         </div>
+      </div>
+
+      <div className="carousel__slides layer">
+        {slides[currentIndex].element}
       </div>
     </div>
   );
