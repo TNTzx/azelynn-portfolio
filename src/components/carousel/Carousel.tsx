@@ -20,7 +20,7 @@ const slideVariants: CarouselSlideVariants = {
   }
 }
 
-export default function Carousel({ slides, currentSlide, onScreenChange }: CarouselProps) {
+export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
   const [visibleIndex, setVisibleIndex] = useState<number | null>(() => {
     let foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
     if (foundIndex === -1) {
@@ -31,10 +31,13 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
   const [targetIndex, setTargetIndex] = useState<number>(visibleIndex ?? 0);
   const [direction, setDirection] = useState<CarouselDirection>(-1);
 
+  const [showLoadingSlide, setShowLoadingSlide] = useState<boolean>(false);
+
   let visibleIndexDebounce = useRef(
     debounce(value => {
       setVisibleIndex(value);
-    }, 1000)
+      setShowLoadingSlide(false);
+    }, debounceDelayMs)
   );
 
   function switchScreen(offset: number) {
@@ -53,8 +56,8 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
     }
 
     setTargetIndex(newIndex);
-
     setVisibleIndex(null);
+    setShowLoadingSlide(true);
     visibleIndexDebounce.current(newIndex);
   }
 
@@ -106,9 +109,11 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
               animate="center"
               exit="exit"
               className='carousel__slide'
-            >
-              {visibleIndex !== null ? slides[visibleIndex].element : null}
-            </motion.div>
+            >{
+              visibleIndex !== null
+              ? slides[visibleIndex].element
+              : (showLoadingSlide ? loadingSlide : null)
+            }</motion.div>
           </AnimatePresence>
         </div>
       </div>

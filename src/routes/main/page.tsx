@@ -3,6 +3,10 @@ import './style.css';
 import { useLocation } from 'react-router';
 import { slides } from './slides';
 
+const loadingSlide = (
+  <h1>Loading...</h1>
+)
+
 export default function Main() {
   const location = useLocation();
 
@@ -21,6 +25,12 @@ export default function Main() {
   }
  
   return (
-    <Carousel slides={slides} currentSlide={currentSlideHash} onScreenChange={onScreenChange} />
+    <Carousel
+      slides={slides}
+      currentSlide={currentSlideHash}
+      onScreenChange={onScreenChange}
+      loadingSlide={loadingSlide}
+      debounceDelayMs={1000}
+    />
   )
 }
