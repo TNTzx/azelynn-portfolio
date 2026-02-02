@@ -17,7 +17,6 @@ const slides: CarouselSlide[] = [
 ]
 
 export default function App() {
-
   return (
     <Carousel slides={slides} currentSlide='slide1'/>
   )

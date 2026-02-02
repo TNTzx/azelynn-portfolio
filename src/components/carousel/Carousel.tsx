@@ -4,19 +4,21 @@ import './Carousel.css';
 import '@src/styles/layer.css';
 
 export default function Carousel({ slides, currentSlide }: CarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-
-  let foundIndex = slides.findIndex((slide) => slide.route === currentSlide);
-  if (foundIndex === -1) {
-    throw new Error(`Slide with route "${currentSlide}" not found.`);
-  }
-  setCurrentIndex(foundIndex);
+  const [currentIndex, setCurrentIndex] = useState<number>(() => {
+    let foundIndex = slides.findIndex((slide) => slide.route === currentSlide);
+    if (foundIndex === -1) {
+      throw new Error(`Slide with route "${currentSlide}" not found.`);
+    }
+    return foundIndex;
+  });
 
   function switchScreen(offset: number) {
-    let newIndex = currentIndex + offset;
-    if (newIndex < 0) newIndex = 0;
-    if (newIndex >= slides.length) newIndex = slides.length - 1;
-    setCurrentIndex(newIndex);
+    setCurrentIndex(currentIndex => {
+      let newIndex = currentIndex + offset;
+      if (newIndex < 0) newIndex = 0;
+      if (newIndex >= slides.length) newIndex = slides.length - 1;
+      return newIndex;
+    })
   }
 
   return (
