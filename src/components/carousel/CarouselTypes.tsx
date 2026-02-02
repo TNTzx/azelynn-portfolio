@@ -3,7 +3,7 @@ import type { JSX } from "react";
 
 export interface CarouselSlide {
   hash: string;
-  element: JSX.Element;
+  getElement: (context: CarouselAnimationContext) => JSX.Element;
 }
 
 export interface CarouselProps {
@@ -16,8 +16,12 @@ export interface CarouselProps {
 
 export type CarouselDirection = -1 | 1;
 
-export interface CarouselVariants extends Variants<CarouselDirection> {
-  enter: Variant<CarouselDirection>;
-  center: Variant<CarouselDirection>;
-  exit: Variant<CarouselDirection>;
+export interface CarouselAnimationContext {
+  direction?: CarouselDirection;
+}
+
+export interface CarouselVariants extends Variants<CarouselAnimationContext> {
+  enter: Variant<CarouselAnimationContext>;
+  center: Variant<CarouselAnimationContext>;
+  exit: Variant<CarouselAnimationContext>;
 }
