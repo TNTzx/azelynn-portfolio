@@ -30,7 +30,7 @@ export default function Main() {
       currentSlide={currentSlideHash}
       onScreenChange={onScreenChange}
       loadingSlide={loadingSlide}
-      debounceDelayMs={1000}
+      debounceDelayMs={500}
     />
   )
 }
