@@ -45,3 +45,9 @@
 
     z-index: 0;
 }
+
+.carousel__slide-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
