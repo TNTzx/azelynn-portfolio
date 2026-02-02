@@ -26,8 +26,23 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
     })
   }
 
+
+  function onKeyUp(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key === 'ArrowLeft') {
+      switchScreen(-1);
+    }
+
+    if (event.key === 'ArrowRight') {
+      switchScreen(1);
+    }
+  }
+
   return (
-    <div className="carousel">
+    <div
+      tabIndex={0}
+      onKeyUp={onKeyUp}
+      className="carousel"
+    >
       <div className="carousel__buttons layer">
         <div className="carousel__button-container carousel__button-container--left">
           <button
