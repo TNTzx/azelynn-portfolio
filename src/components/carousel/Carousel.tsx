@@ -5,7 +5,7 @@ import '@src/styles/layer.css';
 
 export default function Carousel({ slides, currentSlide }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
-    let foundIndex = slides.findIndex((slide) => slide.route === currentSlide);
+    let foundIndex = slides.findIndex((slide) => slide.hash === currentSlide);
     if (foundIndex === -1) {
       throw new Error(`Slide with route "${currentSlide}" not found.`);
     }

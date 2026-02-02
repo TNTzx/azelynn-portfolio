@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 // import { Carousel, type CarouselSlide } from './components'
 import { Main } from './routes'
 
@@ -25,7 +25,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Main />} />
+        <Route index element={<Navigate to="/main" />} />
+        <Route path='/main' element={<Main />} />
       </Routes>
     </BrowserRouter>
   )
