@@ -11,6 +11,7 @@ export interface CarouselProps {
   currentSlide: string;
   onScreenChange?: (newSlide: CarouselSlide) => void;
   loadingSlide?: JSX.Element;
+  debounceDelayMs?: number;
 }
 
 export type CarouselDirection = -1 | 1;
