@@ -25,6 +25,8 @@ export default function Main() {
     const foundHash = /#([a-z0-9]+)/.exec(location.hash)?.[1];
     if (foundHash === undefined) throw new Error(`Invalid hash format: "${location.hash}"`);
     currentSlideHash = foundHash;
+  } else {
+    window.location.hash = `#${currentSlideHash}`;
   }
 
 
