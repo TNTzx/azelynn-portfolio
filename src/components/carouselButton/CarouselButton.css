@@ -1,0 +1,7 @@
+.carousel__button {
+    width: 100%;
+    max-width: 100px;
+    background-color: #6969695b;
+
+    pointer-events: all;
+}

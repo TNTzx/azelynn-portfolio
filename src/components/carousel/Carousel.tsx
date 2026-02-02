@@ -3,6 +3,7 @@ import type { CarouselProps, CarouselAnimationContext, CarouselVariants as Carou
 import './Carousel.css';
 import '@src/styles/layer.css';
 import { AnimatePresence, motion } from 'motion/react';
+import { CarouselButton } from '../carouselButton';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -74,21 +75,11 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     >
       <div className="carousel__buttons layer">
         <div className="carousel__button-container carousel__button-container--left">
-          <button
-            onClick={() => switchScreen(-1)}
-            className="carousel__button carousel__button--left"
-          >
-            Left
-          </button>
+          <CarouselButton direction="left" onClick={() => switchScreen(-1)} />
         </div>
 
         <div className="carousel__button-container carousel__button-container--right">
-          <button
-            onClick={() => switchScreen(1)}
-            className="carousel__button carousel__button--right"
-          >
-            Right
-          </button>
+          <CarouselButton direction="right" onClick={() => switchScreen(1)} />
         </div>
       </div>
 
