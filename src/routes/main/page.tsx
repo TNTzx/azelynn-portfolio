@@ -1,21 +1,7 @@
 import { Carousel, type CarouselSlide } from '@src/components';
 import './style.css';
 import { useLocation } from 'react-router';
-
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-const slides: CarouselSlide[] = [
-  { hash: 'slide1', element: <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 1</div> },
-  { hash: 'slide2', element: <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 2</div> },
-  { hash: 'slide3', element: <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 3</div> },
-]
+import { slides } from './slides';
 
 export default function Main() {
   const location = useLocation();
