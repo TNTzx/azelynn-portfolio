@@ -11,6 +11,8 @@
     z-index: 1;
 
     flex-direction: row;
+
+    pointer-events: none;;
 }
 
 .carousel__button-container {
@@ -33,6 +35,8 @@
     width: 100%;
     max-width: 100px;
     background-color: #6969695b;
+
+    pointer-events: all;
 }
 
 .carousel__slides {
