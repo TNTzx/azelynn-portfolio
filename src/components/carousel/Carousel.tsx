@@ -5,9 +5,15 @@ import '@src/styles/layer.css';
 import { AnimatePresence, motion } from 'motion/react';
 
 const slideVariants: CarouselSlideVariants = {
-  enter: {},
-  center: {},
-  exit: {}
+  enter: {
+    position: 'absolute'
+  },
+  center: {
+    position: 'relative'
+  },
+  exit: {
+    position: 'absolute'
+  }
 }
 
 export default function Carousel({ slides, currentSlide, onScreenChange }: CarouselProps) {
@@ -22,6 +28,8 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
   const [direction, setDirection] = useState<CarouselDirection>(0);
 
   function switchScreen(offset: number) {
+    setDirection(offset / Math.abs(offset) as CarouselDirection);
+
     setCurrentIndex(currentIndex => {
       let newIndex = currentIndex + offset;
       if (newIndex < 0) newIndex = 0;
@@ -29,8 +37,6 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
 
       if (currentIndex !== newIndex) {
         onScreenChange?.(slides[newIndex]);
-
-        setDirection(offset / Math.abs(offset) as CarouselDirection);
       }
 
       return newIndex;
@@ -75,18 +81,20 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
       </div>
 
       <div className="carousel__slides layer">
-        <AnimatePresence custom={direction}>
-          <motion.div
-            key={currentIndex}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-          >
-            {slides[currentIndex].element}
-          </motion.div>
-        </AnimatePresence>
+        <div className="carousel__slide-container">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              {slides[currentIndex].element}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

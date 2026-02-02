@@ -1,7 +1,7 @@
 import type { CarouselVariants } from '@src/components';
 import './Hello.css';
 import { motion } from 'framer-motion';
-import { easeOutQuint } from 'js-easing-functions';
+import { easeInQuint, easeOutQuint } from 'js-easing-functions';
 
 const testVariants: CarouselVariants = {
   enter: {
@@ -9,10 +9,11 @@ const testVariants: CarouselVariants = {
   },
   center: {
     y: "0vh",
-    transition: { type: "tween", ease: (t) => easeOutQuint(t, 0, 1, 1), duration: 2 }
+    transition: { type: "tween", ease: (t) => easeOutQuint(t, 0, 1, 1), duration: 1 }
   },
   exit: {
-    y: "-100vh"
+    y: "100vh",
+    transition: { type: "tween", ease: (t) => easeInQuint(t, 0, 1, 1), duration: 1 }
   }
 }
 
