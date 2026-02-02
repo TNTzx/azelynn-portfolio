@@ -26,8 +26,13 @@ export default function Main() {
     if (foundHash === undefined) throw new Error(`Invalid hash format: "${location.hash}"`);
     currentSlideHash = foundHash;
   }
+
+
+  function onScreenChange(newSlide: CarouselSlide) {
+    window.location.hash = `#${newSlide.hash}`;
+  }
  
   return (
-    <Carousel slides={slides} currentSlide={currentSlideHash} />
+    <Carousel slides={slides} currentSlide={currentSlideHash} onScreenChange={onScreenChange} />
   )
 }
