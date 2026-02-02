@@ -3,7 +3,7 @@ import type { CarouselProps } from './CarouselTypes';
 import './Carousel.css';
 import '@src/styles/layer.css';
 
-export default function Carousel({ slides, currentSlide }: CarouselProps) {
+export default function Carousel({ slides, currentSlide, onScreenChange }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     let foundIndex = slides.findIndex((slide) => slide.hash === currentSlide);
     if (foundIndex === -1) {
@@ -17,6 +17,11 @@ export default function Carousel({ slides, currentSlide }: CarouselProps) {
       let newIndex = currentIndex + offset;
       if (newIndex < 0) newIndex = 0;
       if (newIndex >= slides.length) newIndex = slides.length - 1;
+
+      if (currentIndex !== newIndex) {
+        onScreenChange?.(slides[newIndex]);
+      }
+
       return newIndex;
     })
   }

@@ -8,4 +8,5 @@ export interface CarouselSlide {
 export interface CarouselProps {
   slides: CarouselSlide[];
   currentSlide: string;
+  onScreenChange?: (newSlide: CarouselSlide) => void;
 }
