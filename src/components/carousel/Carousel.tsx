@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { CarouselProps } from './CarouselTypes';
+import type { CarouselProps } from './carouselTypes';
 import './Carousel.css';
 import '@src/styles/layer.css';
 
