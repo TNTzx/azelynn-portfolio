@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 
 export interface CarouselSlide {
-  route: string;
+  hash: string;
   element: JSX.Element;
 }
 
