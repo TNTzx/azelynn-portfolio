@@ -11,8 +11,19 @@ function getRandomColor() {
 }
 
 export const slides: CarouselSlide[] = [
-  { hash: 'hello', element: <Hello />},
-  { hash: 'slide1', element: <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 1</div> },
-  { hash: 'slide2', element: <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 2</div> },
-  { hash: 'slide3', element: <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 3</div> },
+  {
+    hash: 'slide1',
+    getElement: () =>
+      <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 1</div>
+  },
+  {
+    hash: 'hello',
+    getElement: (animationContext) =>
+      <Hello animationContext={animationContext} />
+  },
+  {
+    hash: 'slide2',
+    getElement: () =>
+      <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 2</div>
+  },
 ]

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import type { CarouselDirection, CarouselProps, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
+import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.css';
 import '@src/styles/layer.css';
 import { AnimatePresence, motion } from 'motion/react';
@@ -29,7 +29,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     return foundIndex;
   });
   const [targetIndex, setTargetIndex] = useState<number>(visibleIndex ?? 0);
-  const [direction, setDirection] = useState<CarouselDirection>(-1);
+  const [animationProps, setAnimationProps] = useState<CarouselAnimationContext>({ direction: -1 });
 
   const [showLoadingSlide, setShowLoadingSlide] = useState<boolean>(false);
 
@@ -41,11 +41,8 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
   );
 
   function switchScreen(offset: number) {
-    setDirection((
-      offset !== 0
-      ? (offset / Math.abs(offset))
-      : -1
-    ) as CarouselDirection);
+    const direction = offset > 0 ? 1 : -1
+    setAnimationProps({ direction });
 
     let newIndex = targetIndex + offset;
     if (newIndex < 0) newIndex = 0;
@@ -100,10 +97,10 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
 
       <div className="carousel__slides layer">
         <div className="carousel__slide-container">
-          <AnimatePresence custom={direction}>
+          <AnimatePresence custom={animationProps}>
             <motion.div
               key={visibleIndex}
-              custom={direction}
+              custom={animationProps}
               variants={slideVariants}
               initial="enter"
               animate="center"
@@ -111,7 +108,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
               className='carousel__slide'
             >{
               visibleIndex !== null
-              ? slides[visibleIndex].element
+              ? slides[visibleIndex].getElement(animationProps)
               : (showLoadingSlide ? loadingSlide : null)
             }</motion.div>
           </AnimatePresence>
