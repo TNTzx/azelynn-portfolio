@@ -1,46 +1,61 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import type { CarouselDirection, CarouselProps, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.css';
 import '@src/styles/layer.css';
 import { AnimatePresence, motion } from 'motion/react';
+import debounce from 'debounce';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
-    position: 'absolute'
+    position: 'absolute',
+    zIndex: 0
   },
   center: {
-    position: 'relative'
+    position: 'relative',
+    zIndex: 1
   },
   exit: {
-    position: 'absolute'
+    position: 'absolute',
+    zIndex: 2
   }
 }
 
 export default function Carousel({ slides, currentSlide, onScreenChange }: CarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState<number>(() => {
-    let foundIndex = slides.findIndex((slide) => slide.hash === currentSlide);
+  const [visibleIndex, setVisibleIndex] = useState<number | null>(() => {
+    let foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
     if (foundIndex === -1) {
       throw new Error(`Slide with route "${currentSlide}" not found.`);
     }
     return foundIndex;
   });
+  const [targetIndex, setTargetIndex] = useState<number>(visibleIndex ?? 0);
+  const [direction, setDirection] = useState<CarouselDirection>(-1);
 
-  const [direction, setDirection] = useState<CarouselDirection>(0);
+  let visibleIndexDebounce = useRef(
+    debounce(value => {
+      setVisibleIndex(value);
+    }, 1000)
+  );
 
   function switchScreen(offset: number) {
-    setDirection(offset / Math.abs(offset) as CarouselDirection);
+    setDirection((
+      offset !== 0
+      ? (offset / Math.abs(offset))
+      : -1
+    ) as CarouselDirection);
 
-    setCurrentIndex(currentIndex => {
-      let newIndex = currentIndex + offset;
-      if (newIndex < 0) newIndex = 0;
-      if (newIndex >= slides.length) newIndex = slides.length - 1;
+    let newIndex = targetIndex + offset;
+    if (newIndex < 0) newIndex = 0;
+    if (newIndex >= slides.length) newIndex = slides.length - 1;
 
-      if (currentIndex !== newIndex) {
-        onScreenChange?.(slides[newIndex]);
-      }
+    if (targetIndex !== newIndex) {
+      onScreenChange?.(slides[newIndex]);
+    }
 
-      return newIndex;
-    })
+    setTargetIndex(newIndex);
+
+    setVisibleIndex(null);
+    visibleIndexDebounce.current(newIndex);
   }
 
 
@@ -82,16 +97,17 @@ export default function Carousel({ slides, currentSlide, onScreenChange }: Carou
 
       <div className="carousel__slides layer">
         <div className="carousel__slide-container">
-          <AnimatePresence mode="wait" custom={direction}>
+          <AnimatePresence custom={direction}>
             <motion.div
-              key={currentIndex}
+              key={visibleIndex}
               custom={direction}
               variants={slideVariants}
               initial="enter"
               animate="center"
               exit="exit"
+              className='carousel__slide'
             >
-              {slides[currentIndex].element}
+              {visibleIndex !== null ? slides[visibleIndex].element : null}
             </motion.div>
           </AnimatePresence>
         </div>
