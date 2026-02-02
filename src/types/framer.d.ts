@@ -1,6 +1,6 @@
-import type { Target, TargetAndTransition } from "framer-motion";
+import type { Target, TargetAndTransition } from "motion/react";
 
-declare module "motion" {
+declare module "motion/react" {
   type TargetResolver<T> = (
     custom: T,
     current: Target,
