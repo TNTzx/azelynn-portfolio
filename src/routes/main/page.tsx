@@ -11,20 +11,23 @@ const loadingSlide = (
 export default function Main() {
   const location = useLocation();
 
-  let currentSlideHash = slides[0].hash;
-  if (location.hash !== '') {
-    const foundHash = /#([a-z0-9]+)/.exec(location.hash)?.[1];
-    if (foundHash === undefined) throw new Error(`Invalid hash format: "${location.hash}"`);
-    currentSlideHash = foundHash;
-  } else {
-    window.location.hash = `#${currentSlideHash}`;
-  }
+  const currentSlideHash = (() => {
+    if (!location.hash) {
+      return slides[0].hash;
+    }
 
+    const foundHash = /#([a-z0-9]+)/.exec(location.hash)?.[1];
+    if (!foundHash) {
+      throw new Error(`Invalid hash format: "${location.hash}"`);
+    }
+
+    return foundHash;
+  })();
 
   function onScreenChange(newSlide: CarouselSlide) {
     window.location.hash = `#${newSlide.hash}`;
   }
- 
+
   return (
     <Carousel
       slides={slides}
@@ -33,5 +36,5 @@ export default function Main() {
       loadingSlide={loadingSlide}
       debounceDelayMs={500}
     />
-  )
+  );
 }
