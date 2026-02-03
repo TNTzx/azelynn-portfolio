@@ -10,4 +10,5 @@ export interface CarouselButtonProps {
 export interface CarouselButtonVariants extends Variants<CarouselButtonDirection> {
   initial: Variant<CarouselButtonDirection>;
   hover: Variant<CarouselButtonDirection>;
+  click: Variant<CarouselButtonDirection>;
 }
