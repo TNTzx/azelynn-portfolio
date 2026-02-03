@@ -6,6 +6,18 @@ import { easeOutQuint } from 'js-easing-functions';
 
 const buttonVariants: CarouselButtonVariants = {
   initial: {
+
+  },
+  hover: {
+
+  },
+  click: {
+
+  }
+};
+
+const flashVariants: CarouselButtonVariants = {
+  initial: {
     opacity: 0.5,
     padding: '20px'
   },
@@ -22,7 +34,7 @@ const buttonVariants: CarouselButtonVariants = {
       duration: 0.25,
     }
   }
-}
+};
 
 const iconVariants: CarouselButtonVariants = {
   initial: {
@@ -39,7 +51,7 @@ const iconVariants: CarouselButtonVariants = {
     opacity: 1,
     rotateZ: [45, 0],
   }
-}
+};
 
 export default function CarouselButton({ direction, onClick }: CarouselButtonProps) {
   const controls = useAnimationControls();
@@ -64,14 +76,16 @@ export default function CarouselButton({ direction, onClick }: CarouselButtonPro
       animate={controls}
       transition={{ duration: 0.25, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
     >
-      <motion.span variants={iconVariants}>
-        <FaArrowLeft
-          style={{
-            width: '10em',
-            height: '10em'
-          }}
-        />
-      </motion.span>
+      <motion.div className="carousel__button-flash" variants={flashVariants}>
+        <motion.p variants={iconVariants}>
+          <FaArrowLeft
+            style={{
+              width: '10em',
+              height: '10em'
+            }}
+          />
+        </motion.p>
+      </motion.div>
     </motion.button>
   )
 }
