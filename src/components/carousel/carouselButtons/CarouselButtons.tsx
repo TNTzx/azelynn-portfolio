@@ -1,5 +1,5 @@
-import { CarouselButton } from './carouselButton';
-import './CarouselButtons.css';
+import CarouselButton from './carouselButton/CarouselButton';
+import './CarouselButtons.scss';
 import type { CarouselButtonsProps } from './carouselButtonsTypes';
 
 export default function CarouselButtons({ onClick }: CarouselButtonsProps) {

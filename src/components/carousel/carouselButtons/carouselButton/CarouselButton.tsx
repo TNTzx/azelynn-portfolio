@@ -1,5 +1,5 @@
 import { FaArrowLeft } from 'react-icons/fa';
-import './CarouselButton.css';
+import './CarouselButton.scss';
 import type { CarouselButtonProps, CarouselButtonVariants } from './carouselButtonTypes';
 import { motion } from 'motion/react';
 import { easeOutQuint } from 'js-easing-functions';
@@ -27,7 +27,6 @@ const iconVariants: CarouselButtonVariants = {
 }
 
 export default function CarouselButton({ direction, onClick }: CarouselButtonProps) {
-
   return (
     <motion.button
       onClick={onClick}

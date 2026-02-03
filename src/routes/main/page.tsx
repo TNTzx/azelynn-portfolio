@@ -1,4 +1,5 @@
-import { Carousel, type CarouselSlide } from '@src/components';
+import Carousel from '@src/components/carousel/Carousel';
+import { type CarouselSlide } from '@src/components';
 import './style.css';
 import { useLocation } from 'react-router';
 import { slides } from './slides';

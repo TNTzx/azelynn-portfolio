@@ -1,9 +1,8 @@
 import { useState, useRef } from 'react';
 import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
-import './Carousel.css';
-import '@src/styles/layer.css';
+import './Carousel.scss';
 import { AnimatePresence, motion } from 'motion/react';
-import { CarouselButtons } from './carouselButtons';
+import CarouselButtons from './carouselButtons/CarouselButtons';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -19,7 +18,7 @@ const slideVariants: CarouselSlideVariants = {
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
-    let foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
+    const foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
     if (foundIndex === -1) {
       throw new Error(`Slide with route "${currentSlide}" not found.`);
     }

@@ -1,10 +1,10 @@
 import type { CarouselSlide } from "@src/components";
-import { Hello } from "@src/components/slides";
+import Hello from "@src/components/slides/hello/Hello";
 
 function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color + "88";
