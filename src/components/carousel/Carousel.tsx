@@ -72,8 +72,10 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
       onKeyUp={onKeyUp}
       className="carousel"
     >
-      <div className="carousel__buttons-layer layer">
-        <CarouselButtons onClick={(direction) => switchScreen(direction)} />
+      <div className="carousel__controls layer">
+        <div className="carousel__controls-buttons">
+          <CarouselButtons onClick={(direction) => switchScreen(direction)} />
+        </div>
       </div>
 
       <div className="carousel__slides layer">
