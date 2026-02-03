@@ -1,7 +1,13 @@
 .carousel__button {
-    width: 100%;
-    max-width: 100px;
-    background-color: #6969695b;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+
+    border: 0;
+    background-color: transparent;
+    background-image: linear-gradient(to right, black 0%, transparent 100%);
 
     pointer-events: all;
+    cursor: pointer;
 }
