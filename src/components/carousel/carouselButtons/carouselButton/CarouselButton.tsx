@@ -23,11 +23,12 @@ const flashVariants: CarouselButtonVariants = {
   },
   hover: {
     opacity: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
   },
   click: {
     backgroundColor: [
       'rgba(255, 255, 255, 1)',
-      'rgba(0, 0, 0, 1)',
+      'rgba(0, 0, 0, 0)',
     ],
 
     transition: {
@@ -57,10 +58,10 @@ const rainbowVariants: CarouselButtonVariants = {
 
 const contentVariants: CarouselButtonVariants = {
   initial: {
-    padding: '10px'
+    padding: '0px'
   },
   hover: {
-    padding: '80px'
+    padding: '100px'
   },
   click: {
 
@@ -112,7 +113,7 @@ export default function CarouselButton({ direction, onClick }: CarouselButtonPro
       <motion.div className="carousel__button-bg carousel__button-bg--rainbow" variants={rainbowVariants} />
 
       <motion.div className="carousel__button-contents" variants={contentVariants}>
-        <motion.p variants={iconVariants}>
+        <motion.div variants={iconVariants}>
           <FaArrowLeft
             style={{
               color: 'white',
@@ -122,7 +123,7 @@ export default function CarouselButton({ direction, onClick }: CarouselButtonPro
               strokeWidth: '10px',
             }}
           />
-        </motion.p>
+        </motion.div>
       </motion.div>
     </motion.button>
   )
