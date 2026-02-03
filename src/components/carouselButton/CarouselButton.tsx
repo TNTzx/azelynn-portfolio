@@ -1,14 +1,8 @@
 import { FaArrowLeft } from 'react-icons/fa';
 import './CarouselButton.css';
-import type { CarouselButtonProps } from './carouselButtonTypes';
-import { motion, type Variant } from 'motion/react';
+import type { CarouselButtonProps, CarouselButtonVariants } from './carouselButtonTypes';
+import { motion } from 'motion/react';
 import { easeOutQuint } from 'js-easing-functions';
-import type { Variants } from 'motion';
-
-interface CarouselButtonVariants extends Variants {
-  initial: Variant<undefined>;
-  hover: Variant<undefined>;
-}
 
 const buttonVariants: CarouselButtonVariants = {
   initial: {
@@ -39,7 +33,7 @@ export default function CarouselButton({ direction, onClick }: CarouselButtonPro
       onClick={onClick}
       className="carousel__button"
       style={{
-        transform: direction === 'right' ? 'rotate(180deg)' : undefined,
+        transform: direction === 1 ? 'rotate(180deg)' : undefined,
       }}
       variants={buttonVariants}
       initial="initial"
