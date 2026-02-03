@@ -1,13 +1,23 @@
 .carousel__button {
     display: flex;
+    height: 100%;
+    
+    padding: 0;
+
+    border: 0;
+    background-color: transparent;
+
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.carousel__button-flash {
+    display: flex;
 
     flex-direction: column;
     justify-content: center;
 
-    border: 0;
-    background-color: transparent;
     background-image: linear-gradient(to right, black 0%, transparent 100%);
 
-    pointer-events: all;
-    cursor: pointer;
+    pointer-events: none;
 }
