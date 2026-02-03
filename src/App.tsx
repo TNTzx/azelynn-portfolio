@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import { Main } from './routes'
+import './App.scss'
 
 export default function App() {
   return (

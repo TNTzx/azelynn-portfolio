@@ -1,4 +1,4 @@
-import 'CarouselSwipes.css';
+import 'CarouselSwipes.scss';
 
 export default function CarouselSwipes() {
   return (

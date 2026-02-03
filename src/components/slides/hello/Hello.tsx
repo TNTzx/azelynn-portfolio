@@ -1,5 +1,5 @@
 import type { CarouselAnimationContext, CarouselVariants } from '@src/components';
-import './Hello.css';
+import './Hello.scss';
 import { motion } from 'framer-motion';
 import { easeInQuint, easeOutQuint } from 'js-easing-functions';
 
