@@ -6,31 +6,12 @@
     overflow: hidden;
 }
 
-.carousel__buttons {
-    display: flex;
+.carousel__buttons-layer {
+    position: absolute;
     width: 100%;
     height: 100%;
+
     z-index: 1;
-
-    flex-direction: row;
-
-    pointer-events: none;;
-}
-
-.carousel__button-container {
-    display: flex;
-    flex-direction: row;
-
-    width: 50%;
-    height: 100%;
-}
-
-.carousel__button-container--left {
-    justify-content: start;
-}
-
-.carousel__button-container--right {
-    justify-content: end;
 }
 
 .carousel__slides {
