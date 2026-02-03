@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useMotionValue } from 'motion/react';
 import CarouselButtons from './carouselButtons/CarouselButtons';
-import CarouselSwipes from './carouselSwipes/CarouselSwipes';
+import { useSwipeable } from 'react-swipeable';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -18,6 +18,25 @@ const slideVariants: CarouselSlideVariants = {
 }
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
+  const isSwiping = useRef(false);
+  const swipeProgress = useMotionValue(0);
+  const swipeHandlers = useSwipeable({
+    onSwiping: (e) => {
+      isSwiping.current = true;
+      swipeProgress.set(e.deltaX / window.innerWidth)
+    },
+    onSwiped: () => {
+      isSwiping.current = false;
+      swipeProgress.set(0);
+    }
+  })
+
+  useEffect(() => {
+    return swipeProgress.on("change", (latest) => {
+      console.log("swipeX:", latest);
+    });
+  }, [swipeProgress]);
+
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     const foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
     if (foundIndex === -1) {
@@ -71,6 +90,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     <div
       tabIndex={0}
       onKeyUp={onKeyUp}
+      {...swipeHandlers}
       className="carousel"
     >
       <div className="carousel__controls layer">
@@ -78,16 +98,16 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
           <CarouselButtons onClick={(direction) => switchScreen(direction)} />
         </div>
 
-        <div className="carousel__control carousel__control--swipes">
+        {/* <div className="carousel__control carousel__control--swipes">
           <CarouselSwipes />
-        </div>
+        </div> */}
       </div>
 
       <div className="carousel__slides layer">
         <div className="carousel__slide-container">
           <AnimatePresence mode="sync" custom={animationProps}>
             {isSlideShown ?
-              <motion.div
+              <motion.main
                 key={currentIndex}
                 custom={animationProps}
                 variants={slideVariants}
@@ -97,9 +117,9 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
                 className='carousel__slide'
               >{
                 slides[currentIndex].getElement(animationProps)
-              }</motion.div>
+              }</motion.main>
             :
-              <motion.div
+              <motion.main
                 key="loading"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -107,7 +127,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
                 className="carousel__slide"
               >
                 {loadingSlide}
-              </motion.div>
+              </motion.main>
             }
           </AnimatePresence>
         </div>
