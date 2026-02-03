@@ -57,10 +57,10 @@ const rainbowVariants: CarouselButtonVariants = {
 
 const contentVariants: CarouselButtonVariants = {
   initial: {
-    padding: '20px'
+    padding: '10px'
   },
   hover: {
-    padding: '100px'
+    padding: '80px'
   },
   click: {
 
@@ -69,7 +69,7 @@ const contentVariants: CarouselButtonVariants = {
 
 const iconVariants: CarouselButtonVariants = {
   initial: {
-    scale: 0.5,
+    scale: 0.4,
     opacity: 0.2,
     rotateZ: -360
   },
@@ -116,8 +116,10 @@ export default function CarouselButton({ direction, onClick }: CarouselButtonPro
           <FaArrowLeft
             style={{
               color: 'white',
-              width: '10em',
-              height: '10em'
+              width: '15em',
+              height: '15em',
+              stroke: '#000000',
+              strokeWidth: '10px',
             }}
           />
         </motion.p>
