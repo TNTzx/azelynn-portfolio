@@ -75,11 +75,11 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     >
       <div className="carousel__buttons layer">
         <div className="carousel__button-container carousel__button-container--left">
-          <CarouselButton direction="left" onClick={() => switchScreen(-1)} />
+          <CarouselButton direction={-1} onClick={() => switchScreen(-1)} />
         </div>
 
         <div className="carousel__button-container carousel__button-container--right">
-          <CarouselButton direction="right" onClick={() => switchScreen(1)} />
+          <CarouselButton direction={1} onClick={() => switchScreen(1)} />
         </div>
       </div>
 
