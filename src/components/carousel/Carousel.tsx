@@ -3,7 +3,7 @@ import type { CarouselProps, CarouselAnimationContext, CarouselVariants as Carou
 import './Carousel.css';
 import '@src/styles/layer.css';
 import { AnimatePresence, motion } from 'motion/react';
-import { CarouselButton } from '../carouselButton';
+import { CarouselButton } from './carouselButtons/carouselButton';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
