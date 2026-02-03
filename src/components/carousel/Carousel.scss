@@ -17,13 +17,24 @@
     pointer-events: none;
 }
 
-.carousel__controls-buttons {
-    display: none;
+.carousel__control {
     width: 100%;
     height: 100%;
+}
+
+.carousel__control--buttons {
+    display: none;
 
     @include breakpoint(lg) {
         display: block;
+    }
+}
+
+.carousel__control--swipes {
+    display: block;
+
+    @include breakpoint(lg) {
+        display: none;
     }
 }
 
