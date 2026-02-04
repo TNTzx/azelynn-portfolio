@@ -19,7 +19,6 @@ export function useCarouselControls() {
     delta: 0.2,
     onSwiping: (e) => {
       swipePercent.set(e.deltaX / window.innerWidth)
-      console.log(swipePercent.get())
     },
     onSwiped: () => {
       swipePercent.set(null);
