@@ -56,7 +56,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     onScreenChange?.(slides[newIndex]);
   }
 
-  const [swipePercent, handlers] = useCarouselControls(switchScreen);
+  const [swipePercent, keyPressed, handlers] = useCarouselControls();
 
   return (
     <div
@@ -64,7 +64,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
       className="carousel"
     >
       <div className="carousel__controls-container">
-        <CarouselControls switchScreen={switchScreen} swipePercent={swipePercent} />
+        <CarouselControls switchScreen={switchScreen} keyPressed={keyPressed} swipePercent={swipePercent} />
       </div>
 
       <div className="carousel__slides layer">

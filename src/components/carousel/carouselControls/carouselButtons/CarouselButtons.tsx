@@ -2,15 +2,15 @@ import CarouselButton from './carouselButton/CarouselButton';
 import './CarouselButtons.scss';
 import type { CarouselButtonsProps } from './carouselButtonsTypes';
 
-export default function CarouselButtons({ onClick }: CarouselButtonsProps) {
+export default function CarouselButtons({ onClick, keyPressed }: CarouselButtonsProps) {
   return (
     <div className="carousel__buttons">
       <div className="carousel__button-container carousel__button-container--left">
-        <CarouselButton direction={-1} onClick={() => onClick(-1)} />
+        <CarouselButton direction={-1} keyPressed={keyPressed} onClick={() => onClick(-1)} />
       </div>
 
       <div className="carousel__button-container carousel__button-container--right">
-        <CarouselButton direction={1} onClick={() => onClick(1)} />
+        <CarouselButton direction={1} keyPressed={keyPressed} onClick={() => onClick(1)} />
       </div>
     </div>
   );
