@@ -20,8 +20,12 @@ const testVariants: CarouselVariants = {
 
 export default function Hello({ animationContext }: { animationContext: CarouselAnimationContext }) {
   return (
-    <motion.div variants={testVariants} custom={animationContext}>
-      <h1 style={{ textAlign: "center" }}>Hello World</h1>
-    </motion.div>
+    <div className='hello'>
+      <motion.div variants={testVariants} custom={animationContext}>
+        <h1 style={{ textAlign: "center" }}>Hello World</h1>
+      </motion.div>
+
+      <button onClick={() => console.log('Clicked!')}>What</button>
+    </div>
   )
 }
