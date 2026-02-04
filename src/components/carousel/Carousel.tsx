@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
 import { AnimatePresence, motion, useMotionValue } from 'motion/react';
@@ -29,12 +29,6 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
       swipePercent.set(null);
     }
   })
-
-  useEffect(() => {
-    return swipePercent.on("change", (latest) => {
-      console.log("swipe:", latest);
-    });
-  }, [swipePercent]);
 
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     const foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
