@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use 'layer';
 
 .carousel {
     position: relative;
@@ -9,34 +9,10 @@
     touch-action: none;
 }
 
-.carousel__controls {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+.carousel__controls-container {
+    @extend .layer;
 
     z-index: 2;
-    pointer-events: none;
-}
-
-.carousel__control {
-    width: 100%;
-    height: 100%;
-}
-
-.carousel__control--buttons {
-    display: none;
-
-    @include breakpoint(lg) {
-        display: block;
-    }
-}
-
-.carousel__control--swipes {
-    display: block;
-
-    @include breakpoint(lg) {
-        display: none;
-    }
 }
 
 .carousel__slides {

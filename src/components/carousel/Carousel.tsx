@@ -2,9 +2,8 @@ import { useState, useRef } from 'react';
 import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
 import { AnimatePresence, motion, useMotionValue } from 'motion/react';
-import CarouselButtons from './carouselControls/carouselButtons/CarouselButtons';
 import { useSwipeable } from 'react-swipeable';
-import CarouselSwipes from './carouselControls/carouselSwipes/CarouselSwipes';
+import CarouselControls from './carouselControls/CarouselControls';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -24,6 +23,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     delta: 0.2,
     onSwiping: (e) => {
       swipePercent.set(e.deltaX / window.innerWidth)
+      console.log(swipePercent.get())
     },
     onSwiped: () => {
       swipePercent.set(null);
@@ -68,32 +68,13 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     onScreenChange?.(slides[newIndex]);
   }
 
-
-  function onKeyUp(event: React.KeyboardEvent<HTMLDivElement>) {
-    if (event.key === 'ArrowLeft') {
-      switchScreen(-1);
-    }
-
-    if (event.key === 'ArrowRight') {
-      switchScreen(1);
-    }
-  }
-
   return (
     <div
-      tabIndex={0}
-      onKeyUp={onKeyUp}
       {...swipeHandlers}
       className="carousel"
     >
-      <div className="carousel__controls layer">
-        <div className="carousel__control carousel__control--buttons">
-          <CarouselButtons onClick={(direction) => switchScreen(direction)} />
-        </div>
-
-        <div className="carousel__control carousel__control--swipes">
-          <CarouselSwipes swipePercent={swipePercent} />
-        </div>
+      <div className="carousel__controls-container">
+        <CarouselControls switchScreen={switchScreen} swipePercent={swipePercent} />
       </div>
 
       <div className="carousel__slides layer">

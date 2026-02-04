@@ -1,0 +1,28 @@
+@use 'mixins' as *;
+
+.carousel__controls {
+    width: 100%;
+    height: 100%;
+
+}
+
+.carousel__control-container {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__control-container--buttons {
+    display: none;
+
+    @include breakpoint(lg) {
+        display: block;
+    }
+}
+
+.carousel__control-container--swipes {
+    display: block;
+
+    @include breakpoint(lg) {
+        display: none;
+    }
+}
