@@ -3,10 +3,10 @@ import { useSwipeable } from "react-swipeable";
 import type { CarouselSwipeIndicatorSwipePercent } from "./carouselSwipes/carouselSwipeIndicator";
 import type { CarouselButtonKeyPressed } from "./carouselButtons";
 
-export type CarouselCountrolsSwitchScreen = (direction: -1 | 1) => void
+export type CarouselControlsSwitchScreen = (direction: -1 | 1) => void
 
 export interface CarouselControlsProps {
-    switchScreen?: CarouselCountrolsSwitchScreen;
+    switchScreen?: CarouselControlsSwitchScreen;
     swipePercent: CarouselSwipeIndicatorSwipePercent;
     keyPressed: MotionValue<CarouselButtonKeyPressed>;
 }
