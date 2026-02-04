@@ -2,9 +2,9 @@ import { useState, useRef } from 'react';
 import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
 import { AnimatePresence, motion, useMotionValue } from 'motion/react';
-import CarouselButtons from './carouselButtons/CarouselButtons';
+import CarouselButtons from './carouselControls/carouselButtons/CarouselButtons';
 import { useSwipeable } from 'react-swipeable';
-import CarouselSwipes from './carouselSwipes/CarouselSwipes';
+import CarouselSwipes from './carouselControls/carouselSwipes/CarouselSwipes';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
