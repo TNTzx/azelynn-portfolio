@@ -11,7 +11,7 @@ export default function CarouselControls({ swipePercent, keyPressed, switchScree
       </div>
 
       <div className="carousel__control-container carousel__control-container--swipes">
-        <CarouselSwipes swipePercent={swipePercent} />
+        <CarouselSwipes swipePercent={swipePercent} switchScreen={switchScreen} />
       </div>
     </div>
   )
