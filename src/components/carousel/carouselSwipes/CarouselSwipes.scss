@@ -1,0 +1,15 @@
+@use 'layer';
+
+.carousel__swipes {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel__swipe-indicator-container {
+    @extend .layer;
+
+    width: 100%;
+    height: 100%;
+}

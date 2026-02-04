@@ -4,6 +4,7 @@ import './Carousel.scss';
 import { AnimatePresence, motion, useMotionValue } from 'motion/react';
 import CarouselButtons from './carouselButtons/CarouselButtons';
 import { useSwipeable } from 'react-swipeable';
+import CarouselSwipes from './carouselSwipes/CarouselSwipes';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -18,24 +19,22 @@ const slideVariants: CarouselSlideVariants = {
 }
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
-  const isSwiping = useRef(false);
-  const swipeProgress = useMotionValue(0);
+  const swipePercent = useMotionValue<number | null>(0);
   const swipeHandlers = useSwipeable({
+    delta: 0.2,
     onSwiping: (e) => {
-      isSwiping.current = true;
-      swipeProgress.set(e.deltaX / window.innerWidth)
+      swipePercent.set(e.deltaX / window.innerWidth)
     },
     onSwiped: () => {
-      isSwiping.current = false;
-      swipeProgress.set(0);
+      swipePercent.set(null);
     }
   })
 
   useEffect(() => {
-    return swipeProgress.on("change", (latest) => {
-      console.log("swipeX:", latest);
+    return swipePercent.on("change", (latest) => {
+      console.log("swipe:", latest);
     });
-  }, [swipeProgress]);
+  }, [swipePercent]);
 
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     const foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
@@ -98,9 +97,9 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
           <CarouselButtons onClick={(direction) => switchScreen(direction)} />
         </div>
 
-        {/* <div className="carousel__control carousel__control--swipes">
-          <CarouselSwipes />
-        </div> */}
+        <div className="carousel__control carousel__control--swipes">
+          <CarouselSwipes swipePercent={swipePercent} />
+        </div>
       </div>
 
       <div className="carousel__slides layer">
