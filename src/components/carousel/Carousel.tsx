@@ -3,7 +3,7 @@ import type { CarouselProps, CarouselAnimationContext, CarouselVariants as Carou
 import './Carousel.scss';
 import { AnimatePresence, motion } from 'motion/react';
 import CarouselControls from './carouselControls/CarouselControls';
-import { useCarouselSwipeHandler } from './carouselControls';
+import { useCarouselControls } from './carouselControls/carouselControlsTypes';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -18,8 +18,6 @@ const slideVariants: CarouselSlideVariants = {
 }
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
-  const [swipePercent, swipeHandlers] = useCarouselSwipeHandler();
-
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     const foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
     if (foundIndex === -1) {
@@ -58,9 +56,11 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     onScreenChange?.(slides[newIndex]);
   }
 
+  const [swipePercent, handlers] = useCarouselControls(switchScreen);
+
   return (
     <div
-      {...swipeHandlers}
+      {...handlers}
       className="carousel"
     >
       <div className="carousel__controls-container">
