@@ -7,20 +7,27 @@ import { easeInOutQuint, easeOutQuint } from 'js-easing-functions';
 export default function CarouselButton({ direction, keyPressed, onClick }: CarouselButtonProps) {
   const controls = useAnimationControls();
 
-  function handleClick() {
+  function handleClick(event: React.PointerEvent<HTMLButtonElement>) {
     onClick();
-    controls.start('click').then(() => {
-      controls.start('hover');
-    });
-  }
 
-  useMotionValueEvent(keyPressed, 'change', latestValue => {
-    if (latestValue === direction) {
-      handleClick();
+    if (event.pointerType === 'mouse') {
+      controls.start('click').then(() => {
+        controls.start('hover')
+      });
+    } else {
       controls.start('keyPressed').then(() => {
         controls.start('initial');
       });
     }
+  }
+
+  useMotionValueEvent(keyPressed, 'change', latestValue => {
+    if (latestValue !== direction) return;
+
+    onClick();
+    controls.start('keyPressed').then(() => {
+      controls.start('initial');
+    });
   });
 
 
