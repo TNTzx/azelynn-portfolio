@@ -10,7 +10,7 @@ export default function CarouselButton({ direction, keyPressed, onClick }: Carou
   function handleClick(event: React.PointerEvent<HTMLButtonElement>) {
     onClick();
 
-    if (event.pointerType === 'mouse') {
+    if (event.nativeEvent.pointerType === 'mouse') {
       controls.start('click').then(() => {
         controls.start('hover')
       });
@@ -103,7 +103,7 @@ export default function CarouselButton({ direction, keyPressed, onClick }: Carou
 
     },
     keyPressed: {
-      padding: ['50px', '0px'],
+      padding: ['20px', '0px'],
       transition: {
         duration: 1,
         ease: (t) => easeInOutQuint(t, 0, 1, 1)
