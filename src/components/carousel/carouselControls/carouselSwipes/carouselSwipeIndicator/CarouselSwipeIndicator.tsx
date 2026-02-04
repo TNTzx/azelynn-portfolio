@@ -5,19 +5,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { easeInOutQuint, easeOutCirc, easeOutExpo } from 'js-easing-functions';
 import type { MotionStyle } from 'motion';
 
-export default function CarouselSwipeIndicator({/*  direction, */ swipePercent }: CarouselSwipeIndicatorProps) {
-  const latchedSwipePercent = useMotionValue(0);
-
+export default function CarouselSwipeIndicator({ direction, swipePercent }: CarouselSwipeIndicatorProps) {
   const animatorAnimationControls = useAnimationControls();
   const iconAnimationControls = useAnimationControls();
 
-  const animatorStyle: MotionStyle = {
-    x: useTransform(latchedSwipePercent, [0, 1], ['-100%', '0%'], { ease: (t) => easeOutCirc(t, 0, 1, 1) })
-  };
-
-  const iconStyle: MotionStyle = {
-    rotate: useTransform(latchedSwipePercent, [0, 1], [360, 0], { ease: (t) => easeOutExpo(t, 0, 1, 1) })
-  }
+  const latchedSwipePercent = useMotionValue(0);
 
   useMotionValueEvent(swipePercent, 'change', latestValue => {
     if (latestValue !== null) {
@@ -28,7 +20,7 @@ export default function CarouselSwipeIndicator({/*  direction, */ swipePercent }
     };
 
     animatorAnimationControls.start({
-      x: '-100%',
+      x: `${direction === -1 ? '-' : ''}100%`,
       transition: {
         duration: 1,
         ease: (t) => easeInOutQuint(t, 0, 1, 1)
@@ -36,16 +28,36 @@ export default function CarouselSwipeIndicator({/*  direction, */ swipePercent }
     });
 
     iconAnimationControls.start({
-      rotate: ['-45deg', '0deg']
+      rotate: [`${direction === -1 ? '' : '-'}45deg`, '0deg']
     })
   });
+
+
+  const animatorStyle: MotionStyle = {
+    alignItems: direction === -1 ? 'end' : 'start',
+    x: useTransform(
+      latchedSwipePercent,
+      [0, 1],
+      [`${direction === -1 ? '-' : ''}100%`, '0%'],
+      { ease: (t) => easeOutCirc(t, 0, 1, 1) }
+    )
+  };
+
+  const iconStyle: MotionStyle = {
+    rotate: useTransform(
+      latchedSwipePercent,
+      [0, 0.75],
+      [-360 * direction, 0],
+      { ease: (t) => easeOutExpo(t, 0, 1, 1) }
+    )
+  }
 
   return (
     <div 
       className="carousel__swipe-indicator"
-      // style={{
-      //   transform: direction === -1 ? 'rotateZ(180deg)' : undefined
-      // }}
+      style={{
+        alignItems: direction === -1 ? 'start' : 'end'
+      }}
     >
       <motion.div
         animate={animatorAnimationControls}
@@ -63,7 +75,8 @@ export default function CarouselSwipeIndicator({/*  direction, */ swipePercent }
               height: '10em',
               stroke: '#000000',
               strokeWidth: '10px',
-              margin: '10px'
+              margin: '10px',
+              rotate: direction === 1 ? '180deg' : undefined
             }}
           />
         </motion.span>
