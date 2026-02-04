@@ -1,0 +1,31 @@
+@use 'layer';
+
+.carousel__control-bg {
+    @extend .layer;
+}
+
+.carousel__control-bg--rainbow {
+    z-index: 1;
+
+    opacity: 0;
+    background-image: linear-gradient(
+        to right,
+        rgb(255, 162, 162),
+        rgb(255, 209, 124),
+        rgb(255, 255, 127),
+        rgb(125, 255, 125),
+        rgb(129, 129, 255),
+        rgb(203, 125, 255),
+        rgb(255, 127, 255),
+        rgb(255, 126, 126)
+    );
+    background-size: 10000% 100%;
+
+    mask-image: linear-gradient(to right, black, transparent)
+}
+
+.carousel__control-bg--flash {
+    z-index: 2;
+
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.75), #00000000)
+}
