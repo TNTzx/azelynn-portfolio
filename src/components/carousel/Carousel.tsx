@@ -1,9 +1,9 @@
 import { useState, useRef } from 'react';
 import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
-import { AnimatePresence, motion, useMotionValue } from 'motion/react';
-import { useSwipeable } from 'react-swipeable';
+import { AnimatePresence, motion } from 'motion/react';
 import CarouselControls from './carouselControls/CarouselControls';
+import { useCarouselSwipeHandler } from './carouselControls';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -18,17 +18,7 @@ const slideVariants: CarouselSlideVariants = {
 }
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
-  const swipePercent = useMotionValue<number | null>(0);
-  const swipeHandlers = useSwipeable({
-    delta: 0.2,
-    onSwiping: (e) => {
-      swipePercent.set(e.deltaX / window.innerWidth)
-      console.log(swipePercent.get())
-    },
-    onSwiped: () => {
-      swipePercent.set(null);
-    }
-  })
+  const [swipePercent, swipeHandlers] = useCarouselSwipeHandler();
 
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
     const foundIndex = slides.findIndex(slide => slide.hash === currentSlide);
