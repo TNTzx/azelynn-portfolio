@@ -148,8 +148,8 @@ export default function CarouselButton({ direction, keyPressed, onClick }: Carou
           <FaArrowLeft
             style={{
               color: 'white',
-              width: '15em',
-              height: '15em',
+              width: '10vw',
+              height: '10vw',
               stroke: '#000000',
               strokeWidth: '10px',
             }}
