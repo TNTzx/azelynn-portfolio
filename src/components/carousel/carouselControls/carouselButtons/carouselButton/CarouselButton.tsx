@@ -147,8 +147,8 @@ export default function CarouselButton({ direction, keyPressed, onClick }: Carou
       animate={controls}
       transition={{ duration: 0.25, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
     >
-      <motion.div className="carousel__button-bg carousel__button-bg--flash" variants={flashVariants} />
-      <motion.div className="carousel__button-bg carousel__button-bg--rainbow" variants={rainbowVariants} />
+      <motion.div className="carousel__control-bg carousel__control-bg--flash" variants={flashVariants} />
+      <motion.div className="carousel__control-bg carousel__control-bg--rainbow" variants={rainbowVariants} />
 
       <motion.div className="carousel__button-contents" variants={contentVariants}>
         <motion.div variants={iconVariants}>
