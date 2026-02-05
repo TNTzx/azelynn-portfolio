@@ -118,8 +118,8 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
             <FaArrowLeft
               style={{
                 color: 'white',
-                width: '10em',
-                height: '10em',
+                width: '20vw',
+                height: '20vw',
                 stroke: '#000000',
                 strokeWidth: '10px',
                 rotate: direction === 1 ? '180deg' : undefined
