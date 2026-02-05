@@ -30,12 +30,14 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
 
     containerAnimationControls.start(latchedSwipePercent.get() === 0 ? {} : {
       x: '0%',
+      width: '70%',
       transition: {
         duration: 0.1,
         ease: (t) => easeOutCirc(t, 0, 1, 1)
       }
     }).then(() => containerAnimationControls.start({
       x: `${direction === -1 ? '-' : ''}100%`,
+      width: '50%',
       transition: {
         duration: 0.75,
         ease: (t) => easeInOutCirc(t, 0, 1, 1)
@@ -43,7 +45,9 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
     }));
 
     iconAnimationControls.start({
-      rotate: [`${direction === -1 ? '' : '-'}45deg`, '0deg']
+      opacity: 1,
+      scale: 1,
+      rotate: [`${direction === -1 ? '' : '-'}90deg`, '0deg']
     })
   });
 
@@ -62,6 +66,16 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
   };
 
   const iconStyle: MotionStyle = {
+    opacity: useTransform(
+      latchedSwipePercent,
+      [0, 0.75],
+      [0.5, 0.8]
+    ),
+    scale: useTransform(
+      latchedSwipePercent,
+      [0, 0.75],
+      [0.5, 0.8]
+    ),
     rotate: useTransform(
       latchedSwipePercent,
       [0, 0.75],
@@ -85,11 +99,11 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
         <motion.div
           animate={flashAnimationControls}
           className="carousel__control-bg carousel__control-bg--flash"
-          style={{ opacity: 0, backgroundColor: 'white' }}
+          style={{ opacity: 0, backgroundColor: 'white', rotate: direction === 1 ? '180deg' : undefined }}
         />
         <motion.div
           className="carousel__control-bg carousel__control-bg--rainbow"
-          style={{ opacity: 0.5 }}
+          style={{ opacity: 0.5, rotate: direction === 1 ? '180deg' : undefined }}
         />
 
         <motion.div
