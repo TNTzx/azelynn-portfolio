@@ -4,6 +4,11 @@
     @extend .layer;
 }
 
+@keyframes rainbow-loop {
+    from { background-position: 0% 50%; }
+    to { background-position: 100% 50%; }
+}
+
 .carousel__control-bg--rainbow {
     z-index: 1;
 
@@ -21,7 +26,9 @@
     );
     background-size: 10000% 100%;
 
-    mask-image: linear-gradient(to right, black, transparent)
+    mask-image: linear-gradient(to right, black, transparent);
+
+    animation: rainbow-loop 0.5s infinite reverse
 }
 
 .carousel__control-bg--flash {

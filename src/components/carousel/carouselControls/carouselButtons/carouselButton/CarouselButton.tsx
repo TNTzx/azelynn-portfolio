@@ -75,13 +75,6 @@ export default function CarouselButton({ direction, keyPressed, onClick }: Carou
     },
     hover: {
       opacity: 1,
-      backgroundPosition: ['0% 50%', '100% 50%'],
-      transition: {
-        duration: 0.5,
-        repeat: Infinity,
-        repeatType: 'reverse',
-        ease: 'linear'
-      }
     },
     click: {},
     keyPressed: {

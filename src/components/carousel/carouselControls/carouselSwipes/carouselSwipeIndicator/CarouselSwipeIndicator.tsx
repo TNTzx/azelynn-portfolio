@@ -2,30 +2,45 @@ import { motion, useAnimationControls, useMotionValue, useMotionValueEvent, useT
 import './CarouselSwipeIndicator.scss';
 import type { CarouselSwipeIndicatorProps } from './carouselSwipeIndicatorTypes';
 import { FaArrowLeft } from 'react-icons/fa';
-import { easeInOutQuint, easeOutCirc, easeOutExpo } from 'js-easing-functions';
+import { easeInOutCirc, easeOutCirc, easeOutExpo } from 'js-easing-functions';
 import type { MotionStyle } from 'motion';
 
 export default function CarouselSwipeIndicator({ direction, swipePercent }: CarouselSwipeIndicatorProps) {
-  const animatorAnimationControls = useAnimationControls();
+  const containerAnimationControls = useAnimationControls();
+  const flashAnimationControls = useAnimationControls();
+  const contentAnimationControls = useAnimationControls();
   const iconAnimationControls = useAnimationControls();
 
   const latchedSwipePercent = useMotionValue(0);
 
   useMotionValueEvent(swipePercent, 'change', latestValue => {
     if (latestValue !== null) {
-      animatorAnimationControls.stop();
+      contentAnimationControls.stop();
 
       latchedSwipePercent.set(latestValue);
       return;
     };
 
-    animatorAnimationControls.start({
-      x: `${direction === -1 ? '-' : ''}100%`,
+    flashAnimationControls.start({
+      opacity: [1, 0],
       transition: {
-        duration: 1,
-        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+        duration: 2
       }
     });
+
+    containerAnimationControls.start(latchedSwipePercent.get() === 0 ? {} : {
+      x: '0%',
+      transition: {
+        duration: 0.1,
+        ease: (t) => easeOutCirc(t, 0, 1, 1)
+      }
+    }).then(() => containerAnimationControls.start({
+      x: `${direction === -1 ? '-' : ''}100%`,
+      transition: {
+        duration: 0.75,
+        ease: (t) => easeInOutCirc(t, 0, 1, 1)
+      }
+    }));
 
     iconAnimationControls.start({
       rotate: [`${direction === -1 ? '' : '-'}45deg`, '0deg']
@@ -33,14 +48,17 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
   });
 
 
-  const animatorStyle: MotionStyle = {
-    alignItems: direction === -1 ? 'end' : 'start',
+  const containerStyle: MotionStyle = {
     x: useTransform(
       latchedSwipePercent,
       [0, 1],
       [`${direction === -1 ? '-' : ''}100%`, '0%'],
       { ease: (t) => easeOutCirc(t, 0, 1, 1) }
     )
+  }
+
+  const contentStyle: MotionStyle = {
+    alignItems: direction === -1 ? 'end' : 'start',
   };
 
   const iconStyle: MotionStyle = {
@@ -60,26 +78,41 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
       }}
     >
       <motion.div
-        animate={animatorAnimationControls}
-        style={animatorStyle}
-        className="carousel__swipe-indicator-inner"
+        animate={containerAnimationControls}
+        style={containerStyle}
+        className="carousel__swipe-indicator-content-container"
       >
-        <motion.span
-          animate={iconAnimationControls}
-          style={iconStyle}
+        <motion.div
+          animate={flashAnimationControls}
+          className="carousel__control-bg carousel__control-bg--flash"
+          style={{ opacity: 0, backgroundColor: 'white' }}
+        />
+        <motion.div
+          className="carousel__control-bg carousel__control-bg--rainbow"
+          style={{ opacity: 0.5 }}
+        />
+
+        <motion.div
+          animate={contentAnimationControls}
+          style={contentStyle}
+          className="carousel__swipe-indicator-content"
         >
-          <FaArrowLeft
-            style={{
-              color: 'white',
-              width: '10em',
-              height: '10em',
-              stroke: '#000000',
-              strokeWidth: '10px',
-              margin: '10px',
-              rotate: direction === 1 ? '180deg' : undefined
-            }}
-          />
-        </motion.span>
+          <motion.span
+            animate={iconAnimationControls}
+            style={iconStyle}
+          >
+            <FaArrowLeft
+              style={{
+                color: 'white',
+                width: '10em',
+                height: '10em',
+                stroke: '#000000',
+                strokeWidth: '10px',
+                rotate: direction === 1 ? '180deg' : undefined
+              }}
+            />
+          </motion.span>
+        </motion.div>
       </motion.div>
     </div>
   );
