@@ -15,7 +15,10 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
 
   useMotionValueEvent(swipePercent, 'change', latestValue => {
     if (latestValue !== null) {
+      containerAnimationControls.stop();
+      flashAnimationControls.stop();
       contentAnimationControls.stop();
+      iconAnimationControls.stop();
 
       latchedSwipePercent.set(latestValue);
       return;
