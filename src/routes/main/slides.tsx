@@ -1,5 +1,6 @@
 import type { CarouselSlide } from "@src/components";
 import Hello from "@src/components/slides/hello/Hello";
+import HelloWorld from "@src/components/slides/helloWorld/HelloWorld";
 
 function getRandomColor() {
   const letters = '0123456789ABCDEF';
@@ -11,6 +12,11 @@ function getRandomColor() {
 }
 
 export const slides: CarouselSlide[] = [
+  {
+    hash: 'helloWorld',
+    getElement: (animationContext) =>
+      <HelloWorld animationContext={animationContext} />
+  },
   {
     hash: 'slide1',
     getElement: () =>
