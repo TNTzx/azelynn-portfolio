@@ -13,7 +13,7 @@ function getRandomColor() {
 
 export const slides: CarouselSlide[] = [
   {
-    hash: 'helloWorld',
+    hash: 'helloworld',
     getElement: (animationContext) =>
       <HelloWorld animationContext={animationContext} />
   },
