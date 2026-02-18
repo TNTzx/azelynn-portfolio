@@ -9,6 +9,8 @@ export interface CarouselControlsProps {
     switchScreen?: CarouselControlsSwitchScreen;
     swipePercent: CarouselSwipeIndicatorSwipePercent;
     keyPressed: MotionValue<CarouselButtonKeyPressed>;
+    isLeftDisabled: boolean;
+    isRightDisabled: boolean;
 }
 
 export function useCarouselControls() {

@@ -8,6 +8,7 @@ export interface CarouselButtonProps {
   direction: CarouselButtonDirection;
   keyPressed: MotionValue<CarouselButtonKeyPressed>;
   onClick: () => void;
+  isDisabled: boolean;
 }
 
 export interface CarouselButtonVariants extends Variants<CarouselButtonDirection> {

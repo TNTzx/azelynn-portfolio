@@ -4,4 +4,6 @@ import type { CarouselButtonDirection, CarouselButtonKeyPressed } from "./carous
 export interface CarouselButtonsProps {
     onClick: (direction: CarouselButtonDirection) => void;
     keyPressed: MotionValue<CarouselButtonKeyPressed>;
+    isLeftDisabled: boolean;
+    isRightDisabled: boolean;
 }
