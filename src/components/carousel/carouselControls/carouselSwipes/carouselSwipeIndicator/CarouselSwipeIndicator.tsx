@@ -1,11 +1,11 @@
 import { motion, useAnimationControls, useMotionValue, useMotionValueEvent, useTransform } from 'motion/react';
 import './CarouselSwipeIndicator.scss';
 import type { CarouselSwipeIndicatorProps } from './carouselSwipeIndicatorTypes';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaBan } from 'react-icons/fa';
 import { easeInOutCirc, easeOutCirc, easeOutExpo } from 'js-easing-functions';
 import type { MotionStyle } from 'motion';
 
-export default function CarouselSwipeIndicator({ direction, swipePercent }: CarouselSwipeIndicatorProps) {
+export default function CarouselSwipeIndicator({ direction, swipePercent, isDisabled }: CarouselSwipeIndicatorProps) {
   const containerAnimationControls = useAnimationControls();
   const flashAnimationControls = useAnimationControls();
   const contentAnimationControls = useAnimationControls();
@@ -118,16 +118,29 @@ export default function CarouselSwipeIndicator({ direction, swipePercent }: Caro
             animate={iconAnimationControls}
             style={iconStyle}
           >
-            <FaArrowLeft
-              style={{
-                color: 'white',
-                width: '20vw',
-                height: '20vw',
-                stroke: '#000000',
-                strokeWidth: '10px',
-                rotate: direction === 1 ? '180deg' : undefined
-              }}
-            />
+            {isDisabled ?
+              <FaBan
+                style={{
+                  color: 'red',
+                  width: '20vw',
+                  height: '20vw',
+                  stroke: '#000000',
+                  strokeWidth: '10px',
+                  rotate: direction === 1 ? '180deg' : undefined
+                }}
+              />
+            :
+              <FaArrowLeft
+                style={{
+                  color: 'white',
+                  width: '20vw',
+                  height: '20vw',
+                  stroke: '#000000',
+                  strokeWidth: '10px',
+                  rotate: direction === 1 ? '180deg' : undefined
+                }}
+              />
+            }
           </motion.span>
         </motion.div>
       </motion.div>

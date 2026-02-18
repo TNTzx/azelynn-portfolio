@@ -3,7 +3,7 @@ import CarouselSwipeIndicator from './carouselSwipeIndicator/CarouselSwipeIndica
 import './CarouselSwipes.scss';
 import type { CarouselSwipesProps } from './carouselSwipesTypes';
 
-export default function CarouselSwipes({ swipePercent, switchScreen }: CarouselSwipesProps) {
+export default function CarouselSwipes({ swipePercent, switchScreen, isLeftDisabled, isRightDisabled }: CarouselSwipesProps) {
   const leftSwipePercent = useTransform(swipePercent, (val) => val === null ? null : transform(val, [0, 1], [0, 1]));
   const rightSwipePercent = useTransform(swipePercent, (val) => val === null ? null : transform(val, [-1, 0], [1, 0]));
 
@@ -23,11 +23,11 @@ export default function CarouselSwipes({ swipePercent, switchScreen }: CarouselS
   return (
     <div className="carousel__swipes">
       <div className="carousel__swipe-indicator-container">
-        <CarouselSwipeIndicator direction={-1} swipePercent={leftSwipePercent} />
+        <CarouselSwipeIndicator direction={-1} swipePercent={leftSwipePercent} isDisabled={isLeftDisabled} />
       </div>
 
       <div className="carousel__swipe-indicator-container">
-        <CarouselSwipeIndicator direction={1} swipePercent={rightSwipePercent} />
+        <CarouselSwipeIndicator direction={1} swipePercent={rightSwipePercent} isDisabled={isRightDisabled} />
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaBan } from 'react-icons/fa';
 import './CarouselButton.scss';
 import type { CarouselButtonProps, CarouselButtonVariants } from './carouselButtonTypes';
 import { motion, useAnimationControls, useMotionValueEvent } from 'motion/react';
 import { easeInOutQuint, easeOutQuint } from 'js-easing-functions';
 
-export default function CarouselButton({ direction, keyPressed, onClick }: CarouselButtonProps) {
+export default function CarouselButton({ direction, keyPressed, onClick, isDisabled }: CarouselButtonProps) {
   const controls = useAnimationControls();
 
   function handleClick(event: React.PointerEvent<HTMLButtonElement>) {
@@ -145,15 +145,27 @@ export default function CarouselButton({ direction, keyPressed, onClick }: Carou
 
       <motion.div className="carousel__button-contents" variants={contentVariants}>
         <motion.div variants={iconVariants}>
-          <FaArrowLeft
-            style={{
-              color: 'white',
-              width: '10vw',
-              height: '10vw',
-              stroke: '#000000',
-              strokeWidth: '10px',
-            }}
-          />
+          {isDisabled ?
+            <FaBan
+              style={{
+                color: 'red',
+                width: '10vw',
+                height: '10vw',
+                stroke: '#000000',
+                strokeWidth: '10px',
+              }}
+            />
+          :
+            <FaArrowLeft
+              style={{
+                color: 'white',
+                width: '10vw',
+                height: '10vw',
+                stroke: '#000000',
+                strokeWidth: '10px',
+              }}
+            />
+          }
         </motion.div>
       </motion.div>
     </motion.button>

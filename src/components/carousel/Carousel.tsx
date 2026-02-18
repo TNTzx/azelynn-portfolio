@@ -29,6 +29,9 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
   const [isSlideShown, setIsSlideShown] = useState<boolean>(true);
   const [animationProps, setAnimationProps] = useState<CarouselAnimationContext>({ direction: -1 });
 
+  const isLeftDisabled = currentIndex === 0;
+  const isRightDisabled = currentIndex === (slides.length - 1);
+
   const loadingTimeout = useRef<number | null>(null);
 
   function switchScreen(offset: number) {
@@ -64,7 +67,13 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
       className="carousel"
     >
       <div className="carousel__controls-container">
-        <CarouselControls switchScreen={switchScreen} keyPressed={keyPressed} swipePercent={swipePercent} />
+        <CarouselControls
+          switchScreen={switchScreen}
+          keyPressed={keyPressed}
+          swipePercent={swipePercent}
+          isLeftDisabled={isLeftDisabled}
+          isRightDisabled={isRightDisabled}
+        />
       </div>
 
       <div className="carousel__slides layer">

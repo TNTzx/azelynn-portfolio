@@ -6,7 +6,8 @@ export type CarouselSwipeIndicatorSwipePercent = MotionValue<number | null>;
 
 export interface CarouselSwipeIndicatorProps {
   direction: CarouselSwipeIndicatorDirection;
-  swipePercent: CarouselSwipeIndicatorSwipePercent
+  swipePercent: CarouselSwipeIndicatorSwipePercent;
+  isDisabled: boolean;
 }
 
 export interface CarouselSwipeIndicatorVariants extends Variants<undefined> {

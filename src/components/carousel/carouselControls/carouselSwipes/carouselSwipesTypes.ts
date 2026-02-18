@@ -4,4 +4,6 @@ import type { CarouselSwipeIndicatorSwipePercent } from "./carouselSwipeIndicato
 export interface CarouselSwipesProps {
   swipePercent: CarouselSwipeIndicatorSwipePercent;
   switchScreen?: CarouselControlsSwitchScreen;
+  isLeftDisabled: boolean;
+  isRightDisabled: boolean;
 }
