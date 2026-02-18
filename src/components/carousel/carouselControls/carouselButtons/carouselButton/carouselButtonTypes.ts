@@ -11,9 +11,14 @@ export interface CarouselButtonProps {
   isDisabled: boolean;
 }
 
-export interface CarouselButtonVariants extends Variants<CarouselButtonDirection> {
-  initial: Variant<CarouselButtonDirection>;
-  hover: Variant<CarouselButtonDirection>;
-  click: Variant<CarouselButtonDirection>;
-  keyPressed: Variant<CarouselButtonDirection>;
+export interface CarouselButtonVariantsArgs {
+  direction: CarouselButtonDirection;
+  isDisabled: boolean;
+}
+
+export interface CarouselButtonVariants extends Variants<CarouselButtonVariantsArgs> {
+  initial: Variant<CarouselButtonVariantsArgs>;
+  hover: Variant<CarouselButtonVariantsArgs>;
+  click: Variant<CarouselButtonVariantsArgs>;
+  keyPressed: Variant<CarouselButtonVariantsArgs>;
 }
