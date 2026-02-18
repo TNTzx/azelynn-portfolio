@@ -25,6 +25,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
     if (latestValue !== direction) return;
 
     onClick();
+
     controls.start('keyPressed').then(() => {
       controls.start('initial');
     });
@@ -49,7 +50,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
     },
     click: {
       backgroundColor: [
-        'rgba(255, 255, 255, 1)',
+        isDisabled ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 255, 255, 1)',
         'rgba(0, 0, 0, 0)',
       ],
 
@@ -59,7 +60,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
     },
     keyPressed: {
       backgroundColor: [
-        'rgba(255, 255, 255, 1)',
+        isDisabled ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 255, 255, 1)',
         'rgba(0, 0, 0, 1)',
       ],
 
@@ -141,7 +142,9 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
       transition={{ duration: 0.25, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
     >
       <motion.div className="carousel__control-bg carousel__control-bg--flash" variants={flashVariants} />
-      <motion.div className="carousel__control-bg carousel__control-bg--rainbow" variants={rainbowVariants} />
+      {!isDisabled &&
+        <motion.div className="carousel__control-bg carousel__control-bg--rainbow" variants={rainbowVariants} />
+      }
 
       <motion.div className="carousel__button-contents" variants={contentVariants}>
         <motion.div variants={iconVariants}>
