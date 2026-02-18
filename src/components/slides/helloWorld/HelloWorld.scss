@@ -124,7 +124,7 @@
 
 .slide-hello-world__title {
     color: black;
-    font-size: 20vw;
+    font-size: max(10vw, 5em);
 
     letter-spacing: 0.2em;
 }
@@ -151,12 +151,10 @@
 
 .slide-hello-world__title-shadow--hello {
     background-image: linear-gradient(to bottom, black 30%, transparent 80%);
-    animation: move-left-4rep 2s linear infinite;
 }
 
 .slide-hello-world__title-shadow--world {
     background-image: linear-gradient(to top, black 20%, transparent 70%);
-    animation: move-left-4rep 3s linear infinite reverse;
 }
 
 .slide-hello-world__title-shadow-small {
@@ -169,12 +167,10 @@
 
 .slide-hello-world__title-shadow-small--hello {
     margin-bottom: 3vh;
-    animation: move-left-8rep 2s linear infinite;
 }
 
 .slide-hello-world__title-shadow-small--world {
     margin-top: 3vh;
-    animation: move-left-8rep 2s linear infinite reverse;
 }
 
 .slide-hello-world__title-shadow-container {
