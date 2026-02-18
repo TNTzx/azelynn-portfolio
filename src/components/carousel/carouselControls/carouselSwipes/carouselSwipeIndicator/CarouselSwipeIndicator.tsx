@@ -102,11 +102,11 @@ export default function CarouselSwipeIndicator({ direction, swipePercent, isDisa
         <motion.div
           animate={flashAnimationControls}
           className="carousel__control-bg carousel__control-bg--flash"
-          style={{ opacity: 0, backgroundColor: 'white', rotate: direction === 1 ? '180deg' : undefined }}
+          style={{ opacity: 0, backgroundColor: isDisabled ? 'red' : 'white', rotate: direction === 1 ? '180deg' : undefined }}
         />
         <motion.div
           className="carousel__control-bg carousel__control-bg--rainbow"
-          style={{ opacity: 0.5, rotate: direction === 1 ? '180deg' : undefined }}
+          style={{ opacity: isDisabled ? 0 : 0.5, rotate: direction === 1 ? '180deg' : undefined }}
         />
 
         <motion.div
