@@ -4,6 +4,7 @@ import './Carousel.scss';
 import { AnimatePresence, motion } from 'motion/react';
 import CarouselControls from './carouselControls/CarouselControls';
 import { useCarouselControls } from './carouselControls/carouselControlsTypes';
+import CarouselSlideDots from './carouselSlideDots/CarouselSlideDots';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {
@@ -74,6 +75,12 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
           isLeftDisabled={isLeftDisabled}
           isRightDisabled={isRightDisabled}
         />
+      </div>
+
+      <div className="carousel__slide-dots-container">
+        <div className="carousel__slide-dots-position">
+          <CarouselSlideDots slideCount={slides.length} slideIndex={currentIndex} />
+        </div>
       </div>
 
       <div className="carousel__slides layer">
