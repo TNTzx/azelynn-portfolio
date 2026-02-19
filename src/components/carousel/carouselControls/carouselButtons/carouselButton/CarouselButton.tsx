@@ -9,8 +9,18 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
   const controls = useAnimationControls();
 
   useEffect(() => {
-    controls.start('initial');
+    if (!isDisabled) {
+      controls.start('initial');
+    }
   }, [controls, isDisabled])
+
+  function animateKeyPress() {
+    setTimeout(() => {
+      controls.start('keyPressed').then(() => {
+        controls.start('initial');
+      });
+    }, 0);
+  }
 
   function handleClick(event: React.PointerEvent<HTMLButtonElement>) {
     onClick();
@@ -20,9 +30,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
         controls.start('hover')
       });
     } else {
-      controls.start('keyPressed').then(() => {
-        controls.start('initial');
-      });
+      animateKeyPress()
     }
   }
 
@@ -31,9 +39,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
 
     onClick();
 
-    controls.start('keyPressed').then(() => {
-      controls.start('initial');
-    });
+    animateKeyPress();
   });
 
 
@@ -54,9 +60,10 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
     },
     click: (args) => ({
+      opacity: 1,
       backgroundColor: [
         args.isDisabled ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 255, 255, 1)',
-        'rgba(0, 0, 0, 0)',
+        'rgba(0, 0, 0, 0.8)'
       ],
 
       transition: {
@@ -64,9 +71,10 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
       }
     }),
     keyPressed: (args) => ({
+      opacity: 1,
       backgroundColor: [
         args.isDisabled ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 255, 255, 1)',
-        'rgba(0, 0, 0, 1)',
+        'rgba(0, 0, 0, 0.8)'
       ],
 
       transition: {
