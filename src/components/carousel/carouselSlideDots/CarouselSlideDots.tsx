@@ -6,7 +6,11 @@ export default function CarouselSlideDots({ slides, activeSlideIndex }: Carousel
   return (
     <div className="carousel__slide-dots">
       {slides.map((slide, index) => {
-        return <CarouselSlideDot text={slide.displayName} isActive={activeSlideIndex === index} />;
+        return <CarouselSlideDot
+          key={`carouselslidedot-${slide.hash}`}
+          text={slide.displayName}
+          isActive={activeSlideIndex === index}
+        />;
       })}
     </div>
   );
