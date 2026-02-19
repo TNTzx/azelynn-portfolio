@@ -1,7 +1,7 @@
 import type { CarouselAnimationContext, CarouselVariants } from '@src/components';
 import './HelloWorld.scss';
 import { AnimatePresence, motion, type TargetAndTransition } from 'framer-motion';
-import { easeInOutQuint, easeOutQuint } from 'js-easing-functions';
+import { easeInOutQuint, easeInQuint, easeOutQuint } from 'js-easing-functions';
 import { useViewport } from '@src/hooks';
 import { useEffect, useState } from 'react';
 
@@ -50,7 +50,9 @@ function Mountains() {
     center: { transition: {
       staggerChildren: 0.03,
     } } satisfies TargetAndTransition,
-    exit: {}
+    exit: { transition: {
+      staggerChildren: 0.03,
+    } } satisfies TargetAndTransition
   } satisfies CarouselVariants;
 
   const mountainContainerInverseVariant: CarouselVariants = {
@@ -59,6 +61,12 @@ function Mountains() {
       ...mountainContainerVariant.center,
       transition: {
         ...mountainContainerVariant.center.transition,
+        staggerDirection: -1
+    }},
+    exit: {
+      ...mountainContainerVariant.exit,
+      transition: {
+        ...mountainContainerVariant.exit.transition,
         staggerDirection: -1
     }}
   };
@@ -77,17 +85,15 @@ function Mountains() {
   }
 
   return (
-    <AnimatePresence mode="popLayout">
+    <>
       <motion.div
         key={`top-${debouncedCount}`}
         className="slide-hello-world__mountains-container slide-hello-world__mountains-container--top"
         variants={mountainContainerVariant}
-        initial="enter"
-        animate="center"
-        exit="exit"
+        initial="enter" animate="center" exit="exit"
       >
         {mountains.map(idx => (
-          <div
+          <motion.div
             key={idx}
             className="slide-hello-world__mountain-container"
             style={getMountainContainerStyle(mountainHeights[idx])}
@@ -95,9 +101,8 @@ function Mountains() {
             <motion.div
               variants={mountainVariant}
               className="slide-hello-world__mountain slide-hello-world__mountain--top"
-            >
-            </motion.div>
-          </div>
+            />
+          </motion.div>
         ))}
       </motion.div>
 
@@ -105,12 +110,10 @@ function Mountains() {
         key={`bottom-${debouncedCount}`}
         className="slide-hello-world__mountains-container slide-hello-world__mountains-container--bottom"
         variants={mountainContainerInverseVariant}
-        initial="enter"
-        animate="center"
-        exit="exit"
+        initial="enter" animate="center" exit="exit"
       >
         {mountains.map(idx => (
-          <div
+          <motion.div
             key={idx}
             className="slide-hello-world__mountain-container"
             style={getMountainContainerStyle(mountainHeights[debouncedCount - idx - 1])}
@@ -118,29 +121,92 @@ function Mountains() {
             <motion.div
               variants={mountainVariant}
               className="slide-hello-world__mountain slide-hello-world__mountain--bottom"
-            >
-            </motion.div>
-          </div>
+            />
+          </motion.div>
         ))}
       </motion.div>
-    </AnimatePresence>
+    </>
   );
 }
 
-// const testVariants: CarouselVariants = {
-//   enter: {
-//     y: "100vh"
-//   },
-//   center: animationContext => ({
-//     rotateZ: animationContext.direction === 1 ? "90deg" : "45deg",
-//     y: "0vh",
-//     transition: { type: "tween", ease: (t) => easeOutQuint(t, 0, 1, 1), duration: 1 }
-//   }),
-//   exit: {
-//     y: "100vh",
-//     transition: { type: "tween", ease: (t) => easeInQuint(t, 0, 1, 1), duration: 1 }
-//   }
-// }
+
+function FGBack() {
+  const helloContainer: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: "50%"
+    },
+    center: {
+      opacity: 1,
+      y: "0%",
+      transition: {
+        duration: 2,
+        ease: (t) => easeOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {
+      y: "-100%",
+      rotate: "-10deg",
+      transition: {
+        duration: 1,
+        ease: (t) => easeInQuint(t, 0, 1, 1)
+      }
+    },
+  }
+  return (
+    <>
+      <motion.div
+        className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--hello"
+        variants={helloContainer}
+      >
+        <motion.h2
+          variants={getMarqueeVariant(4, -1, 8)}
+          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello"
+        >
+          HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
+        </motion.h2>
+        <motion.h2
+          variants={getMarqueeVariant(2, -1, 8)}
+          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello"
+        >
+          HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
+        </motion.h2>
+        <motion.h1
+          variants={getMarqueeVariant(6, -1, 4)}
+          className="slide-hello-world__title-shadow slide-hello-world__title-shadow--hello"
+        >
+          HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
+        </motion.h1>
+      </motion.div>
+
+      <motion.div
+        className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--world"
+        initial={{ opacity: 0, y: "-50%" }}
+        animate={{ opacity: 1, y: "0%" }}
+        transition={{ duration: 2, delay: 0.5, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+      >
+        <motion.h1
+          variants={getMarqueeVariant(6, 1, 4)}
+          className="slide-hello-world__title-shadow slide-hello-world__title-shadow--world"
+        >
+          WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
+        </motion.h1>
+        <motion.h2
+          variants={getMarqueeVariant(2, 1, 8)}
+          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world"
+        >
+          WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
+        </motion.h2>
+        <motion.h2
+          variants={getMarqueeVariant(4, 1, 8)}
+          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world"
+        >
+          WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
+        </motion.h2>
+      </motion.div>
+    </>
+  )
+}
 
 export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
   const delayDurationSeconds = 1;
@@ -152,9 +218,9 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
       <div className="slide-hello-world__layer slide-hello-world__layer--bg">
         {showAfterDelay &&
           <div className="slide-hello-world__layer slide-hello-world__layer--bg-front">
-            <div className="slide-hello-world__mountains">
+            <motion.div initial="enter" animate="center" exit="exit" className="slide-hello-world__mountains">
               <Mountains />
-            </div>
+            </motion.div>
           </div>
         }
         
@@ -193,57 +259,7 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
           </div>
 
           <div className="slide-hello-world__layer slide-hello-world__layer--fg-back">
-            <motion.div
-              className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--hello"
-              initial={{ opacity: 0, y: "50%" }}
-              animate={{ opacity: 1, y: "0%" }}
-              transition={{ duration: 2, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
-            >
-              <motion.h2
-                variants={getMarqueeVariant(4, -1, 8)}
-                className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello"
-              >
-                HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
-              </motion.h2>
-              <motion.h2
-                variants={getMarqueeVariant(2, -1, 8)}
-                className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello"
-              >
-                HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
-              </motion.h2>
-              <motion.h1
-                variants={getMarqueeVariant(6, -1, 4)}
-                className="slide-hello-world__title-shadow slide-hello-world__title-shadow--hello"
-              >
-                HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
-              </motion.h1>
-            </motion.div>
-
-            <motion.div
-              className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--world"
-              initial={{ opacity: 0, y: "-50%" }}
-              animate={{ opacity: 1, y: "0%" }}
-              transition={{ duration: 2, delay: 0.5, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
-            >
-              <motion.h1
-                variants={getMarqueeVariant(6, 1, 4)}
-                className="slide-hello-world__title-shadow slide-hello-world__title-shadow--world"
-              >
-                WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
-              </motion.h1>
-              <motion.h2
-                variants={getMarqueeVariant(2, 1, 8)}
-                className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world"
-              >
-                WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
-              </motion.h2>
-              <motion.h2
-                variants={getMarqueeVariant(4, 1, 8)}
-                className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world"
-              >
-                WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
-              </motion.h2>
-            </motion.div>
+            <FGBack />
           </div>
         </motion.div>
       }
