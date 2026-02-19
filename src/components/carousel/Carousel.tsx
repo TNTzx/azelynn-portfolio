@@ -1,10 +1,11 @@
 import { useState, useRef } from 'react';
-import type { CarouselProps, CarouselAnimationContext, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
+import type { CarouselProps, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
 import { AnimatePresence, motion } from 'motion/react';
 import CarouselControls from './carouselControls/CarouselControls';
 import { useCarouselControls } from './carouselControls/carouselControlsTypes';
 import CarouselSlideDots from './carouselSlideDots/CarouselSlideDots';
+import type { CarouselAnimationContext } from './carouselSlide';
 
 const slideVariants: CarouselSlideVariants = {
   enter: {

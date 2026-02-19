@@ -1,0 +1,14 @@
+@use 'layer';
+
+.carousel__slide-dot {
+    display: flex;
+    width: min-content;
+    min-width: 5rem;
+    padding: 0.5em;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: blue;
+}
