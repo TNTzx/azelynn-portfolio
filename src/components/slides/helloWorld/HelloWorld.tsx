@@ -1,9 +1,12 @@
 import type { CarouselAnimationContext, CarouselVariants } from '@src/components';
 import './HelloWorld.scss';
-import { AnimatePresence, motion, type TargetAndTransition } from 'framer-motion';
+import { motion, type TargetAndTransition } from 'framer-motion';
 import { easeInOutQuint, easeInQuint, easeOutQuint } from 'js-easing-functions';
 import { useViewport } from '@src/hooks';
 import { useEffect, useState } from 'react';
+
+
+const delayDurationSeconds = 1;
 
 
 function getMarqueeVariant(duration: number, direction: -1 | 1, textRepetitions: number): CarouselVariants {
@@ -33,10 +36,13 @@ function Mountains() {
     Math.ceil(viewportSize.width / mountainWidth)
   );
 
+  const [delay, setDelay] = useState(delayDurationSeconds);
+
   useEffect(() => {
     const handler = setTimeout(() => {
       const newCount = Math.ceil(viewportSize.width / mountainWidth);
       setDebouncedCount(newCount);
+      setDelay(0);
     }, 200);
 
     return () => clearTimeout(handler);
@@ -48,6 +54,7 @@ function Mountains() {
   const mountainContainerVariant = {
     enter: {},
     center: { transition: {
+      delayChildren: delay,
       staggerChildren: 0.03,
     } } satisfies TargetAndTransition,
     exit: { transition: {
@@ -143,6 +150,7 @@ function FGBack() {
       rotate: "0deg",
       transition: {
         duration: 2,
+        delay: delayDurationSeconds,
         ease: (t) => easeOutQuint(t, 0, 1, 1)
       }
     },
@@ -167,6 +175,7 @@ function FGBack() {
       y: "0%",
       transition: {
         duration: 2,
+        delay: delayDurationSeconds + 1,
         ease: (t) => easeOutQuint(t, 0, 1, 1)
       }
     },
@@ -234,8 +243,6 @@ function FGBack() {
 }
 
 export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
-  const delayDurationSeconds = 0.5;
-
   const bgBackVariants: CarouselVariants = {
     enter: {
       opacity: 0,
@@ -257,6 +264,45 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
       }
     }
   }
+
+  const titleHelloVariants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: "20%",
+      letterSpacing: "-0.5em"
+    },
+    center: {
+      opacity: 1,
+      y: "0%",
+      letterSpacing: "0.2em",
+      transition: {
+        duration: 1,
+        delay: delayDurationSeconds,
+        ease: (t) => easeOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {}
+  }
+
+  const titleWorldVariants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: "-20%",
+      letterSpacing: "-0.5em"
+    },
+    center: {
+      opacity: 1,
+      y: "0%",
+      letterSpacing: "0.2em",
+      transition: {
+        duration: 1,
+        delay: delayDurationSeconds + 1,
+        ease: (t) => easeOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {}
+  };
+
 
   return (
     <div className="slide-hello-world">
@@ -282,17 +328,13 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
         <div className="slide-hello-world__layer slide-hello-world__layer--fg-front">
           <motion.h1
             className="slide-hello-world__title slide-hello-world__title--hello"
-            initial={{ opacity: 0, y: "20%", letterSpacing: "-0.5em" }}
-            animate={{ opacity: 1, y: "0%", letterSpacing: "0.2em" }}
-            transition={{ duration: 1, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+            variants={titleHelloVariants}
           >
             HELLO
           </motion.h1>
           <motion.h1
             className="slide-hello-world__title slide-hello-world__title--world"
-            initial={{ opacity: 0, y: "-20%", letterSpacing: "-0.5em" }}
-            animate={{ opacity: 1, y: "0%", letterSpacing: "0.2em" }}
-            transition={{ duration: 1, delay: 0.5, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+            variants={titleWorldVariants}
           >
             WORLD
           </motion.h1>
