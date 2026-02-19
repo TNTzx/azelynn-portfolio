@@ -24,6 +24,8 @@
 
     flex-direction: column;
     justify-content: end;
+    
+    pointer-events: none;
 }
 
 .carousel__slide-dots-position {
