@@ -242,7 +242,7 @@ function FGBack() {
   )
 }
 
-export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
+function BGBack() {
   const bgBackVariants: CarouselVariants = {
     enter: {
       opacity: 0,
@@ -265,6 +265,17 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
     }
   }
 
+  return (
+    <motion.div
+      className="slide-hello-world__bg-fill"
+      variants={bgBackVariants}
+    >
+      <div className="slide-hello-world__line"></div>
+    </motion.div>
+  )
+}
+
+export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
   const titleHelloVariants: CarouselVariants = {
     enter: {
       opacity: 0,
@@ -315,12 +326,7 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
         
 
         <div className="slide-hello-world__layer slide-hello-world__layer--bg-back">
-          <motion.div
-            className="slide-hello-world__bg-fill"
-            variants={bgBackVariants}
-          >
-            <div className="slide-hello-world__line"></div>
-          </motion.div>
+          <BGBack />
         </div>
       </div>
 
