@@ -235,12 +235,6 @@ function FGBack() {
 
 export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
   const delayDurationSeconds = 0.5;
-  const [showAfterDelay, setShowAfterDelay] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setShowAfterDelay(true), delayDurationSeconds * 1000);
-    return () => clearTimeout(timeout);
-  }, []);
 
   const bgBackVariants: CarouselVariants = {
     enter: {
@@ -267,13 +261,11 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
   return (
     <div className="slide-hello-world">
       <div className="slide-hello-world__layer slide-hello-world__layer--bg">
-        {showAfterDelay &&
-          <div className="slide-hello-world__layer slide-hello-world__layer--bg-front">
-            <motion.div initial="enter" animate="center" exit="exit" className="slide-hello-world__mountains">
-              <Mountains />
-            </motion.div>
-          </div>
-        }
+        <div className="slide-hello-world__layer slide-hello-world__layer--bg-front">
+          <motion.div className="slide-hello-world__mountains">
+            <Mountains />
+          </motion.div>
+        </div>
         
 
         <div className="slide-hello-world__layer slide-hello-world__layer--bg-back">
@@ -286,32 +278,30 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
         </div>
       </div>
 
-      {showAfterDelay &&
-        <motion.div initial="enter" animate="center" exit="exit" className="slide-hello-world__layer slide-hello-world__layer--fg">
-          <div className="slide-hello-world__layer slide-hello-world__layer--fg-front">
-            <motion.h1
-              className="slide-hello-world__title slide-hello-world__title--hello"
-              initial={{ opacity: 0, y: "20%", letterSpacing: "-0.5em" }}
-              animate={{ opacity: 1, y: "0%", letterSpacing: "0.2em" }}
-              transition={{ duration: 1, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
-            >
-              HELLO
-            </motion.h1>
-            <motion.h1
-              className="slide-hello-world__title slide-hello-world__title--world"
-              initial={{ opacity: 0, y: "-20%", letterSpacing: "-0.5em" }}
-              animate={{ opacity: 1, y: "0%", letterSpacing: "0.2em" }}
-              transition={{ duration: 1, delay: 0.5, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
-            >
-              WORLD
-            </motion.h1>
-          </div>
+      <motion.div initial="enter" animate="center" exit="exit" className="slide-hello-world__layer slide-hello-world__layer--fg">
+        <div className="slide-hello-world__layer slide-hello-world__layer--fg-front">
+          <motion.h1
+            className="slide-hello-world__title slide-hello-world__title--hello"
+            initial={{ opacity: 0, y: "20%", letterSpacing: "-0.5em" }}
+            animate={{ opacity: 1, y: "0%", letterSpacing: "0.2em" }}
+            transition={{ duration: 1, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+          >
+            HELLO
+          </motion.h1>
+          <motion.h1
+            className="slide-hello-world__title slide-hello-world__title--world"
+            initial={{ opacity: 0, y: "-20%", letterSpacing: "-0.5em" }}
+            animate={{ opacity: 1, y: "0%", letterSpacing: "0.2em" }}
+            transition={{ duration: 1, delay: 0.5, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+          >
+            WORLD
+          </motion.h1>
+        </div>
 
-          <div className="slide-hello-world__layer slide-hello-world__layer--fg-back">
-            <FGBack />
-          </div>
-        </motion.div>
-      }
+        <div className="slide-hello-world__layer slide-hello-world__layer--fg-back">
+          <FGBack />
+        </div>
+      </motion.div>
     </div>
   )
 }
