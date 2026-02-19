@@ -32,7 +32,7 @@ export const slides: CarouselSlide[] = [
   },
   {
     hash: 'slide2',
-    displayName: 'Really Really Really Really Long Slide Name',
+    displayName: 'Really Really Really Really Really Really Really Really Really Really Really Really Long Slide Name',
     getElement: () =>
       <div style={{ width: '100%', height: '100%', backgroundColor: getRandomColor() }}>Slide 2</div>
   },
