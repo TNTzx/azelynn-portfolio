@@ -8,16 +8,10 @@ import CarouselSlideDots from './carouselSlideDots/CarouselSlideDots';
 import type { CarouselAnimationContext } from './carouselSlide';
 
 const slideVariants: CarouselSlideVariants = {
-  enter: {
-    zIndex: 0
-  },
-  center: {
-    zIndex: 1
-  },
-  exit: {
-    zIndex: 2
-  }
-}
+  enter: { zIndex: 1 },
+  center: { zIndex: 1 },
+  exit: { zIndex: 2 }
+};
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(() => {
