@@ -1,4 +1,5 @@
 @use 'layer';
+@use 'mixins' as *;
 
 .carousel__slide-dot {
     --slant-amount: 30deg;
@@ -14,7 +15,6 @@
 
     background-color: white;
     transform: skewX(calc(var(--slant-amount) * -1));
-
 }
 
 .carousel__slide-dot-counterskew {
@@ -23,5 +23,10 @@
 
 .carousel__slide-dot-text {
     white-space: nowrap;
+    font-size: 0.8em;
+
+    @include breakpoint(lg) {
+        font-size: 1em;
+    }
 }
 
