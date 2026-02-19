@@ -134,7 +134,33 @@ function FGBack() {
   const helloContainer: CarouselVariants = {
     enter: {
       opacity: 0,
-      y: "50%"
+      y: "50%",
+      rotate: "0deg",
+    },
+    center: {
+      opacity: 1,
+      y: "0%",
+      rotate: "0deg",
+      transition: {
+        duration: 2,
+        ease: (t) => easeOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: "-100%",
+      rotate: "-10deg",
+      transition: {
+        duration: 1,
+        ease: (t) => easeInQuint(t, 0, 1, 1)
+      }
+    },
+  }
+
+  const worldContainer: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: "-50%"
     },
     center: {
       opacity: 1,
@@ -145,8 +171,9 @@ function FGBack() {
       }
     },
     exit: {
-      y: "-100%",
-      rotate: "-10deg",
+      opacity: 0,
+      y: "100%",
+      rotate: "10deg",
       transition: {
         duration: 1,
         ease: (t) => easeInQuint(t, 0, 1, 1)
@@ -181,9 +208,7 @@ function FGBack() {
 
       <motion.div
         className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--world"
-        initial={{ opacity: 0, y: "-50%" }}
-        animate={{ opacity: 1, y: "0%" }}
-        transition={{ duration: 2, delay: 0.5, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+        variants={worldContainer}
       >
         <motion.h1
           variants={getMarqueeVariant(6, 1, 4)}
@@ -209,9 +234,35 @@ function FGBack() {
 }
 
 export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
-  const delayDurationSeconds = 1;
+  const delayDurationSeconds = 0.5;
   const [showAfterDelay, setShowAfterDelay] = useState(false);
-  setTimeout(() => setShowAfterDelay(true), delayDurationSeconds * 1000)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setShowAfterDelay(true), delayDurationSeconds * 1000);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const bgBackVariants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      scaleY: "0%"
+    },
+    center: {
+      opacity: 1,
+      scaleY: "100%",
+      transition: {
+        duration: delayDurationSeconds * 2,
+        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {
+      opacity: 0,
+      scaleY: "100%",
+      transition: {
+        duration: 2
+      }
+    }
+  }
 
   return (
     <div className="slide-hello-world">
@@ -228,9 +279,7 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
         <div className="slide-hello-world__layer slide-hello-world__layer--bg-back">
           <motion.div
             className="slide-hello-world__bg-fill"
-            initial={{ opacity: 0, scaleY: "0%" }}
-            animate={{ opacity: 1, scaleY: "100%" }}
-            transition={{ duration: delayDurationSeconds * 2, ease: (t) => easeInOutQuint(t, 0, 1, 1) }}
+            variants={bgBackVariants}
           >
             <div className="slide-hello-world__line"></div>
           </motion.div>
