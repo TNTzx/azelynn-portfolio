@@ -4,6 +4,7 @@ import type { CarouselButtonProps, CarouselButtonVariants } from './carouselButt
 import { motion, useAnimationControls, useMotionValueEvent } from 'motion/react';
 import { easeInOutQuint, easeOutQuint } from 'js-easing-functions';
 import { useEffect } from 'react';
+import Rainbow from '@src/components/rainbow/Rainbow';
 
 export default function CarouselButton({ direction, keyPressed, onClick, isDisabled }: CarouselButtonProps) {
   const controls = useAnimationControls();
@@ -157,7 +158,9 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
     >
       <motion.div className="carousel__control-bg carousel__control-bg--flash" variants={flashVariants} custom={{ direction, isDisabled }} />
       {!isDisabled &&
-        <motion.div className="carousel__control-bg carousel__control-bg--rainbow" variants={rainbowVariants} custom={{ direction, isDisabled }} />
+        <motion.div className="carousel__control-bg" variants={rainbowVariants} custom={{ direction, isDisabled }}>
+          <Rainbow />
+        </motion.div>
       }
 
       <motion.div className="carousel__button-contents" variants={contentVariants} custom={{ direction, isDisabled }}>

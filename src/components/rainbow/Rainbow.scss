@@ -1,0 +1,21 @@
+.rainbow {
+    width: 100%;
+    height: 100%;
+
+    background-image: linear-gradient(
+        to right,
+        rgb(255, 162, 162),
+        rgb(255, 209, 124),
+        rgb(255, 255, 127),
+        rgb(125, 255, 125),
+        rgb(129, 129, 255),
+        rgb(203, 125, 255),
+        rgb(255, 127, 255),
+        rgb(255, 126, 126)
+    );
+    background-size: 10000% 100%;
+
+    mask-image: linear-gradient(to right, black, transparent);
+
+    animation: rainbow-loop 0.5s infinite reverse
+}
