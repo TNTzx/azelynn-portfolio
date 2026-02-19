@@ -21,12 +21,14 @@
     transform: skewX(var(--slant-amount));
 }
 
+.carousel__slide-dot-clip {
+    display: flex;
+    width: 0;
+    overflow: hidden;
+}
+
 .carousel__slide-dot-text {
     white-space: nowrap;
-    font-size: 0.8em;
-
-    @include breakpoint(lg) {
-        font-size: 1em;
-    }
+    font-size: 0.85em;
 }
 
