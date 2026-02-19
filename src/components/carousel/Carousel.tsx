@@ -84,7 +84,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
 
       <div className="carousel__slides layer">
         <div className="carousel__slide-container">
-          <AnimatePresence mode="sync" custom={animationProps}>
+          <AnimatePresence mode="popLayout" propagate custom={animationProps}>
             {isSlideShown ?
               <motion.main
                 key={currentIndex}
