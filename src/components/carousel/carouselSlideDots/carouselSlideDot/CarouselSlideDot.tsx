@@ -5,7 +5,11 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
   return (
     <div className="carousel__slide-dot" style={{ padding: isActive ? "0.5em 2em" : "0em" }}>
       <div className="carousel__slide-dot-counterskew">
-        {isActive && text}
+        {isActive && 
+          <p className="carousel__slide-dot-text">
+            {text}
+          </p>
+        }
       </div>
     </div>
   );
