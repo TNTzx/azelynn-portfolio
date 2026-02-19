@@ -8,5 +8,6 @@ export interface CarouselAnimationContext {
 
 export interface CarouselSlide {
   hash: string;
+  displayName: string;
   getElement: (context: CarouselAnimationContext) => JSX.Element;
 }
