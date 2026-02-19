@@ -137,6 +137,62 @@ function Mountains() {
 }
 
 
+function FGFront() {
+  const helloVariants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: "20%",
+      letterSpacing: "-0.5em"
+    },
+    center: {
+      opacity: 1,
+      y: "0%",
+      letterSpacing: "0.2em",
+      transition: {
+        duration: 1,
+        delay: delayDurationSeconds,
+        ease: (t) => easeOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {}
+  }
+
+  const worldVariants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: "-20%",
+      letterSpacing: "-0.5em"
+    },
+    center: {
+      opacity: 1,
+      y: "0%",
+      letterSpacing: "0.2em",
+      transition: {
+        duration: 1,
+        delay: delayDurationSeconds + 1,
+        ease: (t) => easeOutQuint(t, 0, 1, 1)
+      }
+    },
+    exit: {}
+  };
+
+  return <>
+    <motion.h1
+      className="slide-hello-world__title slide-hello-world__title--hello"
+      variants={helloVariants}
+    >
+      HELLO
+    </motion.h1>
+    <motion.h1
+      className="slide-hello-world__title slide-hello-world__title--world"
+      variants={worldVariants}
+    >
+      WORLD
+    </motion.h1>
+  </>
+}
+
+
 function FGBack() {
   const helloContainer: CarouselVariants = {
     enter: {
@@ -276,45 +332,6 @@ function BGBack() {
 }
 
 export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
-  const titleHelloVariants: CarouselVariants = {
-    enter: {
-      opacity: 0,
-      y: "20%",
-      letterSpacing: "-0.5em"
-    },
-    center: {
-      opacity: 1,
-      y: "0%",
-      letterSpacing: "0.2em",
-      transition: {
-        duration: 1,
-        delay: delayDurationSeconds,
-        ease: (t) => easeOutQuint(t, 0, 1, 1)
-      }
-    },
-    exit: {}
-  }
-
-  const titleWorldVariants: CarouselVariants = {
-    enter: {
-      opacity: 0,
-      y: "-20%",
-      letterSpacing: "-0.5em"
-    },
-    center: {
-      opacity: 1,
-      y: "0%",
-      letterSpacing: "0.2em",
-      transition: {
-        duration: 1,
-        delay: delayDurationSeconds + 1,
-        ease: (t) => easeOutQuint(t, 0, 1, 1)
-      }
-    },
-    exit: {}
-  };
-
-
   return (
     <div className="slide-hello-world">
       <div className="slide-hello-world__layer slide-hello-world__layer--bg">
@@ -332,18 +349,7 @@ export default function HelloWorld({ _animationContext }: { animationContext: Ca
 
       <motion.div initial="enter" animate="center" exit="exit" className="slide-hello-world__layer slide-hello-world__layer--fg">
         <div className="slide-hello-world__layer slide-hello-world__layer--fg-front">
-          <motion.h1
-            className="slide-hello-world__title slide-hello-world__title--hello"
-            variants={titleHelloVariants}
-          >
-            HELLO
-          </motion.h1>
-          <motion.h1
-            className="slide-hello-world__title slide-hello-world__title--world"
-            variants={titleWorldVariants}
-          >
-            WORLD
-          </motion.h1>
+          <FGFront />
         </div>
 
         <div className="slide-hello-world__layer slide-hello-world__layer--fg-back">
