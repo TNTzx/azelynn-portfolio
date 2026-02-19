@@ -4,7 +4,9 @@ import type { CarouselSlideDotProps } from './carouselSlideDotTypes';
 export default function CarouselSlideDots({ text, isDisabled }: CarouselSlideDotProps) {
   return (
     <div className="carousel__slide-dot">
-      {text}
+      <div className="carousel__slide-dot-counterskew">
+        {text}
+      </div>
     </div>
   );
 }

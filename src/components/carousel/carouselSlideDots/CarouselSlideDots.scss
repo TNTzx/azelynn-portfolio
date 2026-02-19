@@ -3,12 +3,14 @@
 .carousel__slide-dots {
     display: flex;
     width: fit-content;
+    padding: 0 1em 0 1em;
 
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 1em;
 
-    background-color: red;
+    background-color: #FFFFFF11;
 
     overflow: hidden;
     pointer-events: none;

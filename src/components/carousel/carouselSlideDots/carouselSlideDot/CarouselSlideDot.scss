@@ -1,6 +1,8 @@
 @use 'layer';
 
 .carousel__slide-dot {
+    --slant-amount: 30deg;
+
     display: flex;
     width: min-content;
     min-width: 5rem;
@@ -10,5 +12,12 @@
     justify-content: center;
     align-items: center;
 
-    background-color: blue;
+    background-color: white;
+    transform: skewX(calc(var(--slant-amount) * -1));
+
 }
+
+.carousel__slide-dot-counterskew {
+    transform: skewX(var(--slant-amount));
+}
+
