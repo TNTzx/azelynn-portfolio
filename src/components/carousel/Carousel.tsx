@@ -80,7 +80,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
 
       <div className="carousel__slide-dots-container">
         <div className="carousel__slide-dots-position">
-          <CarouselSlideDots slideCount={slides.length} slideIndex={currentIndex} />
+          <CarouselSlideDots slides={slides} slideIndex={currentIndex} />
         </div>
       </div>
 

@@ -1,4 +1,6 @@
+import type { CarouselSlide } from "../carouselSlide/carouselSlideTypes";
+
 export interface CarouselSlideDotsProps {
-  slideCount: number;
+  slides: CarouselSlide[];
   slideIndex: number;
 }
