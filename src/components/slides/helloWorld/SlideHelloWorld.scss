@@ -16,6 +16,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    perspective: 1000px;
+
+    transform-style: preserve-3d;
 }
 
 .slide-hello-world__layer {
@@ -25,6 +29,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    transform-style: preserve-3d;
 }
 
 .slide-hello-world__layer--bg {
@@ -123,6 +129,8 @@
 .slide-hello-world__title {
     color: black;
     font-size: max(10vw, 5em);
+
+    -webkit-text-stroke: 2px white;
 
     letter-spacing: 0.2em;
 }
