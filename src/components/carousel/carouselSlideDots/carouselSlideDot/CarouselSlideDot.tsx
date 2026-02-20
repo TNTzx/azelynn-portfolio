@@ -21,7 +21,7 @@ function measureTextWidth(text: string, className?: string) {
 }
 
 
-export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotProps) {
+export default function CarouselSlideDot({ text, isActive, isAnimated = true }: CarouselSlideDotProps) {
   const viewport = useViewport();
   const controls = animationControls();
 
@@ -100,7 +100,7 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
     }
   }
 
-  return (
+  return isAnimated ? (
     <motion.div
       variants={mainVariants}
       animate={controls}
@@ -116,7 +116,11 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
               className="carousel__slide-dot-text-clip"
               variants={clipVariants}
             >
-              <motion.p className="carousel__slide-dot-text carousel__slide-dot-text--clipped" style={{ width: textWidth }} variants={textVariants}>
+              <motion.p
+                className="carousel__slide-dot-text carousel__slide-dot-text--clipped"
+                style={{ width: textWidth }}
+                variants={textVariants}
+              >
                 {text}
               </motion.p>
             </motion.div>
@@ -124,5 +128,36 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
         </motion.div>
       </div>
     </motion.div>
+
+  ) : (
+
+    <div
+      className="carousel__slide-dot"
+      style={(isActive ? mainVariants.active : mainVariants.inactive) as object}
+    >
+      <div className="carousel__slide-dot-counterskew">
+        <div
+          className="carousel__slide-dot-size-setter"
+          style={(isActive ? sizeSetterVariants.active : sizeSetterVariants.inactive) as object}
+        >
+          <div className="carousel__slide-dot-text-container">
+            <div
+              className="carousel__slide-dot-text-clip"
+              style={(isActive ? clipVariants.active : clipVariants.inactive) as object}
+            >
+              <p
+                className="carousel__slide-dot-text carousel__slide-dot-text--clipped"
+                style={{
+                  ...(isActive ? textVariants.active : textVariants.inactive),
+                  width: textWidth
+                } as React.CSSProperties}
+              >
+                {text}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
