@@ -2,29 +2,29 @@ import { animationControls, motion } from 'motion/react';
 import './CarouselSlideDot.scss';
 import type { CarouselSlideDotProps, CarouselSlideDotVariants } from './carouselSlideDotTypes';
 import { useEffect } from 'react';
-import { easeOutQuint, easeOutSine } from 'js-easing-functions';
+import { easeOutQuint } from 'js-easing-functions';
 
 function measureTextWidth(text: string, className?: string) {
   // Create a temporary span
-  const span = document.createElement('span');
-  span.style.position = 'absolute';
-  span.style.visibility = 'hidden';
-  span.style.whiteSpace = 'nowrap';
-  if (className) span.className = className;
-  span.textContent = text;
+  const el = document.createElement('p');
+  el.style.position = 'absolute';
+  el.style.visibility = 'hidden';
+  if (className) el.className = className;
+  el.textContent = text;
 
-  document.body.appendChild(span);
-  const width = span.getBoundingClientRect().width;
-  document.body.removeChild(span);
+  document.body.appendChild(el);
+  const width = el.getBoundingClientRect().width;
+  const height = el.getBoundingClientRect().height;
+  document.body.removeChild(el);
 
-  return width;
+  return [width, height] as const;
 }
 
 
 export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotProps) {
   const controls = animationControls();
 
-  const textWidth = measureTextWidth(text, 'carousel__slide-dot-text');
+  const [textWidth, textHeight] = measureTextWidth(text, 'carousel__slide-dot-text carousel__slide-dot-text--calc');
 
   controls.start('inactive');
 
@@ -52,23 +52,24 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
     }
   };
 
-  const clipVariants: CarouselSlideDotVariants = {
+  const sizeSetterVariants: CarouselSlideDotVariants = {
     active: {
       width: textWidth,
+      height: textHeight,
       transition
     },
     inactive: {
       width: 0,
+      height: 0,
       transition
     }
   };
 
-  const clipDelayVariants: CarouselSlideDotVariants = {
+  const clipVariants: CarouselSlideDotVariants = {
     active: {
       width: textWidth,
       transition: {
-        duration: 1,
-        ease: (t) => easeOutSine(t, 0, 1, 1)
+        duration: Math.min(1, (1 / 100) * textWidth),
       }
     },
     inactive: {
@@ -85,17 +86,19 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
     >
       <div className="carousel__slide-dot-counterskew">
         <motion.div
-          className="carousel__slide-dot-clip"
-          variants={clipVariants}
+          className="carousel__slide-dot-size-setter"
+          variants={sizeSetterVariants}
         >
-          <motion.div
-            className="carousel__slide-dot-clip"
-            variants={clipDelayVariants}
-          >
-            <p className="carousel__slide-dot-text">
-              {text}
-            </p>
-          </motion.div>
+          <div className="carousel__slide-dot-text-container">
+            <motion.div
+              className="carousel__slide-dot-text-clip"
+              variants={clipVariants}
+            >
+              <p className="carousel__slide-dot-text carousel__slide-dot-text--clipped" style={{ width: textWidth }}>
+                {text}
+              </p>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </motion.div>
