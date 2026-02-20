@@ -6,6 +6,7 @@ import CarouselControls from './carouselControls/CarouselControls';
 import { useCarouselControls } from './carouselControls/carouselControlsTypes';
 import CarouselSlideDots from './carouselSlideDots/CarouselSlideDots';
 import type { CarouselAnimationContext } from './carouselSlide';
+import Rainbow from '../rainbow/Rainbow';
 
 const slideVariants: CarouselSlideVariants = {
   enter: { zIndex: 3 },
@@ -104,6 +105,11 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
             </AnimatePresence>
           </main>
         </div>
+      </div>
+
+      <div className='carousel__bg'>
+        <div className='carousel__bg-overlay' />
+        <Rainbow />
       </div>
     </div>
   );
