@@ -11,6 +11,12 @@ export default function CarouselSlideDots({ slides, activeSlideIndex }: Carousel
 
   const positionControls = animationControls();
 
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  useEffect(() => {
+    document.fonts.ready.then(() => setFontLoaded(true));
+  }, []);
+
   useLayoutEffect(() => {
     const track = trackRef.current;
     if (track === null) return;
@@ -20,7 +26,7 @@ export default function CarouselSlideDots({ slides, activeSlideIndex }: Carousel
 
     const dotCenter = activeDot.offsetLeft + (activeDot.offsetWidth / 2);
     setTrackTranslateX(dotCenter);
-  }, [trackRef, activeSlideIndex]);
+  }, [trackRef, activeSlideIndex, fontLoaded]);
   
   useEffect(() => {
     let cancelled = false;
