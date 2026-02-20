@@ -1,5 +1,5 @@
 import type { CarouselAnimationContext, CarouselVariants } from '@src/components';
-import './HelloWorld.scss';
+import './SlideHelloWorld.scss';
 import { motion, type TargetAndTransition } from 'framer-motion';
 import { easeInOutQuint, easeInQuint, easeOutQuint } from 'js-easing-functions';
 import { useViewport } from '@src/hooks';
@@ -331,7 +331,7 @@ function BGBack() {
   )
 }
 
-export default function HelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
+export default function SlideHelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
   return (
     <div className="slide-hello-world">
       <div className="slide-hello-world__layer slide-hello-world__layer--bg">
