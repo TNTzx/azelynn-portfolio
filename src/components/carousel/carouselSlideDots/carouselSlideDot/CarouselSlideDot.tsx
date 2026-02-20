@@ -1,20 +1,20 @@
 import { animationControls, motion } from 'motion/react';
 import './CarouselSlideDot.scss';
 import type { CarouselSlideDotProps, CarouselSlideDotVariants } from './carouselSlideDotTypes';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { easeOutQuint } from 'js-easing-functions';
+import { useViewport } from '@src/hooks';
 
 function measureTextWidth(text: string, className?: string) {
-  // Create a temporary span
   const el = document.createElement('p');
   el.style.position = 'absolute';
-  el.style.visibility = 'hidden';
   if (className) el.className = className;
   el.textContent = text;
 
   document.body.appendChild(el);
-  const width = el.getBoundingClientRect().width;
-  const height = el.getBoundingClientRect().height;
+  const rect = el.getBoundingClientRect();
+  const width = Math.ceil(rect.width) + 1;;
+  const height = rect.height;
   document.body.removeChild(el);
 
   return [width, height] as const;
@@ -22,9 +22,20 @@ function measureTextWidth(text: string, className?: string) {
 
 
 export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotProps) {
+  const viewport = useViewport();
   const controls = animationControls();
 
-  const [textWidth, textHeight] = measureTextWidth(text, 'carousel__slide-dot-text carousel__slide-dot-text--calc');
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+
+  const textWidth = dimensions.width;
+  const textHeight = dimensions.height;
+
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      const [width, height] = measureTextWidth(text, 'carousel__slide-dot-text carousel__slide-dot-text--calc');
+      setDimensions({ width, height });
+    });
+  }, [text, viewport.width]);
 
   controls.start('inactive');
 
@@ -78,6 +89,17 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
     }
   };
 
+  const textVariants: CarouselSlideDotVariants = {
+    active: {
+      transition: {
+        duration: Math.min(1, (1 / 100) * textWidth),
+      }
+    },
+    inactive: {
+      transition
+    }
+  }
+
   return (
     <motion.div
       variants={mainVariants}
@@ -94,9 +116,9 @@ export default function CarouselSlideDot({ text, isActive }: CarouselSlideDotPro
               className="carousel__slide-dot-text-clip"
               variants={clipVariants}
             >
-              <p className="carousel__slide-dot-text carousel__slide-dot-text--clipped" style={{ width: textWidth }}>
+              <motion.p className="carousel__slide-dot-text carousel__slide-dot-text--clipped" style={{ width: textWidth }} variants={textVariants}>
                 {text}
-              </p>
+              </motion.p>
             </motion.div>
           </div>
         </motion.div>

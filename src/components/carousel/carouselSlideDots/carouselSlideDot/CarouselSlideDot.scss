@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
 
-    overflow-x: clip;
+    overflow: clip;
 
     background-color: white;
     box-shadow: 8px 8px;
@@ -28,13 +28,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    overflow-x: clip;
+    overflow: clip;
 
     transform: skewX(var(--slant-amount));
 }
 
 .carousel__slide-dot-size-setter {
-    overflow-x: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
 }
 
 .carousel__slide-dot-text-container {
@@ -54,11 +56,12 @@
     justify-content: center;
     align-items: start;
     
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
 .carousel__slide-dot-text {
+    max-width: 70vw;
     text-align: center;
     font-size: 0.85em;
 }
