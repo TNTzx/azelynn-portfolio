@@ -1,4 +1,4 @@
-import type { CarouselAnimationContext, CarouselVariants } from '@src/components';
+import type { CarouselVariants } from '@src/components';
 import './SlideHelloWorld.scss';
 import { motion, type TargetAndTransition } from 'framer-motion';
 import { easeInOutQuint, easeInQuint, easeOutQuint } from 'js-easing-functions';
@@ -142,38 +142,65 @@ function FGFront() {
     enter: {
       opacity: 0,
       y: "20%",
-      letterSpacing: "-0.5em"
+      letterSpacing: "-0.5em",
+      rotate: "0deg",
+      z: "0px",
     },
     center: {
       opacity: 1,
       y: "0%",
       letterSpacing: "0.2em",
+      rotate: "0deg",
+      z: "0px",
       transition: {
         duration: 1,
         delay: delayDurationSeconds,
         ease: (t) => easeOutQuint(t, 0, 1, 1)
       }
     },
-    exit: {}
+    exit: {
+      opacity: 1,
+      y: "0%",
+      letterSpacing: "1em",
+      rotate: "-15deg",
+      z: "1000px",
+      transition: {
+        duration: 2,
+        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+      }
+    }
   }
 
   const worldVariants: CarouselVariants = {
     enter: {
       opacity: 0,
       y: "-20%",
-      letterSpacing: "-0.5em"
+      letterSpacing: "-0.5em",
+      z: "0px"
     },
     center: {
       opacity: 1,
       y: "0%",
       letterSpacing: "0.2em",
+      z: "0px",
       transition: {
         duration: 1,
-        delay: delayDurationSeconds + 1,
+        delay: delayDurationSeconds + 0.5,
         ease: (t) => easeOutQuint(t, 0, 1, 1)
       }
     },
-    exit: {}
+    
+    exit: {
+      opacity: 1,
+      y: "0%",
+      letterSpacing: "1em",
+      rotate: "-15deg",
+      z: "1000px",
+      transition: {
+        duration: 2,
+        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+      }
+    }
   };
 
   return <>
@@ -231,7 +258,7 @@ function FGBack() {
       y: "0%",
       transition: {
         duration: 2,
-        delay: delayDurationSeconds + 1,
+        delay: delayDurationSeconds + 0.5,
         ease: (t) => easeOutQuint(t, 0, 1, 1)
       }
     },
@@ -316,7 +343,7 @@ function BGBack() {
       opacity: 0,
       scaleY: "100%",
       transition: {
-        duration: 2
+        duration: 1
       }
     }
   }
@@ -331,7 +358,7 @@ function BGBack() {
   )
 }
 
-export default function SlideHelloWorld({ _animationContext }: { animationContext: CarouselAnimationContext }) {
+export default function SlideHelloWorld() {
   return (
     <div className="slide-hello-world">
       <div className="slide-hello-world__layer slide-hello-world__layer--bg">
