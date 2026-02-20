@@ -8,9 +8,9 @@ import CarouselSlideDots from './carouselSlideDots/CarouselSlideDots';
 import type { CarouselAnimationContext } from './carouselSlide';
 
 const slideVariants: CarouselSlideVariants = {
-  enter: { zIndex: 1 },
-  center: { zIndex: 1 },
-  exit: { zIndex: 2 }
+  enter: { zIndex: 3 },
+  center: { zIndex: 2 },
+  exit: { zIndex: 1 }
 };
 
 export default function Carousel({ slides, currentSlide, onScreenChange, loadingSlide = <></>, debounceDelayMs = 1000 }: CarouselProps) {
@@ -78,31 +78,31 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
 
       <div className="carousel__slides layer">
         <div className="carousel__slide-container">
-          <AnimatePresence mode="popLayout" propagate custom={animationProps}>
-            {isSlideShown ?
-              <motion.main
-                key={currentIndex}
-                custom={animationProps}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className='carousel__slide'
-              >{
-                slides[currentIndex].getElement(animationProps)
-              }</motion.main>
-            :
-              <motion.main
-                key="loading"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="carousel__slide"
-              >
-                {loadingSlide}
-              </motion.main>
-            }
-          </AnimatePresence>
+          <main>
+            <AnimatePresence mode="popLayout" propagate custom={animationProps}>
+              {isSlideShown &&
+                <motion.div
+                  key={currentIndex}
+                  custom={animationProps}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className='carousel__slide'
+                >{
+                  slides[currentIndex].getElement(animationProps)
+                }</motion.div>
+              }
+            </AnimatePresence>
+
+            <AnimatePresence custom={animationProps}>
+              <div className='carousel__slide carousel__slide--loading'>
+                {!isSlideShown &&
+                  loadingSlide
+                }
+              </div>
+            </AnimatePresence>
+          </main>
         </div>
       </div>
     </div>
