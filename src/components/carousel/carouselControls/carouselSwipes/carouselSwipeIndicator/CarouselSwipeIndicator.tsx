@@ -106,7 +106,7 @@ export default function CarouselSwipeIndicator({ direction, swipePercent, isDisa
           style={{ opacity: 0, backgroundColor: isDisabled ? 'red' : 'white', rotate: direction === 1 ? '180deg' : undefined }}
         />
         <motion.div
-          className="carousel__control-bg"
+          className="carousel__control-bg rainbow--masked"
           style={{ opacity: isDisabled ? 0 : 0.5, rotate: direction === 1 ? '180deg' : undefined }}
         >
           <Rainbow />

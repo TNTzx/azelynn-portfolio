@@ -158,7 +158,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
     >
       <motion.div className="carousel__control-bg carousel__control-bg--flash" variants={flashVariants} custom={{ direction, isDisabled }} />
       {!isDisabled &&
-        <motion.div className="carousel__control-bg" variants={rainbowVariants} custom={{ direction, isDisabled }}>
+        <motion.div className="carousel__control-bg rainbow--masked" variants={rainbowVariants} custom={{ direction, isDisabled }}>
           <Rainbow />
         </motion.div>
       }
