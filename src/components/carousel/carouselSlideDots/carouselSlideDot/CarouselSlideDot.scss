@@ -13,26 +13,61 @@
     justify-content: center;
     align-items: center;
 
+    overflow-x: clip;
+
     background-color: white;
     box-shadow: 8px 8px;
 
     transform: skewX(calc(var(--slant-amount) * -1));
-
-
 }
 
 .carousel__slide-dot-counterskew {
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow-x: clip;
+
     transform: skewX(var(--slant-amount));
 }
 
-.carousel__slide-dot-clip {
-    display: flex;
-    width: 0;
-    overflow: hidden;
+.carousel__slide-dot-size-setter {
+    overflow-x: hidden;
 }
 
+.carousel__slide-dot-text-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.carousel__slide-dot-text-clip {
+    position: relative;
+    display: flex;
+    width: 0;
+    
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    
+    overflow-x: hidden;
+}
+
+
 .carousel__slide-dot-text {
-    white-space: nowrap;
+    text-align: center;
     font-size: 0.85em;
+}
+
+.carousel__slide-dot-text--calc {
+    max-width: 70vw;
+}
+
+.carousel__slide-dot-text--clipped {
+    position: relative;
 }
 
