@@ -6,7 +6,11 @@ export interface CarouselSlideDotsProps {
   activeSlideIndex: number;
 }
 
-export interface CarouselSlideDotsVariants extends Variants<undefined> {
+export interface CarouselSlideDotsPositionVariants extends Variants<undefined> {
   shown: Variant<undefined>;
   hidden: Variant<undefined>;
+}
+
+export interface CarouselSlideDotsTrackVariants extends Variants<number> {
+  animate: Variant<number>;
 }

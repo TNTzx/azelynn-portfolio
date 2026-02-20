@@ -1,30 +1,44 @@
 import { animationControls, motion } from 'motion/react';
 import CarouselSlideDot from './carouselSlideDot/CarouselSlideDot';
 import './CarouselSlideDots.scss';
-import type { CarouselSlideDotsProps, CarouselSlideDotsVariants } from './carouselSlideDotsTypes';
+import type { CarouselSlideDotsProps, CarouselSlideDotsPositionVariants, CarouselSlideDotsTrackVariants } from './carouselSlideDotsTypes';
 import { easeInBack, easeOutBack } from 'js-easing-functions';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 export default function CarouselSlideDots({ slides, activeSlideIndex }: CarouselSlideDotsProps) {
-  const controls = animationControls();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [trackTranslateX, setTrackTranslateX] = useState(0);
 
+  const positionControls = animationControls();
+
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (track === null) return;
+
+    const activeDot = track.children[0].children[activeSlideIndex] as HTMLElement;
+    if (activeDot === undefined) return;
+
+    const dotCenter = activeDot.offsetLeft + (activeDot.offsetWidth / 2);
+    setTrackTranslateX(dotCenter);
+  }, [trackRef, activeSlideIndex]);
+  
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
-      await controls.start("shown");
+      await positionControls.start("shown");
       await new Promise(r => setTimeout(r, 2000));
       if (!cancelled) {
-        await controls.start("hidden");
+        await positionControls.start("hidden");
       }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [controls, activeSlideIndex])
+  }, [positionControls, activeSlideIndex])
 
-  const dotsVariants: CarouselSlideDotsVariants = {
+  const positionVariants: CarouselSlideDotsPositionVariants = {
     shown: {
       y: "0%",
       transition: {
@@ -41,21 +55,54 @@ export default function CarouselSlideDots({ slides, activeSlideIndex }: Carousel
     },
   };
 
+  const trackVariants: CarouselSlideDotsTrackVariants = {
+    animate: (trackTranslateX) => ({
+      translateX: `-${trackTranslateX}px`,
+      transition: {
+        duration: 0.5,
+        ease: (t) => easeOutBack(t, 0, 1, 1)
+      }
+    })
+  };
+
   return (
     <motion.div
       className="carousel__slide-dots-position"
-      variants={dotsVariants}
-      animate={controls}
+      variants={positionVariants}
+      animate={positionControls}
     >
-      <div className="carousel__slide-dots">
-        {slides.map((slide, index) => {
-          return <CarouselSlideDot
-            key={`carouselslidedot-${slide.hash}`}
-            text={slide.displayName}
-            isActive={activeSlideIndex === index}
-          />;
-        })}
-      </div>
+      <motion.div
+        className="carousel__slide-dots-track"
+        variants={trackVariants}
+        animate="animate"
+        custom={trackTranslateX}
+      >
+        <div className="carousel__slide-dots">
+          {slides.map((slide, index) => {
+            return <CarouselSlideDot
+              key={`carouselslidedot-${slide.hash}`}
+              text={slide.displayName}
+              isActive={activeSlideIndex === index}
+            />;
+          })}
+        </div>
+      </motion.div>
+
+      <motion.div
+        ref={trackRef}
+        className="carousel__slide-dots-track carousel__slide-dots-track--ghost"
+      >
+        <div className="carousel__slide-dots">
+          {slides.map((slide, index) => {
+            return <CarouselSlideDot
+              key={`carouselslidedot-${slide.hash}`}
+              text={slide.displayName}
+              isActive={activeSlideIndex === index}
+              isAnimated={false}
+            />;
+          })}
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
