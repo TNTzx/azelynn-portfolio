@@ -17,3 +17,7 @@
 
     animation: rainbow-loop 0.5s infinite reverse
 }
+
+.rainbow--masked {
+    mask-image: linear-gradient(to right, black, transparent);
+}
