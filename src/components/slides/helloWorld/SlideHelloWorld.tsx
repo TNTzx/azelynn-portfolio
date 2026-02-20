@@ -329,11 +329,15 @@ function BGBack() {
   const bgBackVariants: CarouselVariants = {
     enter: {
       opacity: 0,
-      scaleY: "0%"
+      scaleY: "0%",
+      rotate: "0deg",
+      z: "0px",
     },
     center: {
       opacity: 1,
       scaleY: "100%",
+      rotate: "0deg",
+      z: "0px",
       transition: {
         duration: delayDurationSeconds * 2,
         ease: (t) => easeInOutQuint(t, 0, 1, 1)
@@ -342,8 +346,11 @@ function BGBack() {
     exit: {
       opacity: 0,
       scaleY: "100%",
+      rotate: "-15deg",
+      z: "-1000px",
       transition: {
-        duration: 1
+        duration: 2,
+        ease: (t) => easeInOutQuint(t, 0, 1, 1)
       }
     }
   }
