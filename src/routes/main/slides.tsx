@@ -15,8 +15,8 @@ export const slides: CarouselSlide[] = [
   {
     hash: 'helloworld',
     displayName: 'Hello World',
-    getElement: (animationContext) =>
-      <SlideHelloWorld animationContext={animationContext} />
+    getElement: () =>
+      <SlideHelloWorld />
   },
   {
     hash: 'slide1',

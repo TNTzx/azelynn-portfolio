@@ -1,14 +1,14 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
+import { HashRouter, Navigate, Route, Routes } from 'react-router'
 import { Main } from './routes'
 import './App.scss'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route index element={<Navigate to="/main" />} />
-        <Route path='/main' element={<Main />} />
+        <Route path='/main/:slide?' element={<Main />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
