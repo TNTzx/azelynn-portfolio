@@ -1,8 +1,8 @@
-@import url('./assets/fonts/futura/futura.css');
+@import url('./assets/fonts/montserrat/montserrat.css');
 
 
 :root {
-  font-family: Futura, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
