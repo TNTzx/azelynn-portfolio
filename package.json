@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
 
-  "homepage": "https://TNTzx.github.io/azelynn-portfolio",
+  "homepage": "https://tntzx.github.io/azelynn-portfolio",
 
   "scripts": {
     "dev": "vite",

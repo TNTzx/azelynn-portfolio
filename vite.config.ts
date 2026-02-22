@@ -4,6 +4,8 @@ import path from 'path/win32'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/azelynn-portfolio/',
+
   plugins: [
     react({
       babel: {
