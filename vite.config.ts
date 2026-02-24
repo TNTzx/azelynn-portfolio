@@ -4,6 +4,10 @@ import path from 'path/win32'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {
+    host: true
+  },
+
   base: '/azelynn-portfolio/',
 
   plugins: [
