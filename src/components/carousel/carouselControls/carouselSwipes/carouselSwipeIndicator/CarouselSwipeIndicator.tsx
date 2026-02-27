@@ -2,9 +2,10 @@ import { motion, useAnimationControls, useMotionValue, useMotionValueEvent, useT
 import './CarouselSwipeIndicator.scss';
 import type { CarouselSwipeIndicatorProps } from './carouselSwipeIndicatorTypes';
 import { FaArrowLeft, FaBan } from 'react-icons/fa';
-import { easeInOutCirc, easeOutCirc, easeOutExpo } from 'js-easing-functions';
 import type { MotionStyle } from 'motion';
 import Rainbow from '@src/components/rainbow/Rainbow';
+import { EASEINOUTQUINT, EASEOUTQUINT } from '@src/utils';
+import { easeOutCirc, easeOutExpo } from 'js-easing-functions';
 
 export default function CarouselSwipeIndicator({ direction, swipePercent, isDisabled }: CarouselSwipeIndicatorProps) {
   const containerAnimationControls = useAnimationControls();
@@ -37,14 +38,14 @@ export default function CarouselSwipeIndicator({ direction, swipePercent, isDisa
       width: '70%',
       transition: {
         duration: 0.1,
-        ease: (t) => easeOutCirc(t, 0, 1, 1)
+        ease: EASEOUTQUINT
       }
     }).then(() => containerAnimationControls.start({
       x: `${direction === -1 ? '-' : ''}100%`,
       width: '50%',
       transition: {
         duration: 0.75,
-        ease: (t) => easeInOutCirc(t, 0, 1, 1)
+        ease: EASEINOUTQUINT
       }
     }));
 

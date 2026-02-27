@@ -2,9 +2,9 @@ import { FaArrowLeft, FaBan } from 'react-icons/fa';
 import './CarouselButton.scss';
 import type { CarouselButtonProps, CarouselButtonVariants } from './carouselButtonTypes';
 import { motion, useAnimationControls, useMotionValueEvent } from 'motion/react';
-import { easeInOutQuint, easeOutQuint } from 'js-easing-functions';
 import { useEffect } from 'react';
 import Rainbow from '@src/components/rainbow/Rainbow';
+import { EASEINOUTQUINT, EASEOUTQUINT } from '@src/utils';
 
 export default function CarouselButton({ direction, keyPressed, onClick, isDisabled }: CarouselButtonProps) {
   const controls = useAnimationControls();
@@ -114,7 +114,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
       padding: ['20px', '0px'],
       transition: {
         duration: 1,
-        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+        ease: EASEINOUTQUINT
       }
     }
   };
@@ -154,7 +154,7 @@ export default function CarouselButton({ direction, keyPressed, onClick, isDisab
       custom={{ direction, isDisabled }}
       initial="initial"
       animate={controls}
-      transition={{ duration: 0.25, ease: (t) => easeOutQuint(t, 0, 1, 1) }}
+      transition={{ duration: 0.25, ease: EASEOUTQUINT }}
     >
       <motion.div className="carousel__control-bg carousel__control-bg--flash" variants={flashVariants} custom={{ direction, isDisabled }} />
       {!isDisabled &&

@@ -2,8 +2,8 @@ import { animationControls, motion } from 'motion/react';
 import './CarouselSlideDot.scss';
 import type { CarouselSlideDotProps, CarouselSlideDotVariants } from './carouselSlideDotTypes';
 import { useEffect, useState } from 'react';
-import { easeOutQuint } from 'js-easing-functions';
 import { useViewport } from '@src/hooks';
+import { EASEOUTQUINT } from '@src/utils';
 
 function measureTextWidth(text: string, className?: string) {
   const el = document.createElement('p');
@@ -49,7 +49,7 @@ export default function CarouselSlideDot({ text, isActive, isAnimated = true }: 
 
   const transition = {
     duration: 0.5,
-    ease: (t: number) => easeOutQuint(t, 0, 1, 1)
+    ease: EASEOUTQUINT
   }
 
   const mainVariants: CarouselSlideDotVariants = {

@@ -1,9 +1,9 @@
 import type { CarouselVariants } from '@src/components';
 import './SlideHelloWorld.scss';
 import { motion, type TargetAndTransition } from 'framer-motion';
-import { easeInOutQuint, easeInQuint, easeOutQuint } from 'js-easing-functions';
 import { useViewport } from '@src/hooks';
 import { useEffect, useMemo, useState } from 'react';
+import { EASEINOUTQUINT, EASEINQUINT, EASEOUTQUINT } from '@src/utils';
 
 
 const delayDurationSeconds = 1;
@@ -28,6 +28,7 @@ function getMarqueeVariant(duration: number, direction: -1 | 1, textRepetitions:
 const mountainHeights = Array.from({ length: 200 }, () => Math.random());
 
 function Mountains() {
+  return;
   const viewportSize = useViewport();
 
   const mountainWidth = 1080 / 15;
@@ -155,7 +156,7 @@ function FGFront() {
       transition: {
         duration: 1,
         delay: delayDurationSeconds,
-        ease: (t) => easeOutQuint(t, 0, 1, 1)
+        ease: EASEOUTQUINT
       }
     },
     exit: {
@@ -166,7 +167,7 @@ function FGFront() {
       z: "1000px",
       transition: {
         duration: 2,
-        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+        ease: EASEINOUTQUINT
       }
     }
   }
@@ -186,7 +187,7 @@ function FGFront() {
       transition: {
         duration: 1,
         delay: delayDurationSeconds + 0.5,
-        ease: (t) => easeOutQuint(t, 0, 1, 1)
+        ease: EASEOUTQUINT
       }
     },
     
@@ -198,7 +199,7 @@ function FGFront() {
       z: "1000px",
       transition: {
         duration: 2,
-        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+        ease: EASEINOUTQUINT
       }
     }
   };
@@ -234,7 +235,7 @@ function FGBack() {
       transition: {
         duration: 2,
         delay: delayDurationSeconds,
-        ease: (t) => easeOutQuint(t, 0, 1, 1)
+        ease: EASEOUTQUINT
       }
     },
     exit: {
@@ -243,7 +244,7 @@ function FGBack() {
       rotate: "-10deg",
       transition: {
         duration: 1,
-        ease: (t) => easeInQuint(t, 0, 1, 1)
+        ease: EASEINQUINT
       }
     },
   }
@@ -259,7 +260,7 @@ function FGBack() {
       transition: {
         duration: 2,
         delay: delayDurationSeconds + 0.5,
-        ease: (t) => easeOutQuint(t, 0, 1, 1)
+        ease: EASEOUTQUINT
       }
     },
     exit: {
@@ -268,7 +269,7 @@ function FGBack() {
       rotate: "10deg",
       transition: {
         duration: 1,
-        ease: (t) => easeInQuint(t, 0, 1, 1)
+        ease: EASEINQUINT
       }
     },
   }
@@ -340,7 +341,7 @@ function BGBack() {
       z: "0px",
       transition: {
         duration: delayDurationSeconds * 2,
-        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+        ease: EASEINOUTQUINT
       }
     },
     exit: {
@@ -350,7 +351,7 @@ function BGBack() {
       z: "-1000px",
       transition: {
         duration: 2,
-        ease: (t) => easeInOutQuint(t, 0, 1, 1)
+        ease: EASEINOUTQUINT
       }
     }
   }

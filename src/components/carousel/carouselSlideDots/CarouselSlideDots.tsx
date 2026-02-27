@@ -2,8 +2,8 @@ import { animationControls, motion } from 'motion/react';
 import CarouselSlideDot from './carouselSlideDot/CarouselSlideDot';
 import './CarouselSlideDots.scss';
 import type { CarouselSlideDotsProps, CarouselSlideDotsPositionVariants, CarouselSlideDotsTrackVariants } from './carouselSlideDotsTypes';
-import { easeInBack, easeOutBack } from 'js-easing-functions';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { EASEINBACK, EASEOUTBACK } from '@src/utils';
 
 export default function CarouselSlideDots({ slides, activeSlideIndex }: CarouselSlideDotsProps) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -49,14 +49,14 @@ export default function CarouselSlideDots({ slides, activeSlideIndex }: Carousel
       y: "0%",
       transition: {
         duration: 0.5,
-        ease: (t) => easeOutBack(t, 0, 1, 1)
+        ease: EASEOUTBACK
       }
     },
     hidden: {
       y: "100%",
       transition: {
         duration: 0.5,
-        ease: (t) => easeInBack(t, 0, 1, 1)
+        ease: EASEINBACK
       }
     },
   };
@@ -66,7 +66,7 @@ export default function CarouselSlideDots({ slides, activeSlideIndex }: Carousel
       translateX: `-${trackTranslateX}px`,
       transition: {
         duration: 0.5,
-        ease: (t) => easeOutBack(t, 0, 1, 1)
+        ease: EASEOUTBACK
       }
     })
   };
