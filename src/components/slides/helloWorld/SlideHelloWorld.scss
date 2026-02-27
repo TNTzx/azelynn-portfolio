@@ -80,52 +80,6 @@
 }
 
 
-.slide-hello-world__mountains {
-    display: flex;
-    z-index: 2;
-
-    flex-direction: column;
-
-    width: 100%;
-    height: 100%;
-}
-
-.slide-hello-world__mountains-container {
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
-    height: 100%;
-}
-
-.slide-hello-world__mountains-container--top {
-    align-items: start;
-}
-
-.slide-hello-world__mountains-container--bottom {
-    align-items: end;
-}
-
-.slide-hello-world__mountain-container {
-    display: flex;
-}
-
-.slide-hello-world__mountain {
-    opacity: 70%;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-}
-
-.slide-hello-world__mountain--top {
-    transform-origin: top;
-}
-
-.slide-hello-world__mountain--bottom {
-    transform-origin: bottom;
-}
-
-
 .slide-hello-world__title {
     color: black;
     font-size: max(10vw, 5em);
