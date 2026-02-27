@@ -3,7 +3,7 @@ import './SlideHelloWorld.scss';
 import { motion, type TargetAndTransition } from 'framer-motion';
 import { easeInOutQuint, easeInQuint, easeOutQuint } from 'js-easing-functions';
 import { useViewport } from '@src/hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 
 const delayDurationSeconds = 1;
@@ -49,7 +49,7 @@ function Mountains() {
   }, [viewportSize.width, mountainWidth]);
 
   
-  const mountains = [...Array(debouncedCount).keys()];
+  const mountains = useMemo(() => [...Array(debouncedCount).keys()], [debouncedCount]);
 
   const mountainContainerVariant = {
     enter: {},
