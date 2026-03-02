@@ -13,13 +13,15 @@ function FGFront() {
     enter: {
       opacity: 0,
       y: "100%",
-      rotate: "0deg",
+      rotateX: "0deg",
+      rotateZ: "0deg",
       z: "0px",
     },
     center: {
       opacity: 1,
       y: "0%",
-      rotate: "0deg",
+      rotateX: "0deg",
+      rotateZ: "0deg",
       z: "0px",
       transition: {
         duration: 1,
@@ -30,7 +32,8 @@ function FGFront() {
     exit: {
       opacity: 1,
       y: "0%",
-      rotate: "-15deg",
+      rotateX: "-45deg",
+      rotateZ: "-15deg",
       z: "1000px",
       transition: {
         duration: 2,
@@ -43,7 +46,9 @@ function FGFront() {
     enter: {
       opacity: 0,
       y: "-100%",
-      z: "0px"
+      z: "0px",
+      rotateX: "0deg",
+      rotateZ: "0deg",
     },
     center: {
       opacity: 1,
@@ -59,8 +64,9 @@ function FGFront() {
     exit: {
       opacity: 1,
       y: "0%",
-      rotate: "-15deg",
       z: "1000px",
+      rotateX: "45deg",
+      rotateZ: "-15deg",
       transition: {
         duration: 2,
         ease: EASEINOUTQUINT
