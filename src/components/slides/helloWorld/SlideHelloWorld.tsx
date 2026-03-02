@@ -12,15 +12,13 @@ function FGFront() {
   const helloVariants: CarouselVariants = (() => ({
     enter: {
       opacity: 0,
-      y: "20%",
-      letterSpacing: "-0.5em",
+      y: "100%",
       rotate: "0deg",
       z: "0px",
     },
     center: {
       opacity: 1,
       y: "0%",
-      letterSpacing: "0.2em",
       rotate: "0deg",
       z: "0px",
       transition: {
@@ -32,7 +30,6 @@ function FGFront() {
     exit: {
       opacity: 1,
       y: "0%",
-      letterSpacing: "1em",
       rotate: "-15deg",
       z: "1000px",
       transition: {
@@ -45,14 +42,12 @@ function FGFront() {
   const worldVariants: CarouselVariants = (() => ({
     enter: {
       opacity: 0,
-      y: "-20%",
-      letterSpacing: "-0.5em",
+      y: "-100%",
       z: "0px"
     },
     center: {
       opacity: 1,
       y: "0%",
-      letterSpacing: "0.2em",
       z: "0px",
       transition: {
         duration: 1,
@@ -64,7 +59,6 @@ function FGFront() {
     exit: {
       opacity: 1,
       y: "0%",
-      letterSpacing: "1em",
       rotate: "-15deg",
       z: "1000px",
       transition: {
