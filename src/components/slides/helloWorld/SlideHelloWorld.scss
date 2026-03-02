@@ -96,6 +96,12 @@
 // }
 
 .slide-hello-world__title-shadow {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     color: transparent;
     background-clip: text;
 
@@ -109,14 +115,22 @@
 
 .slide-hello-world__title-shadow--hello {
     background-image: linear-gradient(to bottom, black 30%, transparent 80%);
+    animation: marquee-left-4rep 4s linear infinite;
 }
 
 .slide-hello-world__title-shadow--world {
     background-image: linear-gradient(to top, black 20%, transparent 70%);
+    animation: marquee-left-4rep 4s reverse linear infinite;
 }
 
 .slide-hello-world__title-shadow-small {
+    display: flex;
     margin: 0;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     color: black;
     opacity: 50%;
     font-size: 7vw;
@@ -125,10 +139,12 @@
 
 .slide-hello-world__title-shadow-small--hello {
     margin-bottom: 3vh;
+    animation: marquee-left-4rep 8s linear infinite;
 }
 
 .slide-hello-world__title-shadow-small--world {
     margin-top: 3vh;
+    animation: marquee-left-4rep 8s reverse linear infinite;
 }
 
 .slide-hello-world__title-shadow-container {
@@ -146,10 +162,10 @@
 
 // }
 
-@keyframes move-left-4rep {
+@keyframes marquee-left-4rep {
     to { transform: translateX(calc(100% / 4)); }
 }
 
-@keyframes move-left-8rep {
+@keyframes marquee-left-8rep {
     to { transform: translateX(calc(100% / 8)); }
 }

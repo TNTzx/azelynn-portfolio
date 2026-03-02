@@ -8,22 +8,6 @@ import Mountains from './mountains/Mountains';
 const delayDurationSeconds = 1;
 
 
-function getMarqueeVariant(duration: number, direction: -1 | 1, textRepetitions: number): CarouselVariants {
-  return {
-    enter: {},
-    center: {
-      x: ["0%", `${100 / textRepetitions * direction}%`],
-      transition: {
-        repeat: Infinity,
-        duration,
-        ease: "linear"
-      }
-    },
-    exit: {}
-  }
-}
-
-
 function FGFront() {
   const helloVariants: CarouselVariants = (() => ({
     enter: {
@@ -165,23 +149,20 @@ function FGBack() {
         className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--hello"
         variants={helloContainer}
       >
-        <motion.h2
-          variants={getMarqueeVariant(4, -1, 8)}
-          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello"
-        >
-          HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
+        <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello">
+          {[...Array(8)].map(() =>
+            <div>HELLO&nbsp;</div>)
+          }
         </motion.h2>
-        <motion.h2
-          variants={getMarqueeVariant(2, -1, 8)}
-          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello"
-        >
-          HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
+        <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello">
+          {[...Array(16)].map(() =>
+            <div>HELLO&nbsp;</div>)
+          }
         </motion.h2>
-        <motion.h1
-          variants={getMarqueeVariant(6, -1, 4)}
-          className="slide-hello-world__title-shadow slide-hello-world__title-shadow--hello"
-        >
-          HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;HELLO&nbsp;
+        <motion.h1 className="slide-hello-world__title-shadow slide-hello-world__title-shadow--hello">
+          {[...Array(8)].map(() =>
+            <div>HELLO&nbsp;</div>)
+          }
         </motion.h1>
       </motion.div>
 
@@ -189,23 +170,20 @@ function FGBack() {
         className="slide-hello-world__title-shadow-container slide-hello-world__title-shadow-container--world"
         variants={worldContainer}
       >
-        <motion.h1
-          variants={getMarqueeVariant(6, 1, 4)}
-          className="slide-hello-world__title-shadow slide-hello-world__title-shadow--world"
-        >
-          WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
+        <motion.h1 className="slide-hello-world__title-shadow slide-hello-world__title-shadow--world">
+          {[...Array(8)].map(() =>
+            <div>WORLD&nbsp;</div>)
+          }
         </motion.h1>
-        <motion.h2
-          variants={getMarqueeVariant(2, 1, 8)}
-          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world"
-        >
-          WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
+        <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world">
+          {[...Array(16)].map(() =>
+            <div>WORLD&nbsp;</div>)
+          }
         </motion.h2>
-        <motion.h2
-          variants={getMarqueeVariant(4, 1, 8)}
-          className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world"
-        >
-          WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;WORLD&nbsp;
+        <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world">
+          {[...Array(8)].map(() =>
+            <div>WORLD&nbsp;</div>)
+          }
         </motion.h2>
       </motion.div>
     </>
