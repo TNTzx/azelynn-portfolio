@@ -85,6 +85,8 @@
     font-size: max(10vw, 5em);
 
     letter-spacing: 0.2em;
+
+    will-change: transform;
 }
 
 // .slide-hello-world__title--hello {
@@ -111,6 +113,8 @@
     font-weight: 500;
     font-style: italic;
     white-space: nowrap;
+
+    will-change: transform opacity;
 }
 
 .slide-hello-world__title-shadow--hello {
@@ -135,6 +139,8 @@
     opacity: 50%;
     font-size: 7vw;
     font-weight: normal;
+
+    will-change: transform opacity;
 }
 
 .slide-hello-world__title-shadow-small--hello {
@@ -152,6 +158,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    will-change: transform;
 }
 
 // .slide-hello-world__title-shadow-container--hello {

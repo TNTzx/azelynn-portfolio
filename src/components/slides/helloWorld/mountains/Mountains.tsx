@@ -5,12 +5,12 @@ import { motion } from 'motion/react';
 import { useState, useEffect, useMemo } from 'react';
 import './Mountains.scss';
 
-const mountainHeights = Array.from({ length: 200 }, () => Math.random());
+const mountainHeights = Array.from({ length: 50 }, () => Math.random());
 
 export default function Mountains({ delayDurationSeconds }: { delayDurationSeconds: number }) {
   const viewportSize = useViewport();
 
-  const mountainWidth = 1080 / 15;
+  const mountainWidth = 1080 / 8;
 
   const [debouncedCount, setDebouncedCount] = useState(
     Math.ceil(viewportSize.width / mountainWidth)
@@ -35,10 +35,10 @@ export default function Mountains({ delayDurationSeconds }: { delayDurationSecon
     enter: {},
     center: { transition: {
       delayChildren: delay,
-      staggerChildren: 0.03,
+      staggerChildren: 0.06,
     } } satisfies TargetAndTransition,
     exit: { transition: {
-      staggerChildren: 0.03,
+      staggerChildren: 0.06,
     } } satisfies TargetAndTransition
   } satisfies CarouselVariants))();
 
@@ -58,11 +58,18 @@ export default function Mountains({ delayDurationSeconds }: { delayDurationSecon
     }}
   }))();
 
-  const mountainVariant: CarouselVariants = (() => ({
-    enter: { scaleY: 0 },
-    center: { scaleY: 1 },
-    exit: { scaleY: 0 }
-  }))();
+
+  const topMountainVariant: CarouselVariants = {
+    enter: { y: "-100%" },
+    center: { y: 0 },
+    exit: { y: "-100%" }
+  };
+
+  const bottomMountainVariant: CarouselVariants = {
+    enter: { y: "100%" },
+    center: { y: 0 },
+    exit: { y: "100%" }
+  };
 
   function getMountainContainerStyle(randomValue: number) {
     return {
@@ -86,7 +93,7 @@ export default function Mountains({ delayDurationSeconds }: { delayDurationSecon
             style={getMountainContainerStyle(mountainHeights[idx])}
           >
             <motion.div
-              variants={mountainVariant}
+              variants={topMountainVariant}
               className="slide-hello-world__mountain slide-hello-world__mountain--top"
             />
           </motion.div>
@@ -106,7 +113,7 @@ export default function Mountains({ delayDurationSeconds }: { delayDurationSecon
             style={getMountainContainerStyle(mountainHeights[debouncedCount - idx - 1])}
           >
             <motion.div
-              variants={mountainVariant}
+              variants={bottomMountainVariant}
               className="slide-hello-world__mountain slide-hello-world__mountain--bottom"
             />
           </motion.div>
