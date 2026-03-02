@@ -19,6 +19,8 @@
     outline: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+
+    will-change: transform;
 }
 
 .carousel__button-contents {
@@ -29,4 +31,6 @@
     justify-content: center;
 
     pointer-events: none;
+
+    will-change: transform;
 }
