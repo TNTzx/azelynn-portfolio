@@ -56,7 +56,7 @@ function IconPathSegment({ isReverse }: { isReverse: boolean }) {
 }
 
 function IconPaths() {
-  const moveOffsetVh = 60;
+  const moveOffsetVh = 100;
 
   function getVariants(isReverse: boolean): CarouselVariants {
     const signedIsReverse = isReverse ? -1 : 1;
@@ -116,13 +116,27 @@ function IconLayer() {
 }
 
 export default function SlideLoading() {
+  const variants: CarouselVariants = {
+    enter: {
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+    },
+    center: {
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      transition: { duration: 1 }
+    },
+    exit: {
+      backgroundColor: 'rgba(0, 0, 0, 0)',
+      transition: { duration: 1 }
+    }
+  }
+
   return (
-    <div className="slide-loading">
+    <motion.div className="slide-loading" variants={variants}>
       <div className="slide-loading__layer--icon">
         <div className="slide-loading__icon">
           <IconLayer />
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
