@@ -15,7 +15,7 @@ function IconPathSegment({ isReverse }: { isReverse: boolean }) {
     center: {
       strokeDashoffset: [0, pathLength * 0.5].map(x => x + offsetLength),
       transition: {
-        delay: 0.25,
+        delay: 0.1,
         duration: 0.9,
         ease: [0.22, 1, 0.36, 1],
         repeat: Infinity,
@@ -47,7 +47,7 @@ function IconPathSegment({ isReverse }: { isReverse: boolean }) {
           0.563456,0.207766 0.897533,0.794221 0.792015,1.39034
           -0.105519,0.59612 -0.620115,1.029487 -1.21998,1.027406
           z"
-        stroke-width="0.264583"
+        strokeWidth="0.264583"
         variants={variants}
         className={`slide-loading__icon-path ${isReverse ? 'slide-loading__icon-path--reversed' : ''}`}
       />
@@ -75,8 +75,8 @@ function IconPaths() {
         x: '0vh',
         y: '0vh',
         transition: {
-          duration: 0.25,
-          ease: EASEOUTQUINT
+          duration: 0.1,
+          ease: 'linear'
         }
       },
       exit: {
@@ -103,12 +103,24 @@ function IconPaths() {
   );
 }
 
+function IconLayer() {
+  return <>
+    <div className="slide-loading__icon-container">
+      <IconPaths />
+    </div>
+
+    <div className="slide-loading__icon-container-blur">
+      <IconPaths />
+    </div>
+  </>
+}
+
 export default function SlideLoading() {
   return (
     <div className="slide-loading">
-      <div className="slide-loading__icon">
-        <div className="slide-loading__icon-bounds">
-          <IconPaths />
+      <div className="slide-loading__layer--icon">
+        <div className="slide-loading__icon">
+          <IconLayer />
         </div>
       </div>
     </div>
