@@ -23,7 +23,7 @@ export default function Main() {
       slides={slides}
       currentSlide={currentSlideHash}
       onScreenChange={onScreenChange}
-      loadingSlide={<></>}
+      loadingSlide={<SlideLoading />}
       debounceDelayMs={1000}
     />
   );
