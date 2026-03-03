@@ -50,7 +50,8 @@
 }
 
 .carousel__slide--loading {
-    z-index: 10
+    z-index: 10;
+    pointer-events: none;
 }
 
 .carousel__bg {
