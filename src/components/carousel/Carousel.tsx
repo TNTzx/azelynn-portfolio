@@ -96,12 +96,17 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
               }
             </AnimatePresence>
 
-            <AnimatePresence custom={animationProps}>
-              <div className='carousel__slide carousel__slide--loading'>
-                {!isSlideShown &&
-                  loadingSlide
-                }
-              </div>
+            <AnimatePresence propagate custom={animationProps}>
+              {!isSlideShown &&
+                <motion.div
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className='carousel__slide carousel__slide--loading'
+                >
+                  {loadingSlide}
+                </motion.div>
+              }
             </AnimatePresence>
           </main>
         </div>
