@@ -2,8 +2,56 @@
 
 
 .slide-loading {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-loading__icon {
+    @extend .layer;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.slide-loading__icon-inner {
+    display: flex;
+    width: 50%;
+    height: 50%;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-loading__icon-path {
+    --path-length: 23.456764221191406;
+    --visible-percent: 0.15;
+    --visible-length: calc(var(--path-length) * var(--visible-percent));
+    --invisible-length: calc(var(--path-length) * (1 - var(--visible-percent)));
+    --start-offset: calc(var(--path-length) * 0.263);
+
+    stroke-dasharray: var(--visible-length) var(--invisible-length);
+    stroke-dashoffset: var(--start-offset);
+    animation: march 1s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.slide-loading__icon-path--reversed {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: rotate(180deg);
+}
+
+@keyframes march {
+    to {
+        // calc(var(--path-length) / 2 + var(--start-offset))
+        stroke-dashoffset: 17.8975111008;
+    }
 }
