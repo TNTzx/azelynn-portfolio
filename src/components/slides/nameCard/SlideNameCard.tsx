@@ -15,15 +15,15 @@ function Name() {
       <h1 className="slide-name-card__name-text slide-name-card__name-text--title">
         AZELYNN
       </h1>
-      <h1 className="slide-name-card__name-text slide-name-card__name-text--description">
+      <h3 className="slide-name-card__name-text slide-name-card__name-text--description">
         WEB & APPLICATION DEVELOPER <Separator />
-        MOTION GRAPHICS ANIMATOR <Separator />
-        <span className="slide-name-card__name-text--small">
+        MOTION GRAPHICS ANIMATOR
+      </h3>
+      <h4 className="slide-name-card__name-text slide-name-card__name-text--small">
           musician <Separator />
           artist <Separator />
           storywriter
-        </span>
-      </h1>
+      </h4>
     </div>
   )
 }

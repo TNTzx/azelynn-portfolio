@@ -1,4 +1,5 @@
 @use 'layer';
+@use 'mixins' as *;
 
 .slide-name-card {
     position: relative;
@@ -41,13 +42,17 @@
     position: relative;
     display: flex;
 
-    width: 50%;
+    width: 100%;
     height: 100%;
     box-sizing: border-box;
 
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @include breakpoint(xl) {
+        width: 75%;
+    }
 }
 
 .slide-name-card__name {
@@ -62,31 +67,84 @@
 
 .slide-name-card__name-text {
     color: white;
+    width: 100%;
+    text-align: center;
 
+    @include breakpoint(lg) {
+        text-align: left;
+    }
 }
 
 .slide-name-card__name-text--subtitle {
-    margin: -1vw 0;
-
-    font-size: 3vw;
+    font-size: 1em;
     font-weight: 200;
+    word-break: break-all;
+
+    @include breakpoint(sm) {
+        font-size: 1.75em;
+    }
+
+    @include breakpoint(md) {
+        font-size: 2.5em;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 3em;
+    }
 }
 
 .slide-name-card__name-text--title {
-    margin: -2vw 0 -1vw 0;
+    margin: -0.3em 0 -0.1em 0;
 
-    font-size: 8vw;
+    font-size: 3.5em;
     font-weight: bold;
+    word-break: break-all;
+
+    @include breakpoint(sm) {
+        font-size: 5em;
+    }
+
+    @include breakpoint(md) {
+        font-size: 6.5em;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 8em;
+    }
 }
 
 .slide-name-card__name-text--description {
     color: gray;
-    font-size: 2vw;
+    font-size: 1em;
     font-weight: 100;
+
+    @include breakpoint(sm) {
+        font-size: 1.33em;
+    }
+
+    @include breakpoint(md) {
+        font-size: 1.66em;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 2em;
+    }
 }
 
 .slide-name-card__name-text--small {
     color: rgb(94, 94, 94);
-    font-size: 1.5vw;
+    font-size: 1em;
     font-weight: 100;
+
+    @include breakpoint(sm) {
+        font-size: 1.33em;
+    }
+
+    @include breakpoint(md) {
+        font-size: 1.66em;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 1.85em;
+    }
 }
