@@ -108,9 +108,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
                   slides[currentIndex].getElement(animationProps)
                 }</motion.div>
               }
-            </AnimatePresence>
 
-            <AnimatePresence propagate custom={animationProps}>
               {isLoadingShown &&
                 <motion.div
                   initial="enter"
