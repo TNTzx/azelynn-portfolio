@@ -1,5 +1,6 @@
 @use "sass:math";
 @use 'layer';
+@use 'mixins' as *;
 
 
 .slide-loading {
@@ -75,7 +76,7 @@
 
 .slide-loading__icon-container-blur {
     @extend .layer;
-    display: flex;
+    display: none;
     width: 150%;
     height: 150%;
 
@@ -85,6 +86,10 @@
 
     opacity: 0.25;
     filter: blur(10px);
+
+    @include breakpoint(lg) {
+        display: flex;
+    }
 }
 
 .slide-loading__icon-part-layer {

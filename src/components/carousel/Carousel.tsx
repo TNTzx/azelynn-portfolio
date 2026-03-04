@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import type { CarouselProps, CarouselVariants as CarouselSlideVariants } from './carouselTypes';
 import './Carousel.scss';
 import { AnimatePresence, motion } from 'motion/react';
@@ -72,6 +72,11 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
 
   const [swipePercent, keyPressed, handlers] = useCarouselControls();
 
+  const currentSlideElement = useMemo(
+    () => slides[currentIndex].getElement(animationProps),
+    [slides, currentIndex, animationProps]
+  );
+
   return (
     <div
       {...handlers}
@@ -104,9 +109,9 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
                   animate="center"
                   exit="exit"
                   className='carousel__slide'
-                >{
-                  slides[currentIndex].getElement(animationProps)
-                }</motion.div>
+                >
+                  {currentSlideElement}
+                </motion.div>
               }
 
               {isLoadingShown &&

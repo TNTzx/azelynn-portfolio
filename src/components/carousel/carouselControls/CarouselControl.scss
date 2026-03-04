@@ -4,11 +4,6 @@
     @extend .layer;
 }
 
-@keyframes rainbow-loop {
-    from { background-position: 0% 50%; }
-    to { background-position: 100% 50%; }
-}
-
 .carousel__control-bg--flash {
     z-index: 2;
 
