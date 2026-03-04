@@ -14,3 +14,26 @@
 
     transform-style: preserve-3d;
 }
+
+.slide-name-card__layer {
+    @extend .layer;
+
+}
+
+.slide-name-card__layer--front {
+    z-index: 1;
+}
+
+.slide-name-card__name-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide-name-card__name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
