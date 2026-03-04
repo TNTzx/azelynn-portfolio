@@ -150,18 +150,18 @@ function FGBack() {
         variants={helloContainer}
       >
         <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello">
-          {[...Array(8)].map(() =>
-            <div>HELLO&nbsp;</div>)
+          {[...Array(8)].map((_, idx) =>
+            <div key={idx}>HELLO&nbsp;</div>)
           }
         </motion.h2>
         <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--hello">
-          {[...Array(16)].map(() =>
-            <div>HELLO&nbsp;</div>)
+          {[...Array(16)].map((_, idx) =>
+            <div key={idx}>HELLO&nbsp;</div>)
           }
         </motion.h2>
         <motion.h1 className="slide-hello-world__title-shadow slide-hello-world__title-shadow--hello">
-          {[...Array(8)].map(() =>
-            <div>HELLO&nbsp;</div>)
+          {[...Array(8)].map((_, idx) =>
+            <div key={idx}>HELLO&nbsp;</div>)
           }
         </motion.h1>
       </motion.div>
@@ -171,18 +171,18 @@ function FGBack() {
         variants={worldContainer}
       >
         <motion.h1 className="slide-hello-world__title-shadow slide-hello-world__title-shadow--world">
-          {[...Array(8)].map(() =>
-            <div>WORLD&nbsp;</div>)
+          {[...Array(8)].map((_, idx) =>
+            <div key={idx}>WORLD&nbsp;</div>)
           }
         </motion.h1>
         <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world">
-          {[...Array(16)].map(() =>
-            <div>WORLD&nbsp;</div>)
+          {[...Array(16)].map((_, idx) =>
+            <div key={idx}>WORLD&nbsp;</div>)
           }
         </motion.h2>
         <motion.h2 className="slide-hello-world__title-shadow-small slide-hello-world__title-shadow-small--world">
-          {[...Array(8)].map(() =>
-            <div>WORLD&nbsp;</div>)
+          {[...Array(8)].map((_, idx) =>
+            <div key={idx}>WORLD&nbsp;</div>)
           }
         </motion.h2>
       </motion.div>
