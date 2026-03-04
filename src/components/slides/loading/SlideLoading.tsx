@@ -2,6 +2,7 @@ import type { CarouselVariants } from '@src/components';
 import './SlideLoading.scss';
 import { motion } from 'motion/react';
 import { EASEINQUINT, EASEOUTQUINT } from '@src/utils';
+import { ImageSpam } from '@src/assets/images';
 
 function IconPathSegment({ isReverse }: { isReverse: boolean }) {
   const pathLength = 23.456764221191406;
@@ -90,8 +91,7 @@ function IconPaths() {
     }
   }
 
-  return (
-  <>
+  return <>
     <motion.div variants={getVariants(false)} className="slide-loading__icon-part-layer">
       <IconPathSegment isReverse={false} />
     </motion.div>
@@ -99,8 +99,7 @@ function IconPaths() {
     <motion.div variants={getVariants(true)} className="slide-loading__icon-part-layer">
       <IconPathSegment isReverse={true} />
     </motion.div>
-  </>
-  );
+  </>;
 }
 
 function IconLayer() {
@@ -113,6 +112,44 @@ function IconLayer() {
       <IconPaths />
     </div>
   </>
+}
+
+function Spam() {
+  const variants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: '100vh',
+      scale: '100%',
+      rotate: 0,
+    },
+    center: {
+      opacity: 1,
+      y: '0vh',
+      scale: '100%',
+      rotate: 0,
+      transition: { 
+        delay: 5,
+        duration: 5,
+        ease: EASEOUTQUINT
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: '0vh',
+      scale: '0%',
+      rotate: 360 * 4,
+      transition: {
+        duration: 0.5,
+        ease: EASEINQUINT
+      }
+    }
+  }
+
+  return (
+    <motion.div variants={variants} className="slide-loading__spam">
+      <img src={ImageSpam} alt="Spam" className="slide-loading__spam-image" />
+    </motion.div>
+  )
 }
 
 export default function SlideLoading() {
@@ -132,7 +169,10 @@ export default function SlideLoading() {
 
   return (
     <motion.div className="slide-loading" variants={variants}>
-      <div className="slide-loading__layer--icon">
+      <div className="slide-loading__layer slide-loading__layer--spam">
+        <Spam />
+      </div>
+      <div className="slide-loading__layer slide-loading__layer--icon">
         <div className="slide-loading__icon">
           <IconLayer />
         </div>

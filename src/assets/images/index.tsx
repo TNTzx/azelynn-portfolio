@@ -1,0 +1,1 @@
+export { default as ImageSpam } from './spam.jpg';
