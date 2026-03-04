@@ -1,21 +1,41 @@
-import type { CarouselVariants } from '@src/components';
 import './SlideNameCard.scss';
-import { motion } from 'motion/react';
+
+function Separator() {
+  return (
+    <b>// </b>
+  )
+}
 
 function Name() {
   return (
     <div className="slide-name-card__name">
-      Test
+      <h2 className="slide-name-card__name-text slide-name-card__name-text--subtitle">
+        hello there, i'm
+      </h2>
+      <h1 className="slide-name-card__name-text slide-name-card__name-text--title">
+        AZELYNN
+      </h1>
+      <h1 className="slide-name-card__name-text slide-name-card__name-text--description">
+        WEB & APPLICATION DEVELOPER <Separator />
+        MOTION GRAPHICS ANIMATOR <Separator />
+        <span className="slide-name-card__name-text--small">
+          musician <Separator />
+          artist <Separator />
+          storywriter
+        </span>
+      </h1>
     </div>
   )
 }
 
 function Front() {
-  return <>
-    <div className="slide-name-card__name-container">
-      <Name />
+  return (
+    <div className="slide-name-card__front">
+      <div className="slide-name-card__name-container">
+        <Name />
+      </div>
     </div>
-  </>
+  )
 }
 
 export default function SlideNameCard() {

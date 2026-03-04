@@ -18,16 +18,32 @@
 .slide-name-card__layer {
     @extend .layer;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .slide-name-card__layer--front {
     z-index: 1;
 }
 
-.slide-name-card__name-container {
+.slide-name-card__front {
+    position: relative;
     display: flex;
     width: 100%;
     height: 100%;
+    padding: 10vh 10vw;
+    box-sizing: border-box;
+}
+
+.slide-name-card__name-container {
+    position: relative;
+    display: flex;
+
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
 
     flex-direction: column;
     justify-content: center;
@@ -41,5 +57,36 @@
 
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
+}
+
+.slide-name-card__name-text {
+    color: white;
+
+}
+
+.slide-name-card__name-text--subtitle {
+    margin: -1vw 0;
+
+    font-size: 3vw;
+    font-weight: 200;
+}
+
+.slide-name-card__name-text--title {
+    margin: -2vw 0 -1vw 0;
+
+    font-size: 8vw;
+    font-weight: bold;
+}
+
+.slide-name-card__name-text--description {
+    color: gray;
+    font-size: 2vw;
+    font-weight: 100;
+}
+
+.slide-name-card__name-text--small {
+    color: rgb(94, 94, 94);
+    font-size: 1.5vw;
+    font-weight: 100;
 }
