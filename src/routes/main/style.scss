@@ -12,6 +12,7 @@
 
 .page-main__layer--debug {
     z-index: 2;
+    pointer-events: none;
 }
 
 .page-main__layer--carousel {
