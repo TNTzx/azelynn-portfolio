@@ -1,9 +1,85 @@
+@use 'mixins' as *;
+
 .debug {
     position: relative;
+    display: flex;
+    width: 100%;
+    gap: 0px;
+
+    flex-direction: column;
+
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.debug__text {
-    font-size: 1em;
-    font-weight: 100;
+.debug__header {
+    display: flex;
+    width: 100%;
+    padding: 4px 16px;
+    gap: 0px;
+    box-sizing: border-box;
+
+    flex-direction: column;
+    align-items: center;
+
+    @include breakpoint(md) {
+        flex-direction: row;
+        gap: 16px;
+    }
+}
+
+.debug__header-text {
     color: white;
+}
+
+.debug__header-text--title {
+    white-space: nowrap;
+}
+
+.debug__content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    @include breakpoint(md) {
+        flex-direction: row;
+    }
+}
+
+.debug__content-section {
+    --background-opacity: 0.212;
+
+    display: flex;
+    width: 100%;
+    padding: 8px;
+    gap: 8px;
+    box-sizing: border-box;
+
+    flex-direction: column;
+
+    border-style: solid;
+    border-width: 2px;
+}
+
+.debug__content-section--red {
+    border-color: red;
+    background-color: rgba(255, 0, 0, var(--background-opacity));
+    color: rgb(255, 197, 197);
+}
+
+.debug__content-section--orange {
+    border-color: rgb(255, 153, 0);
+    background-color: rgba(255, 153, 0, var(--background-opacity));
+    color: rgb(255, 232, 197);
+}
+
+.debug__content-section-text {
+    margin: -0.2em 0;
+}
+
+.debug__content-section-text--label {
+    font-weight: 100;
+}
+
+.debug__content-section-text--value {
+    font-weight: 500;
 }
