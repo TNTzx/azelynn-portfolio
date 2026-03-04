@@ -3,7 +3,7 @@ import CarouselSwipeIndicator from './carouselSwipeIndicator/CarouselSwipeIndica
 import './CarouselSwipes.scss';
 import type { CarouselSwipesProps } from './carouselSwipesTypes';
 
-const SWIPE_THRESHOLD = 0.3;
+const SWIPE_THRESHOLD = 0.25;
 
 export default function CarouselSwipes({ swipePercent, switchScreen, isLeftDisabled, isRightDisabled }: CarouselSwipesProps) {
   const leftSwipePercent = useTransform(swipePercent, (val) => val === null ? null : transform(val, [0, SWIPE_THRESHOLD, 1], [0, 0, 1]));
