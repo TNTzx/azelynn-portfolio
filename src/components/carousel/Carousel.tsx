@@ -24,12 +24,14 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
   });
 
   const [isSlideShown, setIsSlideShown] = useState<boolean>(true);
+  const [isLoadingShown, setIsLoadingShown] = useState<boolean>(false);
   const [animationProps, setAnimationProps] = useState<CarouselAnimationContext>({ direction: -1 });
 
   const isLeftDisabled = currentIndex === 0;
   const isRightDisabled = currentIndex === (slides.length - 1);
 
   const loadingTimeout = useRef<number | null>(null);
+  const slideShowTimeout = useRef<number | null>(null);
 
   function switchScreen(offset: number) {
     let newIndex = currentIndex + offset;
@@ -46,12 +48,24 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
     setIsSlideShown(false);
     setCurrentIndex(newIndex);
 
-    if (loadingTimeout.current) {
-      clearTimeout(loadingTimeout.current);
-    }
-    loadingTimeout.current = window.setTimeout(() => {
+    clearTimeout(slideShowTimeout.current ?? undefined);
+    slideShowTimeout.current = window.setTimeout(() => {
+      setIsLoadingShown(false);
       setIsSlideShown(true);
+
+      if (loadingTimeout.current !== null) {
+        clearTimeout(loadingTimeout.current);
+        loadingTimeout.current = null;
+      }
     }, debounceDelayMs);
+
+    if (loadingTimeout.current === null && !isLoadingShown) {
+      loadingTimeout.current = window.setTimeout(() => {
+        setIsLoadingShown(true);
+        clearTimeout(loadingTimeout.current ?? undefined);
+        loadingTimeout.current = null;
+      }, debounceDelayMs);
+    }
 
     onScreenChange?.(slides[newIndex]);
   }
@@ -97,7 +111,7 @@ export default function Carousel({ slides, currentSlide, onScreenChange, loading
             </AnimatePresence>
 
             <AnimatePresence propagate custom={animationProps}>
-              {!isSlideShown &&
+              {isLoadingShown &&
                 <motion.div
                   initial="enter"
                   animate="center"
