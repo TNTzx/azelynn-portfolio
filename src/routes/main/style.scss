@@ -1,0 +1,19 @@
+@use 'layer';
+
+.page-main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.page-main__layer {
+    @extend .layer;
+}
+
+.page-main__layer--debug {
+    z-index: 2;
+}
+
+.page-main__layer--carousel {
+    z-index: 1;
+}

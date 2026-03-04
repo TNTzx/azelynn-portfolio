@@ -1,9 +1,10 @@
 import Carousel from '@src/components/carousel/Carousel';
 import { type CarouselSlide } from '@src/components';
-import './style.css';
+import './style.scss';
 import { useNavigate, useParams } from 'react-router';
 import { slides } from './slides';
 import SlideLoading from '@src/components/slides/loading/SlideLoading';
+import Debug from '@src/components/debug/debug';
 
 export const ROUTE_NAME = "main";
 
@@ -19,12 +20,20 @@ export default function Main() {
   }
 
   return (
-    <Carousel
-      slides={slides}
-      currentSlide={currentSlideHash}
-      onScreenChange={onScreenChange}
-      loadingSlide={<SlideLoading />}
-      debounceDelayMs={1000}
-    />
+    <div className="page-main">
+      <div className="page-main__layer page-main__layer--debug">
+        <Debug />
+      </div>
+
+      <div className="page-main__layer page-main__layer--carousel">
+        <Carousel
+          slides={slides}
+          currentSlide={currentSlideHash}
+          onScreenChange={onScreenChange}
+          loadingSlide={<SlideLoading />}
+          debounceDelayMs={1000}
+        />
+      </div>
+    </div>
   );
 }
