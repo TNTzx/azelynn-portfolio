@@ -24,6 +24,10 @@ function Name() {
           artist <Separator />
           storywriter
       </h4>
+
+      <h1 className="slide-name-card__name-text slide-name-card__name-text--title">
+        CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>CONTENT<br/>
+      </h1>
     </div>
   )
 }

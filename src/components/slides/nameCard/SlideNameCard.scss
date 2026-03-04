@@ -36,6 +36,8 @@
     height: 100%;
     padding: 10vh 10vw;
     box-sizing: border-box;
+
+    overflow-y: auto;
 }
 
 .slide-name-card__name-container {
@@ -49,6 +51,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @include breakpoint(lg) {
+        width: fit-content;
+    }
 
     @include breakpoint(xl) {
         width: 75%;
