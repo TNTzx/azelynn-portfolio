@@ -2,6 +2,7 @@ import type { CarouselSlide } from "@src/components";
 import Hello from "@src/components/slides/hello/Hello";
 import SlideHelloWorld from "@src/components/slides/helloWorld/SlideHelloWorld";
 import SlideLoading from "@src/components/slides/loading/SlideLoading";
+import SlideNameCard from "@src/components/slides/nameCard/SlideNameCard";
 
 function getRandomColor() {
   const letters = '0123456789ABCDEF';
@@ -18,6 +19,12 @@ export const slides: CarouselSlide[] = [
     displayName: 'Hello World',
     getElement: () =>
       <SlideHelloWorld />
+  },
+  {
+    hash: 'namecard',
+    displayName: 'I\'m Azelynn!',
+    getElement: () =>
+      <SlideNameCard />
   },
   {
     hash: 'slide1',
