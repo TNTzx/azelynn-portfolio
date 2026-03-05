@@ -1,23 +1,54 @@
 import { useViewport } from '@src/hooks';
 import './Debug.scss';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { EASEOUTQUINT } from '@src/utils';
+
+const TOUCH_TIMEOUT_BEFORE_RESET_MS = 150;
+const TOUCH_COUNT = 10;
 
 export default function Debug() {
   const [isOpen, setIsOpen] = useState(false);
   const viewport = useViewport();
+  const touchTimeout = useRef<number | null>(null);
+  const touches = useRef<number>(0);
+
+  const toggleIsOpen = useCallback(() => setIsOpen(!isOpen), [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === '3') setIsOpen(!isOpen);
+      if (event.key === '3') toggleIsOpen();
     };
 
+    const handleTouchEnd = () => {
+      window.clearTimeout(touchTimeout.current ?? undefined);
+      touchTimeout.current = null;
+
+      function reset() {
+        touches.current = 0;
+      }
+
+      touches.current++;
+      if (touches.current >= TOUCH_COUNT) {
+        toggleIsOpen();
+        reset();
+        return;
+      }
+
+      touchTimeout.current = window.setTimeout(() => {
+        reset();
+        window.clearTimeout(touchTimeout.current ?? undefined);
+        touchTimeout.current = null;
+      }, TOUCH_TIMEOUT_BEFORE_RESET_MS);
+    }
+
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('touchend', handleTouchEnd);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [isOpen]);
+  }, [toggleIsOpen]);
 
   const screenWidth = viewport.width;
 
@@ -32,6 +63,7 @@ export default function Debug() {
     <AnimatePresence>
       {isOpen &&
         <motion.div
+          onClick={toggleIsOpen}
           initial={{ opacity: 0, originY: '0%', scaleY: '0%' }}
           animate={{ opacity: 1, originY: '0%', scaleY: '100%', transition: { duration: 0.5, ease: EASEOUTQUINT } }}
           exit={{ opacity: 0, originY: '0%', scaleY: '0%', transition: { duration: 0.5, ease: EASEOUTQUINT } }}
