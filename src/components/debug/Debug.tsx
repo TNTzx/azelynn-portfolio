@@ -66,7 +66,8 @@ export default function Debug() {
   const screenWidth = viewport.width;
 
   let breakpoint: string;
-  if (screenWidth < 576) breakpoint = 'xs';
+  if (screenWidth < 320) breakpoint = 'N/A';
+  else if (screenWidth < 576) breakpoint = 'xs';
   else if (screenWidth < 768) breakpoint = 'sm';
   else if (screenWidth < 992) breakpoint = 'md';
   else if (screenWidth < 1200) breakpoint = 'lg';
