@@ -87,26 +87,27 @@
     }
 }
 
-.slide-name-card__name-text--subtitle {
-    font-size: 1em;
+.slide-name-card__name-text--intro {
+    margin: -0.3em 0;
+    font-size: 0.75em;
     font-weight: 200;
     word-break: break-all;
 
     @include breakpoint(sm) {
-        font-size: 1.75em;
+        font-size: 1.5em;
     }
 
     @include breakpoint(md) {
-        font-size: 2.5em;
+        font-size: 2.25em;
     }
 
     @include breakpoint(lg) {
-        font-size: 3em;
+        font-size: 2.75em;
     }
 }
 
 .slide-name-card__name-text--title {
-    margin: -0.3em 0 -0.1em 0;
+    margin: -0.1em 0 -0.2em 0;
 
     font-size: 3.2em;
     font-weight: bold;
@@ -122,6 +123,25 @@
 
     @include breakpoint(lg) {
         font-size: 8em;
+    }
+}
+
+.slide-name-card__name-text--subtitle {
+    margin: -0.3em 0 0.2em 0;
+    font-size: 1em;
+    font-weight: bold;
+    word-break: keep-all;
+
+    @include breakpoint(sm) {
+        font-size: 1.75em;
+    }
+
+    @include breakpoint(md) {
+        font-size: 2.5em;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 3em;
     }
 }
 

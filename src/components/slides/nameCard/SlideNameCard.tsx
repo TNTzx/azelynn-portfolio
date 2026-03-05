@@ -10,12 +10,15 @@ function Separator() {
 function Name() {
   return (
     <div className="slide-name-card__name">
-      <h2 className="slide-name-card__name-text slide-name-card__name-text--subtitle">
+      <h2 className="slide-name-card__name-text slide-name-card__name-text--intro">
         hello there, i'm
       </h2>
       <h1 className="slide-name-card__name-text slide-name-card__name-text--title">
         AZELYNN
       </h1>
+      <h2 className="slide-name-card__name-text slide-name-card__name-text--subtitle">
+        aka //TNTz
+      </h2>
       <h3 className="slide-name-card__name-text slide-name-card__name-text--description">
         WEB & APPLICATION DEVELOPER <Separator />
         MOTION GRAPHICS ANIMATOR
