@@ -44,7 +44,7 @@
     position: relative;
     display: flex;
 
-    width: 100%;
+    width: fit-content;
     height: 100%;
     box-sizing: border-box;
 
@@ -153,4 +153,19 @@
     @include breakpoint(lg) {
         font-size: 1.85em;
     }
+}
+
+.slide-name-card__picture-container {
+    display: flex;
+}
+
+.slide-name-card__picture {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: end;
+}
+
+.slide-name-card__picture-image {
+    object-fit: scale-down;
 }

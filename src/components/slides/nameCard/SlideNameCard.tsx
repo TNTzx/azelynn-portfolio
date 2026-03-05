@@ -1,3 +1,4 @@
+import { ImageAzel } from '@src/assets/images';
 import './SlideNameCard.scss';
 
 function Separator() {
@@ -28,11 +29,23 @@ function Name() {
   )
 }
 
+function Picture() {
+  return (
+    <div className="slide-name-card__picture">
+      <img src={ImageAzel} className="slide-name-card__picture-image" />
+    </div>
+  )
+}
+
 function Front() {
   return (
     <div className="slide-name-card__front">
       <div className="slide-name-card__name-container">
         <Name />
+      </div>
+
+      <div className="slide-name-card__picture-container">
+        <Picture />
       </div>
     </div>
   )
