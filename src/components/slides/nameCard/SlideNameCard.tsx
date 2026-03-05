@@ -25,7 +25,7 @@ function Name() {
       </h3>
       <h4 className="slide-name-card__name-text slide-name-card__name-text--small">
           musician <Separator />
-          artist <Separator />
+          digital artist <Separator />
           storywriter
       </h4>
     </div>
