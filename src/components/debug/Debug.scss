@@ -38,18 +38,15 @@
 .debug__content {
     display: flex;
     width: 100%;
-    flex-direction: column;
-
-    @include breakpoint(md) {
-        flex-direction: row;
-    }
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .debug__content-section {
     --background-opacity: 0.212;
 
     display: flex;
-    width: 100%;
+    width: fit-content;
     padding: 8px;
     gap: 8px;
 
@@ -71,6 +68,12 @@
     color: rgb(255, 232, 197);
 }
 
+.debug__content-section--yellow {
+    border-color: rgb(255, 251, 0);
+    background-color: rgba(255, 251, 0, var(--background-opacity));
+    color: rgb(255, 246, 197);
+}
+
 .debug__content-section-text {
     margin: -0.2em 0;
 }
@@ -81,4 +84,11 @@
 
 .debug__content-section-text--value {
     font-weight: 500;
+}
+
+.debug__fps > div {
+    position: relative !important;
+    > div {
+        overflow-x: hidden;
+    }
 }

@@ -3,17 +3,30 @@ import './Debug.scss';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { EASEOUTQUINT } from '@src/utils';
+import { useFps } from "react-fps";
 
+const TOGGLE_TIMEOUT_MS = 1000;
 const TOUCH_TIMEOUT_BEFORE_RESET_MS = 150;
 const TOUCH_COUNT = 10;
 
 export default function Debug() {
   const [isOpen, setIsOpen] = useState(false);
   const viewport = useViewport();
+  const fpsInfo = useFps(viewport.width);
+
+  const toggleTimeout = useRef<number | null>(null);
+
   const touchTimeout = useRef<number | null>(null);
   const touches = useRef<number>(0);
 
-  const toggleIsOpen = useCallback(() => setIsOpen(!isOpen), [isOpen]);
+  const toggleIsOpen = useCallback(() => {
+    if (toggleTimeout.current !== null) return;
+    toggleTimeout.current = window.setTimeout(() => {
+      window.clearTimeout(toggleTimeout.current ?? undefined);
+      toggleTimeout.current = null;
+    }, TOGGLE_TIMEOUT_MS)
+    setIsOpen(!isOpen)
+  }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -85,6 +98,10 @@ export default function Debug() {
             <div className="debug__content-section debug__content-section--orange">
               <h2 className="debug__content-section-text debug__content-section-text--label">Breakpoint</h2>
               <h1 className="debug__content-section-text debug__content-section-text--value">{breakpoint}</h1>
+            </div>
+            <div className="debug__content-section debug__content-section--yellow">
+              <h2 className="debug__content-section-text debug__content-section-text--label">Current FPS</h2>
+              <h1 className="debug__content-section-text debug__content-section-text--value">{fpsInfo.currentFps}</h1>
             </div>
           </div>
         </motion.div>
