@@ -22,7 +22,7 @@
 }
 
 .slide-name-card__layer--front {
-    z-index: 1;
+    z-index: 3;
 }
 
 .slide-name-card__front {
@@ -200,7 +200,7 @@
     }
 }
 
-.slide-name-card__picture-container {
+.slide-name-card__image-azel-container {
     display: flex;
     width: 100%;
 
@@ -209,7 +209,7 @@
     }
 }
 
-.slide-name-card__picture {
+.slide-name-card__image-azel {
     display: flex;
     width: 100%;
 
@@ -221,8 +221,30 @@
     }
 }
 
-.slide-name-card__picture-image {
+.slide-name-card__image-azel-element {
     width: 100%;
     max-width: 40vw;
     object-fit: scale-down;
+
+    filter: drop-shadow(20px 20px 10px rgba(black, 0.5));
+}
+
+.slide-name-card__layer--mid {
+    z-index: 2;
+}
+
+.slide-name-card__layer--back {
+    z-index: 1;
+}
+
+.slide-name-card__back {
+    display: flex;
+
+    width: 115%;
+    height: 115%;
+}
+
+.slide-name-card__image-beach-element {
+    object-fit: cover;
+    filter: brightness(0.2) blur(5px);
 }

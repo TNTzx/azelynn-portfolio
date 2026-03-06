@@ -1,4 +1,4 @@
-import { ImageAzel } from '@src/assets/images';
+import { ImageAzel, ImageBeach } from '@src/assets/images';
 import './SlideNameCard.scss';
 
 function Separator() {
@@ -49,8 +49,8 @@ function Name() {
 
 function Picture() {
   return (
-    <div className="slide-name-card__picture">
-      <img src={ImageAzel} className="slide-name-card__picture-image" />
+    <div className="slide-name-card__image-azel">
+      <img src={ImageAzel} className="slide-name-card__image-azel-element" />
     </div>
   )
 }
@@ -62,9 +62,17 @@ function Front() {
         <Name />
       </div>
 
-      <div className="slide-name-card__picture-container">
+      <div className="slide-name-card__image-azel-container">
         <Picture />
       </div>
+    </div>
+  )
+}
+
+function Back() {
+  return (
+    <div className="slide-name-card__back">
+      <img src={ImageBeach} className="slide-name-card__image-beach-element" />
     </div>
   )
 }
@@ -74,6 +82,10 @@ export default function SlideNameCard() {
     <div className="slide-name-card">
       <div className="slide-name-card__layer slide-name-card__layer--front">
         <Front />
+      </div>
+
+      <div className="slide-name-card__layer slide-name-card__layer--back">
+        <Back />
       </div>
     </div>
   )
