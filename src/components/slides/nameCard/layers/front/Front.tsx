@@ -25,7 +25,9 @@ function TextSection(args: {
   const mainVariants: CarouselVariants = args.shadow ? {
     enter: {
       opacity: 0,
-      x: -100
+      x: -100,
+      y: 0,
+      z: 0
     },
     center: {
       opacity: [0, 0, 1],
@@ -39,7 +41,10 @@ function TextSection(args: {
       }
     },
     exit: {
-
+      opacity: 1,
+      x: 0,
+      y: 0,
+      z: SHADOW_OFFSET,
     }
   } : {
     enter: {
@@ -57,7 +62,10 @@ function TextSection(args: {
       }
     },
     exit: {
-
+      opacity: 1,
+      x: 0,
+      y: 0,
+      z: SHADOW_OFFSET,
     }
   };
 
@@ -78,7 +86,10 @@ function TextSection(args: {
       }
     },
     exit: {
-
+      opacity: 1,
+      x: 0,
+      y: 0,
+      z: -SHADOW_OFFSET,
     }
   };
 
@@ -98,7 +109,6 @@ function TextSection(args: {
 }
 
 function Name() {
-
   return (
     <div className="slide-name-card__name">
       <TextSection tag="h2" classVariant="slide-name-card__name-text--intro" shadow={true} delay={0}>
