@@ -103,20 +103,20 @@ function Name() {
         hello there, i'm
       </TextSection>
 
-      <TextSection tag="h1" classVariant="slide-name-card__name-text--title" shadow={true} delay={0.5}>
+      <TextSection tag="h1" classVariant="slide-name-card__name-text--title" shadow={true} delay={0.25}>
         AZELYNN
       </TextSection>
 
-      <TextSection tag="h2" classVariant="slide-name-card__name-text--subtitle" shadow={true} delay={1}>
+      <TextSection tag="h2" classVariant="slide-name-card__name-text--subtitle" shadow={true} delay={0.5}>
         aka //TNTz
       </TextSection>
 
-      <TextSection tag="h3" classVariant="slide-name-card__name-text--description" shadow={false} delay={2}>
+      <TextSection tag="h3" classVariant="slide-name-card__name-text--description" shadow={false} delay={1}>
         WEB & APPLICATION DEVELOPER <Separator />
         MOTION GRAPHICS ANIMATOR
       </TextSection>
 
-      <TextSection tag="h3" classVariant="slide-name-card__name-text--small" shadow={false} delay={2.5}>
+      <TextSection tag="h3" classVariant="slide-name-card__name-text--small" shadow={false} delay={1.5}>
         musician <Separator />
         digital artist <Separator />
         storywriter
