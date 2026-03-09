@@ -11,6 +11,10 @@
 
     perspective: 1000px;
     transform-style: preserve-3d;
+
+    @include breakpoint(xl) {
+        overflow-y: hidden;
+    }
 }
 
 .slide-name-card__front {

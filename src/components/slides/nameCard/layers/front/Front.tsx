@@ -1,7 +1,7 @@
 import { ImageAzel } from "@src/assets/images"
 import './Front.scss';
 import type { CarouselVariants } from "@src/components/carousel";
-import { EASEINOUTQUINT, EASEOUTQUINT } from "@src/utils";
+import { EASEINOUTQUINT, EASEINQUINT, EASEOUTQUINT } from "@src/utils";
 import { motion } from "motion/react";
 import type { ReactElement } from "react";
 
@@ -152,15 +152,18 @@ function Picture() {
 export default function Front() {
   const variants: CarouselVariants = {
     enter: {
+      opacity: 0,
       rotateY: 0,
     },
     center: {
+      opacity: 1,
       rotateY: 0,
     },
     exit: {
+      opacity: 0,
       rotateY: 90,
       transition: {
-        ease: EASEINOUTQUINT,
+        ease: EASEINQUINT,
         duration: 0.8,
         delay: 0
       }
