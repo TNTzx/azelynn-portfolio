@@ -1,7 +1,7 @@
 import { ImageAzel } from "@src/assets/images"
 import './Front.scss';
 import type { CarouselVariants } from "@src/components/carousel";
-import { EASEOUTQUINT } from "@src/utils";
+import { EASEINOUTQUINT, EASEOUTQUINT } from "@src/utils";
 import { motion } from "motion/react";
 import type { ReactElement } from "react";
 
@@ -126,9 +126,25 @@ function Name() {
 }
 
 function Picture() {
+  const variants: CarouselVariants = {
+    enter: {
+      clipPath: 'inset(0 0 100% 0)'
+    },
+    center: {
+      clipPath: 'inset(0 0 0 0)',
+      transition: {
+        ease: EASEINOUTQUINT,
+        duration: 2,
+        delay: 0.5
+      }
+    },
+    exit: {
+    }
+  };
+
   return (
     <div className="slide-name-card__image-azel">
-      <img src={ImageAzel} className="slide-name-card__image-azel-element" />
+      <motion.img src={ImageAzel} variants={variants} className="slide-name-card__image-azel-element" />
     </div>
   )
 }
