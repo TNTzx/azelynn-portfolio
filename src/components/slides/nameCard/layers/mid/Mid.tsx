@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { loadSlim } from "@tsparticles/slim";
 import type { Container } from "@tsparticles/engine";
 import './Mid.scss';
+import type { CarouselVariants } from '@src/components/carousel';
+import { EASEINOUTQUINT, EASEOUTQUINT } from '@src/utils';
+import { motion } from 'motion/react';
 
 function MidParticles() {
   const [init, setInit] = useState(false);
@@ -82,5 +85,32 @@ function MidParticles() {
 }
 
 export default function Mid() {
-  return <MidParticles />
+  const variants: CarouselVariants = {
+    enter: {
+      opacity: 0,
+      y: '100vh'
+    },
+    center: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: EASEOUTQUINT,
+        duration: 4,
+        delay: 1
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: '-100vh',
+      transition: {
+        ease: EASEINOUTQUINT,
+        duration: 1
+      }
+    }
+  }
+  return (
+    <motion.div variants={variants} className="slide-name-card__mid">
+      <MidParticles />
+    </motion.div>
+  )
 }
