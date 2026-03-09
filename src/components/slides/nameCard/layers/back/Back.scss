@@ -7,10 +7,14 @@
 
     justify-content: center;
     align-items: center;
+
+    transform-style: preserve-3d;
 }
 
 .slide-name-card__image-beach-element {
-    height: 120%;
+    height: 150%;
     width: auto;
     filter: brightness(0.5) blur(5px);
+
+    transform-style: preserve-3d;
 }

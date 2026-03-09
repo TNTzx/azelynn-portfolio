@@ -20,7 +20,7 @@ function TextSection(args: {
 }) {
   const MotionTag = motion[args.tag];
 
-  const OFFSET = 5;
+  const SHADOW_OFFSET = 30;
 
   const mainVariants: CarouselVariants = args.shadow ? {
     enter: {
@@ -29,8 +29,9 @@ function TextSection(args: {
     },
     center: {
       opacity: [0, 0, 1],
-      x: [0, 0, -OFFSET],
-      y: [0, 0, -OFFSET],
+      x: [0, 0, 0],
+      y: [0, 0, 0],
+      z: [0, 0, SHADOW_OFFSET],
       transition: {
         ease: ['linear', EASEOUTQUINT],
         duration: 0.5 + 0.5,
@@ -67,8 +68,9 @@ function TextSection(args: {
     },
     center: {
       opacity: [0, 1, 1],
-      x: [-100, 0, OFFSET],
-      y: [0, 0, OFFSET],
+      x: [-100, 0, 0],
+      y: [0, 0, 0],
+      z: [0, 0, -SHADOW_OFFSET],
       transition: {
         ease: [EASEOUTQUINT, EASEOUTQUINT],
         duration: 0.5 + 0.5,

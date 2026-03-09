@@ -37,7 +37,8 @@ export default function Back() {
       useSpring(motionMouse.y, springConfig),
       [0, window.innerHeight],
       [30, -30]
-    )
+    ),
+    z: -100
   }
 
   return (

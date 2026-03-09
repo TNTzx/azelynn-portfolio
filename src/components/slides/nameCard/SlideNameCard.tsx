@@ -3,21 +3,11 @@ import Back from './layers/back/Back';
 import Front from './layers/front/Front';
 import Mid from './layers/mid/Mid';
 import './SlideNameCard.scss';
-import { motion, useAnimationControls, useSpring, useTransform, type MotionStyle, type SpringOptions } from 'motion/react';
-import { useEffect } from 'react';
+import { motion, useSpring, useTransform, type MotionStyle, type SpringOptions } from 'motion/react';
 
 export default function SlideNameCard() {
   console.log('rerender');
-  const controls = useAnimationControls();
   const motionMouse = useCursorPosition();
-  
-  useEffect(() => {
-    function handler(event: PointerEvent) {
-
-    }
-    window.addEventListener('click', handler);
-    return () => window.removeEventListener('click', handler);
-  }, [])
 
   const springConfig: SpringOptions = { damping: 25, stiffness: 150 };
   const smooth = {
