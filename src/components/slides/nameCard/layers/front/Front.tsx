@@ -150,8 +150,23 @@ function Picture() {
 }
 
 export default function Front() {
+  const variants: CarouselVariants = {
+    enter: {
+      rotateY: 0,
+    },
+    center: {
+      rotateY: 90,
+      transition: {
+        ease: EASEINOUTQUINT,
+        duration: 2,
+        delay: 0.5
+      }
+    },
+    exit: {
+    }
+  }
   return (
-    <div className="slide-name-card__front">
+    <motion.div variants={variants} className="slide-name-card__front">
       <div className="slide-name-card__name-container">
         <Name />
       </div>
@@ -159,6 +174,6 @@ export default function Front() {
       <div className="slide-name-card__image-azel-container">
         <Picture />
       </div>
-    </div>
+    </motion.div>
   )
 }
