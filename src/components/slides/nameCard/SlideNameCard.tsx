@@ -1,22 +1,50 @@
+import { useCursorPosition } from '@src/hooks/motionMouse';
 import Back from './layers/back/Back';
 import Front from './layers/front/Front';
 import Mid from './layers/mid/Mid';
 import './SlideNameCard.scss';
+import { motion, useAnimationControls, useSpring, useTransform, type MotionStyle, type SpringOptions } from 'motion/react';
+import { useEffect } from 'react';
 
 export default function SlideNameCard() {
+  console.log('rerender');
+  const controls = useAnimationControls();
+  const motionMouse = useCursorPosition();
+  
+  useEffect(() => {
+    function handler(event: PointerEvent) {
+
+    }
+    window.addEventListener('click', handler);
+    return () => window.removeEventListener('click', handler);
+  }, [])
+
+  const springConfig: SpringOptions = { damping: 25, stiffness: 150 };
+  const smooth = {
+    x: useSpring(motionMouse.x, springConfig),
+    y: useSpring(motionMouse.y, springConfig)
+  }
+
+  const style: MotionStyle = {
+    rotateX: useTransform(smooth.y, [0, window.innerHeight], [5, -5]),
+    rotateY: useTransform(smooth.x, [0, window.innerWidth], [-5, 5])
+  }
+
   return (
-    <div className="slide-name-card">
-      <div className="slide-name-card__layer slide-name-card__layer--front">
+    <motion.div
+      className="slide-name-card"
+    >
+      <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--front">
         <Front />
-      </div>
+      </motion.div>
 
-      <div className="slide-name-card__layer slide-name-card__layer--mid">
+      <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--mid">
         <Mid />
-      </div>
+      </motion.div>
 
-      <div className="slide-name-card__layer slide-name-card__layer--back">
+      <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--back">
         <Back />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }

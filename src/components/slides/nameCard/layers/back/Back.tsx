@@ -2,11 +2,11 @@ import { ImageBeach } from "@src/assets/images";
 import './Back.scss'
 import type { CarouselVariants } from "@src/components/carousel";
 import { motion, useSpring, useTransform } from "motion/react";
-import { useMotionMouse } from "@src/hooks/motionMouse";
+import { useCursorPosition } from "@src/hooks/motionMouse";
 import type { MotionStyle, SpringOptions } from "motion";
 
 export default function Back() {
-  const motionMouse = useMotionMouse();
+  const motionMouse = useCursorPosition();
 
   const variants: CarouselVariants = {
     enter: {

@@ -13,6 +13,8 @@
 
     perspective: 1000px;
     transform-style: preserve-3d;
+
+    pointer-events: none
 }
 
 .slide-name-card__layer {
@@ -24,6 +26,8 @@
     align-items: center;
 
     transform-style: preserve-3d;
+
+    will-change: transform;
 }
 
 .slide-name-card__layer--front {
@@ -37,4 +41,13 @@
 .slide-name-card__layer--back {
     justify-content: end;
     z-index: 1;
+}
+
+.slide-name-card__layer-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transform-style: preserve-3d;
 }

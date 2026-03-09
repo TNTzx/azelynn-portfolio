@@ -1,22 +1,35 @@
 import { useMotionValue } from "motion/react";
 import { useEffect } from "react";
 
-export function useMotionMouse() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+export function useCursorPosition(includeTouch: boolean = false) {
+  const cursorPosX = useMotionValue(window.innerWidth / 2);
+  const cursorPosY = useMotionValue(window.innerHeight / 2);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+    function handleMouseMove(e: MouseEvent) {
+      cursorPosX.set(e.clientX);
+      cursorPosY.set(e.clientY);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+    function handleTouchMove(event: TouchEvent) {
+      // Prevent scrolling while moving the card to reduce jitter
+      if (event.cancelable) event.preventDefault();
+      const first = event.touches[0];
+      cursorPosX.set(first.clientX);
+      cursorPosY.set(first.clientY);
+    }
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+    }
+  }, [includeTouch, cursorPosX, cursorPosY]);
 
   return {
-    x: mouseX,
-    y: mouseY
+    x: cursorPosX,
+    y: cursorPosY
   };
 }
