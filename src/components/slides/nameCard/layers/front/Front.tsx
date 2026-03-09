@@ -155,14 +155,15 @@ export default function Front() {
       rotateY: 0,
     },
     center: {
+      rotateY: 0,
+    },
+    exit: {
       rotateY: 90,
       transition: {
         ease: EASEINOUTQUINT,
-        duration: 2,
-        delay: 0.5
+        duration: 0.8,
+        delay: 0
       }
-    },
-    exit: {
     }
   }
   return (
