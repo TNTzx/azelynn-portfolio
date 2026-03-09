@@ -1,9 +1,13 @@
 import { ImageBeach } from "@src/assets/images";
 import './Back.scss'
 import type { CarouselVariants } from "@src/components/carousel";
-import { motion } from "motion/react";
+import { motion, useSpring, useTransform } from "motion/react";
+import { useMotionMouse } from "@src/hooks/motionMouse";
+import type { MotionStyle, SpringOptions } from "motion";
 
 export default function Back() {
+  const motionMouse = useMotionMouse();
+
   const variants: CarouselVariants = {
     enter: {
       opacity: 0
@@ -20,9 +24,30 @@ export default function Back() {
     }
   }
 
+  
+  const springConfig: SpringOptions = { damping: 25, stiffness: 150 };
+
+  const style: MotionStyle = {
+    x: useTransform(
+      useSpring(motionMouse.x, springConfig),
+      [0, window.innerWidth],
+      [30, -30]
+    ),
+    y: useTransform(
+      useSpring(motionMouse.y, springConfig),
+      [0, window.innerHeight],
+      [30, -30]
+    )
+  }
+
   return (
     <div className="slide-name-card__back">
-      <motion.img src={ImageBeach} variants={variants} className="slide-name-card__image-beach-element" />
+      <motion.img
+        src={ImageBeach}
+        style={style}
+        variants={variants}
+        className="slide-name-card__image-beach-element"
+      />
     </div>
   )
 }
