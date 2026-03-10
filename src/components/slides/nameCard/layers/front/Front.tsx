@@ -27,13 +27,13 @@ function TextSection(args: {
       opacity: 0,
       x: -100,
       y: 0,
-      z: 0
+      translateZ: 0
     },
     center: {
       opacity: [0, 0, 1],
       x: [0, 0, 0],
       y: [0, 0, 0],
-      z: [0, 0, SHADOW_OFFSET],
+      translateZ: [0, 0, SHADOW_OFFSET],
       transition: {
         ease: ['linear', EASEOUTQUINT],
         duration: 0.5 + 0.5,
@@ -44,7 +44,12 @@ function TextSection(args: {
       opacity: 1,
       x: 0,
       y: 0,
-      z: SHADOW_OFFSET,
+      translateZ: SHADOW_OFFSET,
+      transition: {
+        ease: ['linear', EASEOUTQUINT],
+        duration: 10,
+        delay: args.delay
+      }
     }
   } : {
     enter: {
@@ -65,7 +70,7 @@ function TextSection(args: {
       opacity: 1,
       x: 0,
       y: 0,
-      z: SHADOW_OFFSET,
+      translateZ: 0,
     }
   };
 
@@ -78,7 +83,7 @@ function TextSection(args: {
       opacity: [0, 1, 1],
       x: [-100, 0, 0],
       y: [0, 0, 0],
-      z: [0, 0, -SHADOW_OFFSET],
+      translateZ: [0, 0, -SHADOW_OFFSET],
       transition: {
         ease: [EASEOUTQUINT, EASEOUTQUINT],
         duration: 0.5 + 0.5,
@@ -89,7 +94,7 @@ function TextSection(args: {
       opacity: 1,
       x: 0,
       y: 0,
-      z: -SHADOW_OFFSET,
+      translateZ: -SHADOW_OFFSET,
     }
   };
 
@@ -140,7 +145,7 @@ function Name() {
 function Picture() {
   const variants: CarouselVariants = {
     enter: {
-      clipPath: 'inset(0 0 100% 0)'
+      clipPath: 'inset(0 0 100% 0)',
     },
     center: {
       clipPath: 'inset(0 0 0 0)',
@@ -164,33 +169,38 @@ function Picture() {
 export default function Front() {
   const variants: CarouselVariants = {
     enter: {
+      visibility: 'visible',
       opacity: 0,
       rotateY: 0,
     },
     center: {
+      visibility: 'visible',
       opacity: 1,
       rotateY: 0,
     },
     exit: {
-      opacity: 0,
-      rotateY: 90,
+      visibility: ['visible', 'visible', 'hidden'],
+      rotateY: [0, 90, 90],
       transition: {
-        ease: EASEINQUINT,
+        ease: [EASEINQUINT, "linear"],
         duration: 0.8,
+        times: [0, 0.99, 1],
         delay: 0
       }
     }
   }
   return (
     <motion.div className="slide-name-card__front-wrapper">
-      <motion.div variants={variants} className="slide-name-card__front">
-        <div className="slide-name-card__name-container">
-          <Name />
-        </div>
+      <motion.div className="slide-name-card__front">
+        <motion.div variants={variants} className="slide-name-card__front-wrapper">
+          <div className="slide-name-card__name-container">
+            <Name />
+          </div>
 
-        <div className="slide-name-card__image-azel-container">
-          <Picture />
-        </div>
+          <div className="slide-name-card__image-azel-container">
+            <Picture />
+          </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   )

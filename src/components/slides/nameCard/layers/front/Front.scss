@@ -95,7 +95,6 @@
 .slide-name-card__name-text--shadow {
     position: absolute;
     color: rgba(255, 255, 255, 0.13);
-    z-index: -1;
 }
 
 .slide-name-card__name-text--intro {
@@ -207,6 +206,7 @@
 
     flex-direction: row;
     transform: translateZ(-70px);
+    transform-style: preserve-3d;
 
     filter: brightness(0.75);
 
