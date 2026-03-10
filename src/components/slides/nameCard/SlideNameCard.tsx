@@ -6,7 +6,6 @@ import './SlideNameCard.scss';
 import { motion, useSpring, useTransform, type MotionStyle, type SpringOptions } from 'motion/react';
 
 export default function SlideNameCard() {
-  console.log('rerender');
   const motionMouse = useCursorPosition();
 
   const springConfig: SpringOptions = { damping: 25, stiffness: 150 };
