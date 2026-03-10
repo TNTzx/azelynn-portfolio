@@ -191,16 +191,14 @@ export default function Front() {
   }
   return (
     <motion.div className="slide-name-card__front-wrapper">
-      <motion.div className="slide-name-card__front">
-        <motion.div variants={variants} className="slide-name-card__front-wrapper">
-          <div className="slide-name-card__name-container">
-            <Name />
-          </div>
+      <motion.div variants={variants} className="slide-name-card__front">
+        <div className="slide-name-card__name-container">
+          <Name />
+        </div>
 
-          <div className="slide-name-card__image-azel-container">
-            <Picture />
-          </div>
-        </motion.div>
+        <div className="slide-name-card__image-azel-container">
+          <Picture />
+        </div>
       </motion.div>
     </motion.div>
   )

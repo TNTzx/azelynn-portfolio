@@ -15,8 +15,8 @@ export default function SlideNameCard() {
   }
 
   const style: MotionStyle = {
-    rotateX: useTransform(smooth.y, [0, window.innerHeight], [5, -5]),
-    rotateY: useTransform(smooth.x, [0, window.innerWidth], [-5, 5])
+    rotateX: useTransform(smooth.y, [0, window.innerHeight], [10, -10]),
+    rotateY: useTransform(smooth.x, [0, window.innerWidth], [-10, 10])
   }
 
   return (
