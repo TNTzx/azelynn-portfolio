@@ -4,7 +4,7 @@ import './style.scss';
 import { useNavigate, useParams } from 'react-router';
 import { slides } from './slides';
 import SlideLoading from '@src/components/slides/loading/SlideLoading';
-import Debug from '@src/components/debug/debug';
+import Debug from '@src/components/debug/Debug';
 
 export const ROUTE_NAME = "main";
 
