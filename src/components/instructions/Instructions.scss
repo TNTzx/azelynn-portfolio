@@ -1,0 +1,39 @@
+@use 'mixins' as *;
+
+.instructions {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    flex-direction: row;
+    align-items: end;
+}
+
+.instructions__inner {
+    display: flex;
+    width: 100%;
+    padding: 20px 4px;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: black;
+}
+
+.instructions__text {
+    color: white;
+    font-weight: 400;
+}
+
+.instructions__text::after {
+  content: attr(data-mobile);
+
+  @include breakpoint(md) {
+    content: attr(data-tablet);
+  }
+
+  @include breakpoint(xl) {
+    content: attr(data-desktop);
+  }
+}
