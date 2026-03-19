@@ -5,9 +5,11 @@ import Mid from './layers/mid/Mid';
 import './SlideNameCard.scss';
 import { motion, useSpring, useTransform, type MotionStyle, type SpringOptions } from 'motion/react';
 import Instructions from '@src/components/instructions/Instructions';
+import { useViewport } from '@src/hooks';
 
 export default function SlideNameCard() {
   const motionMouse = useCursorPosition();
+  const viewport = useViewport();
 
   const springConfig: SpringOptions = { damping: 25, stiffness: 150 };
   const smooth = {
@@ -16,8 +18,8 @@ export default function SlideNameCard() {
   }
 
   const style: MotionStyle = {
-    rotateX: useTransform(smooth.y, [0, window.innerHeight], [10, -10]),
-    rotateY: useTransform(smooth.x, [0, window.innerWidth], [-10, 10])
+    rotateX: useTransform(smooth.y, [0, viewport.height], [10, -10]),
+    rotateY: useTransform(smooth.x, [0, viewport.width], [-10, 10])
   }
 
   return (
