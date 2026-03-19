@@ -11,34 +11,51 @@
     pointer-events: all;
 }
 
-.instructions__controls {
-  display: flex;
-  width: 100%;
+.instructions__inner {
+    display: flex;
+    width: 100%;
 
-  flex-direction: row;
-  justify-content: center;
+    flex-direction: column;
+}
+
+.instructions__controls {
+    display: flex;
+    width: 100%;
+
+    flex-direction: row;
+    justify-content: center;
 }
 
 .instructions__close-button {
-  display: flex;
-  padding: 4px 50px;
+    display: flex;
+    padding: 4px 50px;
 
-  background-color: black;
-  border: transparent;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+    background-color: black;
+    border: transparent;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 
-  cursor: pointer;
+    cursor: pointer;
+}
+
+.instructions__content-wrapper {
+    overflow: hidden;
+    width: 100%;
+    background-color: black;
+    will-change: height;
 }
 
 .instructions__content {
     display: flex;
     width: 100%;
+    height: auto;
     padding: 20px 4px;
 
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    overflow-y: hidden;
 
     background-color: black;
 }
@@ -49,13 +66,13 @@
 }
 
 .instructions__text::after {
-  content: attr(data-mobile);
+    content: attr(data-mobile);
 
-  @include breakpoint(md) {
-    content: attr(data-tablet);
-  }
+    @include breakpoint(md) {
+        content: attr(data-tablet);
+    }
 
-  @include breakpoint(xl) {
-    content: attr(data-desktop);
-  }
+    @include breakpoint(xl) {
+        content: attr(data-desktop);
+    }
 }
