@@ -4,6 +4,7 @@ import Front from './layers/front/Front';
 import Mid from './layers/mid/Mid';
 import './SlideNameCard.scss';
 import { motion, useSpring, useTransform, type MotionStyle, type SpringOptions } from 'motion/react';
+import Instructions from '@src/components/instructions/Instructions';
 
 export default function SlideNameCard() {
   const motionMouse = useCursorPosition();
@@ -20,20 +21,27 @@ export default function SlideNameCard() {
   }
 
   return (
-    <motion.div
-      className="slide-name-card"
-    >
-      <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--front">
-        <Front />
-      </motion.div>
+    <div className="slide-name-card">
+      <div className="slide-name-card__layer slide-name-card__layer--instructions">
+        <Instructions 
+          desktop='Move your mouse to change your perspective.'
+          tablet='Move your mouse / tap to change your perspective.'
+          mobile='Tap to change your perspective.'
+        />
+      </div>
+      <div className="slide-name-card__layer slide-name-card__layer--content">
+        <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--front">
+          <Front />
+        </motion.div>
 
-      <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--mid">
-        <Mid />
-      </motion.div>
+        <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--mid">
+          <Mid />
+        </motion.div>
 
-      <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--back">
-        <Back />
-      </motion.div>
-    </motion.div>
+        <motion.div style={style} className="slide-name-card__layer slide-name-card__layer--back">
+          <Back />
+        </motion.div>
+      </div>
+    </div>
   )
 }
